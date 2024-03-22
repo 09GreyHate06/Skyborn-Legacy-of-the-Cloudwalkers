@@ -90,7 +90,7 @@ namespace SLOTC.Core.Saving
         {
             string filename_ = GetPathFromSaveFile(filename);
 
-            Debug.Log("Saving to " + filename_);
+            //Debug.Log("Saving to " + filename_);
             using (FileStream stream = File.Open(filename_, FileMode.Create))
             {
                 BinaryFormatter formatter = new BinaryFormatter();
@@ -107,7 +107,7 @@ namespace SLOTC.Core.Saving
                 return new Dictionary<string, object>();
             }
 
-            Debug.Log("Loading from " + filename_);
+            //Debug.Log("Loading from " + filename_);
             using (FileStream stream = File.Open(filename_, FileMode.Open))
             {
                 BinaryFormatter formatter = new BinaryFormatter();
