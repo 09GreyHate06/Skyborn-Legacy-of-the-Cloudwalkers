@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -80,7 +81,8 @@ namespace SLOTC.Core.Saving
             foreach(SaveableEntity saveable in FindObjectsOfType<SaveableEntity>())
             {
                 string id = saveable.UniqueIdentifier;
-                if (!states.ContainsKey(id)) continue;
+                if (!states.ContainsKey(id)) 
+                    continue;
 
                 saveable.RestoreState(states[id]);
             }

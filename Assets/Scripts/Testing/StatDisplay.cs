@@ -1,4 +1,5 @@
 using SLOTC.Core.Combat;
+using SLOTC.Core.Inventory;
 using SLOTC.Core.Stats;
 using TMPro;
 using UnityEngine;

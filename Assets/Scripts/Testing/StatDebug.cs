@@ -1,3 +1,4 @@
+using SLOTC.Core.Inventory;
 using SLOTC.Core.Saving;
 using SLOTC.Core.Stats;
 using System.Collections;
@@ -6,43 +7,40 @@ using UnityEngine;
 
 public class StatDebug : MonoBehaviour
 {
+    [SerializeField] EquipableItem _weapon;
+    [SerializeField] EquipableItem _accessory;
+    [SerializeField] EquipableItem _pendant;
+    [SerializeField] EquipableItem _head;
+    [SerializeField] EquipableItem _body;
+    [SerializeField] EquipableItem _shoes;
+
     [SerializeField] GameObject _player;
 
-    [SerializeField] KeyCode _saveKey = KeyCode.S;
-    [SerializeField] KeyCode _loadKey = KeyCode.L;
     [SerializeField] KeyCode _gainExpKey = KeyCode.X;
-    [SerializeField] KeyCode _addMod0 = KeyCode.Alpha0;
-    [SerializeField] KeyCode _addMod1 = KeyCode.Alpha1;
-    [SerializeField] KeyCode _addMod2 = KeyCode.Alpha2;
-    [SerializeField] KeyCode _addMod3 = KeyCode.Alpha3;
-    [SerializeField] KeyCode _addMod4 = KeyCode.Alpha4;
-    [SerializeField] KeyCode _addMod5 = KeyCode.Alpha5;
-    [SerializeField] KeyCode _addMod6 = KeyCode.Alpha6;
-    [SerializeField] KeyCode _addMod7 = KeyCode.Alpha7;
-    [SerializeField] KeyCode _addMod8 = KeyCode.Alpha8;
-    [SerializeField] KeyCode _addMod9 = KeyCode.Alpha9;
-    [SerializeField] KeyCode _removeMod0 = KeyCode.Keypad0;
-    [SerializeField] KeyCode _removeMod1 = KeyCode.Keypad1;
-    [SerializeField] KeyCode _removeMod2 = KeyCode.Keypad2;
-    [SerializeField] KeyCode _removeMod3 = KeyCode.Keypad3;
-    [SerializeField] KeyCode _removeMod4 = KeyCode.Keypad4;
-    [SerializeField] KeyCode _removeMod5 = KeyCode.Keypad5;
-    [SerializeField] KeyCode _removeMod6 = KeyCode.Keypad6;
-    [SerializeField] KeyCode _removeMod7 = KeyCode.Keypad7;
-    [SerializeField] KeyCode _removeMod8 = KeyCode.Keypad8;
-    [SerializeField] KeyCode _removeMod9 = KeyCode.Keypad9;
+    [SerializeField] KeyCode _addEquipment1 = KeyCode.Alpha1;
+    [SerializeField] KeyCode _addEquipment2 = KeyCode.Alpha2;
+    [SerializeField] KeyCode _addEquipment3 = KeyCode.Alpha3;
+    [SerializeField] KeyCode _addEquipment4 = KeyCode.Alpha4;
+    [SerializeField] KeyCode _addEquipment5 = KeyCode.Alpha5;
+    [SerializeField] KeyCode _addEquipment6 = KeyCode.Alpha6;
+    [SerializeField] KeyCode _removeEquipment1 = KeyCode.Keypad1;
+    [SerializeField] KeyCode _removeEquipment2 = KeyCode.Keypad2;
+    [SerializeField] KeyCode _removeEquipment3 = KeyCode.Keypad3;
+    [SerializeField] KeyCode _removeEquipment4 = KeyCode.Keypad4;
+    [SerializeField] KeyCode _removeEquipment5 = KeyCode.Keypad5;
+    [SerializeField] KeyCode _removeEquipment6 = KeyCode.Keypad6;
 
     [SerializeField] List<StatModifier[]> _statModifiers = new List<StatModifier[]>(9);
 
     private readonly object[] _statModifiersKey = new object[9];
 
     private Experience _exp;
-    private Status _status;
+    private Equipment _equipment;
 
     void Awake()
     {
         _exp = _player.GetComponent<Experience>();
-        _status = _player.GetComponent<Status>();
+        _equipment = _player.GetComponent<Equipment>();
 
         for(int i = 0; i < _statModifiersKey.Length; i++)
         {
@@ -52,101 +50,59 @@ public class StatDebug : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(_saveKey))
-        {
-            FindObjectOfType<SavingSystem>().SerializeGameData("test");
-        }
-        else if (Input.GetKeyDown(_loadKey))
-        {
-            StartCoroutine(FindObjectOfType<SavingSystem>().DeserializeGameData("test"));
-        }
-
         if (Input.GetKeyDown(_gainExpKey))
         {
             _exp.GainExperience(100);
         }
 
-        if(Input.GetKeyDown(_addMod0))
+        if (Input.GetKeyDown(_addEquipment1))
         {
-            _status.AddModifiers(_statModifiersKey[0], _statModifiers[0]);
+            _equipment.Equip(_weapon);
         }
-        if (Input.GetKeyDown(_addMod1))
+        if (Input.GetKeyDown(_addEquipment2))
         {
-            _status.AddModifiers(_statModifiersKey[1], _statModifiers[1]);
+            _equipment.Equip(_accessory);
         }
-        if (Input.GetKeyDown(_addMod2))
+        if (Input.GetKeyDown(_addEquipment3))
         {
-            _status.AddModifiers(_statModifiersKey[2], _statModifiers[2]);
+            _equipment.Equip(_pendant);
         }
-        if (Input.GetKeyDown(_addMod3))
+        if (Input.GetKeyDown(_addEquipment4))
         {
-            _status.AddModifiers(_statModifiersKey[3], _statModifiers[3]);
+            _equipment.Equip(_head);
         }
-        if (Input.GetKeyDown(_addMod4))
+        if (Input.GetKeyDown(_addEquipment5))
         {
-            _status.AddModifiers(_statModifiersKey[4], _statModifiers[4]);
+            _equipment.Equip(_body);
         }
-        if (Input.GetKeyDown(_addMod5))
+        if (Input.GetKeyDown(_addEquipment6))
         {
-            _status.AddModifiers(_statModifiersKey[5], _statModifiers[5]);
-        }
-        if (Input.GetKeyDown(_addMod6))
-        {
-            _status.AddModifiers(_statModifiersKey[6], _statModifiers[6]);
-        }
-        if (Input.GetKeyDown(_addMod7))
-        {
-            _status.AddModifiers(_statModifiersKey[7], _statModifiers[7]);
-        }
-        if (Input.GetKeyDown(_addMod8))
-        {
-            _status.AddModifiers(_statModifiersKey[8], _statModifiers[8]);
-        }
-        if (Input.GetKeyDown(_addMod9))
-        {
-            _status.AddModifiers(_statModifiersKey[9], _statModifiers[9]);
+            _equipment.Equip(_shoes);
         }
 
-
-        if (Input.GetKeyDown(_removeMod0))
+        if (Input.GetKeyDown(_removeEquipment1))
         {
-            _status.RemoveModifiers(_statModifiersKey[0]);
+            _equipment.Unequip(EquipLocation.Weapon);
         }
-        if (Input.GetKeyDown(_removeMod1))
+        if (Input.GetKeyDown(_removeEquipment2))
         {
-            _status.RemoveModifiers(_statModifiersKey[1]);
+            _equipment.Unequip(EquipLocation.Accessory);
         }
-        if (Input.GetKeyDown(_removeMod2))
+        if (Input.GetKeyDown(_removeEquipment3))
         {
-            _status.RemoveModifiers(_statModifiersKey[2]);
+            _equipment.Unequip(EquipLocation.Pendant);
         }
-        if (Input.GetKeyDown(_removeMod3))
+        if (Input.GetKeyDown(_removeEquipment4))
         {
-            _status.RemoveModifiers(_statModifiersKey[3]);
+            _equipment.Unequip(EquipLocation.Head);
         }
-        if (Input.GetKeyDown(_removeMod4))
+        if (Input.GetKeyDown(_removeEquipment5))
         {
-            _status.RemoveModifiers(_statModifiersKey[4]);
+            _equipment.Unequip(EquipLocation.Body);
         }
-        if (Input.GetKeyDown(_removeMod5))
+        if (Input.GetKeyDown(_removeEquipment6))
         {
-            _status.RemoveModifiers(_statModifiersKey[5]);
-        }
-        if (Input.GetKeyDown(_removeMod6))
-        {
-            _status.RemoveModifiers(_statModifiersKey[6]);
-        }
-        if (Input.GetKeyDown(_removeMod7))
-        {
-            _status.RemoveModifiers(_statModifiersKey[7]);
-        }
-        if (Input.GetKeyDown(_removeMod8))
-        {
-            _status.RemoveModifiers(_statModifiersKey[8]);
-        }
-        if (Input.GetKeyDown(_removeMod9))
-        {
-            _status.RemoveModifiers(_statModifiersKey[9]);
+            _equipment.Unequip(EquipLocation.Shoes);
         }
     }
 

@@ -28,7 +28,7 @@ namespace SLOTC.Core.Saving
 
         public void RestoreState(object state)
         {
-            Dictionary<string, SaveableEntity> stateDict = new Dictionary<string, SaveableEntity>();
+            Dictionary<string, object> stateDict = (Dictionary<string, object>)state;
 
             foreach(ISaveable saveable in GetComponents<ISaveable>())
             {
