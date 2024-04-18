@@ -982,6 +982,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _forceSmoothDampTime: 0.3
   _gravityMultiplier: 1
+  <UseGravity>k__BackingField: 1
   _controller: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &1065780580138576607
@@ -998,7 +999,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 4
   _rotationSpeed: 500
-  _jumpForce: 5
+  _jumpForce: 8
 --- !u!1 &3305595358625345092
 GameObject:
   m_ObjectHideFlags: 0

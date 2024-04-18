@@ -43,8 +43,7 @@ namespace SLOTC.Utils.StateMachine
 
             _currentState?.OnExit();
             _currentState = state;
-            _transitions.TryGetValue(_currentState.GetID(), out _currentTransitions);
-            if (_currentTransitions == null)
+            if(!_transitions.TryGetValue(_currentState.GetID(), out _currentTransitions))
                 _currentTransitions = new List<Transition>();
 
             _currentState?.OnEnter();

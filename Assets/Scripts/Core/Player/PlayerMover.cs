@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace SLOTC.Core.Player
 {
@@ -8,6 +7,7 @@ namespace SLOTC.Core.Player
     {
         [SerializeField] float _forceSmoothDampTime = 0.3f;
         [SerializeField] float _gravityMultiplier = 1.0f;
+        [field: SerializeField] public bool UseGravity { get; set; } = true;
 
         public CharacterController _controller;
 
@@ -29,10 +29,7 @@ namespace SLOTC.Core.Player
             //    AddForce(new Vector3(0.0f, 0.0f, -20.0f));
             //}
 
-            if (velocity.y < 0.0f && _controller.isGrounded)
-                velocity.y = Physics.gravity.y * _gravityMultiplier * Time.deltaTime;
-            else
-                velocity += Physics.gravity * _gravityMultiplier * Time.deltaTime;
+            ApplyGravity();
 
             _force = Vector3.SmoothDamp(_force, Vector3.zero, ref _dampingVelocity, _forceSmoothDampTime);
             _controller.Move((velocity + _force) * Time.deltaTime);
@@ -41,6 +38,17 @@ namespace SLOTC.Core.Player
         public void AddForce(Vector3 force)
         {
             _force += force;
+        }
+
+        private void ApplyGravity()
+        {
+            if (!UseGravity)
+                return;
+
+            if (velocity.y < 0.0f && _controller.isGrounded)
+                velocity.y = -1.5f;
+            else
+                velocity += Physics.gravity * _gravityMultiplier * Time.deltaTime;
         }
     }
 }

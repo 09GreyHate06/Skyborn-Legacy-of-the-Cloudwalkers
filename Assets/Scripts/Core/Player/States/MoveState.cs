@@ -5,19 +5,24 @@ namespace SLOTC.Core.Player.States
 {
     public class MoveState : IState
     {
+        private int _moveAnimHash = Animator.StringToHash("Move");
+        private int _moveMagnitudeParamHash = Animator.StringToHash("MoveMagnitude");
+
         private PlayerMover _playerMover;
         private Animator _animator;
         private float _moveSpeed;
         private float _rotationSpeed;
+        private float _animTransitionDuration;
         private float _animDampTime;
         PlayerInput _playerInput;
 
-        public MoveState(PlayerMover playerMover, Animator animator, float moveSpeed, float rotationSpeed, float animDampTime)
+        public MoveState(PlayerMover playerMover, Animator animator, float animTransitionDuration, float animDampTime, float moveSpeed, float rotationSpeed)
         {
             _playerMover = playerMover;
             _animator = animator;
             _moveSpeed = moveSpeed;
             _rotationSpeed = rotationSpeed;
+            _animTransitionDuration = animTransitionDuration;
             _animDampTime = animDampTime;
             _playerInput = Object.FindObjectOfType<PlayerInput>();
         }
@@ -29,13 +34,11 @@ namespace SLOTC.Core.Player.States
 
         public void OnEnter()
         {
+            _animator.CrossFadeInFixedTime(_moveAnimHash, _animTransitionDuration);
         }
 
         public void OnExit()
         {
-            _playerMover.velocity.x = 0.0f;
-            _playerMover.velocity.z = 0.0f;
-            _animator.SetFloat("MoveMagnitude", 0.0f);
         }
 
         public void OnUpdate(float deltaTime)
@@ -54,7 +57,7 @@ namespace SLOTC.Core.Player.States
                 Vector3 velocity = _playerMover.transform.forward * _moveSpeed * inputMagnitude;
                 _playerMover.velocity.x = velocity.x;
                 _playerMover.velocity.z = velocity.z;
-                _animator.SetFloat("MoveMagnitude", inputAxis.magnitude, _animDampTime, deltaTime);
+                _animator.SetFloat(_moveMagnitudeParamHash, inputMagnitude, _animDampTime, deltaTime);
             }
         }
     }
