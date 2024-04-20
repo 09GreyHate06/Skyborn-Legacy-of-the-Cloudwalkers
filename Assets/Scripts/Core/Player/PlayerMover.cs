@@ -9,8 +9,8 @@ namespace SLOTC.Core.Player
         [SerializeField] float _gravityMultiplier = 1.0f;
         [field: SerializeField] public bool UseGravity { get; set; } = true;
 
-        public CharacterController _controller;
 
+        private CharacterController _controller;
         private Vector3 _force;
         private Vector3 _dampingVelocity;
 

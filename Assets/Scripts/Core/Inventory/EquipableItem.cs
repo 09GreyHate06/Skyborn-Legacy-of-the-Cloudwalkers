@@ -10,6 +10,7 @@ namespace SLOTC.Core.Inventory
     {
         [SerializeField] StatModifier[] _statModifiers;
         [SerializeField] EquipLocation _equipLocations;
+        
 
         public EquipLocation EquipLocation { get { return _equipLocations; } }
         public  StatModifier[] StatModifiers { get { return (StatModifier[])_statModifiers.Clone(); } }

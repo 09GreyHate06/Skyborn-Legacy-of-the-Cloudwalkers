@@ -94,16 +94,16 @@ namespace SLOTC.Core.Stats
                     // HP =  (Vitality * 12) + (Strength * 2)
                     return Mathf.Clamp(Mathf.FloorToInt(_attributes.GetAttribute(AttributeType.Vitality) * 12 + _attributes.GetAttribute(AttributeType.Strength) * 2), 0, _maxStatValue);
 
-                case StatType.MagicPoints:
-                    // MP = (Intelligence * 10) + (Vitality * 3)
+                case StatType.SkillPoints:
+                    // SP = (Intelligence * 10) + (Vitality * 3)
                     return Mathf.Clamp(Mathf.FloorToInt(_attributes.GetAttribute(AttributeType.Intelligence) * 10 + _attributes.GetAttribute(AttributeType.Vitality) * 3), 0, _maxStatValue);
 
-                case StatType.AttackDamage:
-                    // ATK =  (Strength * 1.2) + (Dexterity * 0.5)
+                case StatType.PhysicalDamage:
+                    // PDMG =  (Strength * 1.2) + (Dexterity * 0.5)
                     return Mathf.Clamp(Mathf.FloorToInt(_attributes.GetAttribute(AttributeType.Strength) * 1.2f + _attributes.GetAttribute(AttributeType.Dexterity) * 0.5f), 0, _maxStatValue);
 
-                case StatType.MagicAttackDamage:
-                    // MATK = (Intelligence * 1.5)
+                case StatType.MagicDamage:
+                    // MDMG = (Intelligence * 1.5)
                     return Mathf.Clamp(Mathf.FloorToInt(_attributes.GetAttribute(AttributeType.Intelligence) * 1.5f), 0, _maxStatValue);
 
                 case StatType.Defense:

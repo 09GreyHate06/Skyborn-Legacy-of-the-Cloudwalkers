@@ -10,6 +10,8 @@ namespace SLOTC.Core.Player
 
         public event Action<InputAction.CallbackContext> OnMoveEvent;
         public event Action<InputAction.CallbackContext> OnJumpEvent;
+        public event Action<InputAction.CallbackContext> OnAttackEvent;
+        public event Action<InputAction.CallbackContext> OnTargetEvent;
 
         public Vector2 Axis {  get; private set; }
 
@@ -37,6 +39,20 @@ namespace SLOTC.Core.Player
         public void OnJump(InputAction.CallbackContext context)
         {
             OnJumpEvent?.Invoke(context);
+        }
+
+        public void OnAttack(InputAction.CallbackContext context)
+        {
+            OnAttackEvent?.Invoke(context);
+        }
+
+        public void OnLook(InputAction.CallbackContext context)
+        {
+        }
+
+        public void OnTarget(InputAction.CallbackContext context)
+        {
+            OnTargetEvent?.Invoke(context);
         }
     }
 }

@@ -6,14 +6,14 @@ namespace SLOTC.Core.Stats
         ///<summary>abbreviated as HP</summary>
         HitPoints,
 
-        ///<summary>abbreviated as MP</summary>
-        MagicPoints,
+        ///<summary>abbreviated as SP</summary>
+        SkillPoints,
 
-        ///<summary>abbreviated as ATK</summary>
-        AttackDamage,
+        ///<summary>abbreviated as PDMG</summary>
+        PhysicalDamage,
 
-        ///<summary>abbreviated as MATK</summary>
-        MagicAttackDamage,
+        ///<summary>abbreviated as MDMG</summary>
+        MagicDamage,
 
         ///<summary>abbreviated as DEF</summary>
         Defense,
