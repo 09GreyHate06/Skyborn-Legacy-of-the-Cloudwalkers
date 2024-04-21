@@ -38,9 +38,6 @@ namespace SLOTC.Utils.StateMachine
 
         public void SetState(IState state)
         {
-            if (_currentState == state)
-                return;
-
             _currentState?.OnExit();
             _currentState = state;
             if(!_transitions.TryGetValue(_currentState.GetID(), out _currentTransitions))

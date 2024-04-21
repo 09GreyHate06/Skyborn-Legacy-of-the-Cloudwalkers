@@ -73,6 +73,15 @@ namespace SLOTC.Core.Player
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Guard"",
+                    ""type"": ""Button"",
+                    ""id"": ""5cb085de-afc4-447a-8ea2-5c29fcc50723"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -189,11 +198,22 @@ namespace SLOTC.Core.Player
                 {
                     ""name"": """",
                     ""id"": ""5152a94b-2b99-46f6-bdb4-2ac20763f6a0"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouse"",
                     ""action"": ""Target"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8f2a02f5-5db3-40d6-b2db-c564ebfc42df"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Guard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -237,6 +257,7 @@ namespace SLOTC.Core.Player
             m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
             m_Gameplay_Look = m_Gameplay.FindAction("Look", throwIfNotFound: true);
             m_Gameplay_Target = m_Gameplay.FindAction("Target", throwIfNotFound: true);
+            m_Gameplay_Guard = m_Gameplay.FindAction("Guard", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -303,6 +324,7 @@ namespace SLOTC.Core.Player
         private readonly InputAction m_Gameplay_Attack;
         private readonly InputAction m_Gameplay_Look;
         private readonly InputAction m_Gameplay_Target;
+        private readonly InputAction m_Gameplay_Guard;
         public struct GameplayActions
         {
             private @PlayerInputActions m_Wrapper;
@@ -312,6 +334,7 @@ namespace SLOTC.Core.Player
             public InputAction @Attack => m_Wrapper.m_Gameplay_Attack;
             public InputAction @Look => m_Wrapper.m_Gameplay_Look;
             public InputAction @Target => m_Wrapper.m_Gameplay_Target;
+            public InputAction @Guard => m_Wrapper.m_Gameplay_Guard;
             public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -336,6 +359,9 @@ namespace SLOTC.Core.Player
                 @Target.started += instance.OnTarget;
                 @Target.performed += instance.OnTarget;
                 @Target.canceled += instance.OnTarget;
+                @Guard.started += instance.OnGuard;
+                @Guard.performed += instance.OnGuard;
+                @Guard.canceled += instance.OnGuard;
             }
 
             private void UnregisterCallbacks(IGameplayActions instance)
@@ -355,6 +381,9 @@ namespace SLOTC.Core.Player
                 @Target.started -= instance.OnTarget;
                 @Target.performed -= instance.OnTarget;
                 @Target.canceled -= instance.OnTarget;
+                @Guard.started -= instance.OnGuard;
+                @Guard.performed -= instance.OnGuard;
+                @Guard.canceled -= instance.OnGuard;
             }
 
             public void RemoveCallbacks(IGameplayActions instance)
@@ -397,6 +426,7 @@ namespace SLOTC.Core.Player
             void OnAttack(InputAction.CallbackContext context);
             void OnLook(InputAction.CallbackContext context);
             void OnTarget(InputAction.CallbackContext context);
+            void OnGuard(InputAction.CallbackContext context);
         }
     }
 }

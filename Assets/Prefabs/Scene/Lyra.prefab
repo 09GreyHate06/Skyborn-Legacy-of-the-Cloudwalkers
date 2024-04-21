@@ -993,7 +993,7 @@ GameObject:
   - component: {fileID: 1065780580138576607}
   m_Layer: 0
   m_Name: Lyra
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1094,11 +1094,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aba63acd4c232a47bff6c8a4c5f2a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _combo:
+  - {fileID: 11400000, guid: 8ee5e7f9d3a9de54ab92e2228309026b, type: 2}
+  - {fileID: 11400000, guid: 7c3c374fdc4b71241bb3b65839f23589, type: 2}
+  - {fileID: 11400000, guid: 717f5255a92d35b4e9206f66311ddcae, type: 2}
+  - {fileID: 11400000, guid: 786c80562f3d8fe448add5fb7c8c57cd, type: 2}
+  _comboGraceTime: 1
   _moveSpeed: 6
   _rotationSpeed: 500
   _jumpForce: 6
   _fallingThreshold: -1.5
   _targetLocker: {fileID: 4276808443775462674}
+  _toFreeLookAnimTransitonDuration: 0.1
+  _toTargetLockedAnimTransitonDuration: 0.1
+  _toJumpAnimTransitonDuration: 0.1
+  _toFallingAnimTransitonDuration: 0.5
+  _freeLookBlendTreeDampTime: 0.1
+  _targetLockedBlendTreeDampTime: 0.1
 --- !u!1 &3305595358625345092
 GameObject:
   m_ObjectHideFlags: 0
