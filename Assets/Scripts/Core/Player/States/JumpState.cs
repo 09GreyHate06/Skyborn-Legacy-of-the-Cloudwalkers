@@ -5,11 +5,11 @@ namespace SLOTC.Core.Player.States
 {
     public class JumpState : IState
     {
-        private int _jumpAnimHash = Animator.StringToHash("Jump");
-        private PlayerMover _playerMover;
-        private Animator _animator;
-        private float _jumpForce;
-        private float _animTransitionDuration;
+        private readonly int _jumpAnimHash = Animator.StringToHash("Jump");
+        private readonly PlayerMover _playerMover;
+        private readonly Animator _animator;
+        private readonly float _jumpForce;
+        private readonly float _animTransitionDuration;
 
         public JumpState(PlayerMover playerMover, Animator animator, float animTransitionDuration, float jumpForce)
         {
@@ -26,9 +26,7 @@ namespace SLOTC.Core.Player.States
 
         public void OnEnter()
         {
-            if (_playerMover.IsGrounded)
-                _playerMover.velocity.y = _jumpForce;
-
+            _playerMover.velocity.y = _jumpForce;
             _animator.CrossFadeInFixedTime(_jumpAnimHash, _animTransitionDuration);
         }
 

@@ -18,16 +18,17 @@ namespace SLOTC.Core.Player
         [SerializeField] float _moveSpeed = 3.0f;
         [SerializeField] float _rotationSpeed = 50.0f;
         [SerializeField] float _jumpForce = 5.0f;
-        [SerializeField] float _fallingThreshold = -1.5f;
+        [SerializeField] float _timeLeavedGroundBeforeFallState = 1.0f;
         [SerializeField] TargetLocker _targetLocker;
 
         [Space(10)]
         [Header("Animation Settings")]
+        [SerializeField] float _toIdleAnimTransitonDuration = 0.25f;
         [SerializeField] float _toFreeLookAnimTransitonDuration = 0.25f;
         [SerializeField] float _toTargetLockedAnimTransitonDuration = 0.25f;
         [SerializeField] float _toJumpAnimTransitonDuration = 0.25f;
-        [SerializeField] float _toGuardAnimTransionDuration = 0.25f;
         [SerializeField] float _toFallingAnimTransitonDuration = 0.25f;
+        [SerializeField] float _idleDampTime = 0.05f;
         [SerializeField] float _freeLookBlendTreeDampTime = 0.05f;
         [SerializeField] float _targetLockedBlendTreeDampTime = 0.05f;
 
@@ -36,9 +37,13 @@ namespace SLOTC.Core.Player
         private PlayerMover _playerMover;
 
         private bool _jumpBtnPressed;
-        private bool _isAttackBtnPressed;
-        private bool _guardBtnPressed;
+        private bool _attackBtnPressed;
+        private bool _moveBtnPressed;
         private bool _isAttacking = false;
+        private bool _attackAnimFinished = true;
+
+        private bool _leavedGroundFlag;
+        private float _timeSinceLeaveGround;
 
         private void Awake()
         {
@@ -51,49 +56,70 @@ namespace SLOTC.Core.Player
             Animator animator = GetComponent<Animator>();
             _playerMover = GetComponent<PlayerMover>();
 
-            FreeLookState freeLookState = new FreeLookState(_playerMover, animator, _toFreeLookAnimTransitonDuration, _freeLookBlendTreeDampTime, _moveSpeed, _rotationSpeed);
-            TargetLockedState targetLockState = new TargetLockedState(_playerMover, animator, _toTargetLockedAnimTransitonDuration, _targetLockedBlendTreeDampTime, _moveSpeed, _rotationSpeed);
+            IdleState idleState = new IdleState(_playerMover, animator, _toIdleAnimTransitonDuration, _idleDampTime);
+            FreeLookMoveState freeLookMoveState = new FreeLookMoveState(_playerMover, _playerInput, animator, 
+                _toFreeLookAnimTransitonDuration, _freeLookBlendTreeDampTime, _moveSpeed, _rotationSpeed);
+            TargetLockedMoveState targetLockMoveState = new TargetLockedMoveState(_playerMover, _playerInput, animator, 
+                _toTargetLockedAnimTransitonDuration, _targetLockedBlendTreeDampTime, _moveSpeed, _rotationSpeed);
             JumpState jumpState = new JumpState(_playerMover, animator, _toJumpAnimTransitonDuration, _jumpForce);
             FallingState fallingState = new FallingState(animator, _toFallingAnimTransitonDuration);
-            AttackState attackState = new AttackState(_playerMover, animator, _combo, _comboGraceTime);
-            GuardState guardState = new GuardState(_playerMover, animator, _toGuardAnimTransionDuration);
+            AttackState attackState = new AttackState(_playerMover, _playerInput, animator, _combo, _comboGraceTime, _rotationSpeed);
 
             attackState.OnAttackFinished += () => { _isAttacking = false; };
+            attackState.OnAnimationFinished += () => { _attackAnimFinished = true; };
 
-            // to FreeLook
-            _stateMachine.AddTransition(jumpState, freeLookState, () => { return _playerMover.IsGrounded; });
-            _stateMachine.AddTransition(fallingState, freeLookState, () => { return _playerMover.IsGrounded; });
-            _stateMachine.AddTransition(attackState, freeLookState, () => { return _playerMover.IsGrounded && !_isAttacking; });
-            _stateMachine.AddTransition(guardState, freeLookState, () => { return _playerMover.IsGrounded && !_guardBtnPressed; });
-            _stateMachine.AddTransition(targetLockState, freeLookState, () => { return _playerMover.IsGrounded && !_targetLocker.HasTarget; });
+            void AT(IState from, IState to, Func<bool> condition) => _stateMachine.AddTransition(from, to, condition);
 
-            // to TargetLockState
-            _stateMachine.AddTransition(freeLookState, targetLockState, () => { return _playerMover.IsGrounded && _targetLocker.HasTarget; });
+            // to IdleState
+            AT(freeLookMoveState, idleState, () => { return _playerMover.IsGrounded && !_moveBtnPressed; });
+            AT(targetLockMoveState, idleState, () => { return _playerMover.IsGrounded && !_moveBtnPressed; });
+            AT(jumpState, idleState, () => { return _playerMover.IsGrounded; });
+            AT(fallingState, idleState, () => { return _playerMover.IsGrounded; });
+            AT(attackState, idleState, () => { return _playerMover.IsGrounded && _attackAnimFinished; });
 
-            // to JumpState
-            _stateMachine.AddTransition(freeLookState, jumpState, () => { return _playerMover.IsGrounded && _jumpBtnPressed; });
-            _stateMachine.AddTransition(targetLockState, jumpState, () => { return _playerMover.IsGrounded && _jumpBtnPressed; });
-            _stateMachine.AddTransition(fallingState, jumpState, () => { return _playerMover.IsGrounded && _jumpBtnPressed; });
-            _stateMachine.AddTransition(attackState, jumpState, () => { return _playerMover.IsGrounded && _jumpBtnPressed && !_isAttacking; });
-            _stateMachine.AddTransition(guardState, jumpState, () => { return _playerMover.IsGrounded && _jumpBtnPressed && !_guardBtnPressed; });
+            // to FreeLookMoveState
+            bool toFLMoveBase() { return _playerMover.IsGrounded && !_targetLocker.HasTarget && _moveBtnPressed; }
+            AT(idleState, freeLookMoveState, toFLMoveBase);
+            AT(targetLockMoveState, freeLookMoveState, toFLMoveBase);
+            AT(attackState, freeLookMoveState, () => { return toFLMoveBase() && !_isAttacking; });
 
-            // to FallingState
-            Func<bool> isFalling = () => { return _playerMover.velocity.y < _fallingThreshold && !_playerMover.IsGrounded; };
-            _stateMachine.AddTransition(freeLookState, fallingState, () => isFalling());
-            _stateMachine.AddTransition(targetLockState, fallingState, () => isFalling());
-            _stateMachine.AddTransition(jumpState, fallingState, () => isFalling());
-            _stateMachine.AddTransition(attackState, fallingState, () => isFalling() && !_isAttacking);
-            _stateMachine.AddTransition(guardState, fallingState, () => isFalling());
+            // to TargetLockMoveState
+            bool toTLMoveBase() { return _playerMover.IsGrounded && _targetLocker.HasTarget && _moveBtnPressed; }
+            AT(idleState, targetLockMoveState, toTLMoveBase);
+            AT(freeLookMoveState, targetLockMoveState, toTLMoveBase);
+            AT(attackState, freeLookMoveState, () => { return toTLMoveBase() && !_isAttacking; });
+
+            // to jumpState
+            bool toJumpStateBase() { return _playerMover.IsGrounded && _jumpBtnPressed; }
+            AT(idleState, jumpState, toJumpStateBase);
+            AT(freeLookMoveState, jumpState, toJumpStateBase);
+            AT(targetLockMoveState, jumpState, toJumpStateBase);
+            AT(attackState, jumpState, () => { return toJumpStateBase() && !_isAttacking; });
+
+            // to FallingState 
+            // todo: walking when falling and rotating
+            bool isFallingBase() { return _timeSinceLeaveGround >= _timeLeavedGroundBeforeFallState; }
+            AT(idleState, fallingState, isFallingBase);
+            AT(freeLookMoveState, fallingState, isFallingBase);
+            AT(targetLockMoveState, fallingState, isFallingBase);
+            AT(jumpState, fallingState, isFallingBase);
+            AT(attackState, fallingState, () => { return isFallingBase() && !_isAttacking; });
 
             // to AttackState
-            _stateMachine.AddAnyTransition(attackState, true, () => { return _isAttackBtnPressed; });
+            _stateMachine.AddAnyTransition(attackState, true, () => 
+            { 
+                bool result = _attackBtnPressed && !_isAttacking;
 
-            // to Guard
-            _stateMachine.AddTransition(freeLookState, guardState, () => { return _guardBtnPressed && _playerMover.IsGrounded; });
-            _stateMachine.AddTransition(targetLockState, guardState, () => { return _guardBtnPressed && _playerMover.IsGrounded && _targetLocker.HasTarget; });
-            _stateMachine.AddTransition(attackState, guardState, () => { return _guardBtnPressed && _playerMover.IsGrounded && !_isAttacking; });
+                if (result)
+                {
+                    _isAttacking = true;
+                    _attackAnimFinished = false;
+                }
 
-            _stateMachine.SetState(freeLookState);
+                return result;
+            });
+
+            _stateMachine.SetState(freeLookMoveState);
         }
 
         private void OnEnable()
@@ -123,11 +149,17 @@ namespace SLOTC.Core.Player
 
         void Update()
         {
+            if (!_playerMover.IsGrounded)
+                _timeSinceLeaveGround += Time.deltaTime;
+            else 
+                _timeSinceLeaveGround = 0.0f;
+            
             _stateMachine.OnUpdate(Time.deltaTime);
         }
 
         private void OnMove(InputAction.CallbackContext context)
         {
+            _moveBtnPressed = context.performed;
         }
 
         private void OnJump(InputAction.CallbackContext context)
@@ -137,9 +169,7 @@ namespace SLOTC.Core.Player
 
         private void OnAttack(InputAction.CallbackContext context)
         {
-            _isAttackBtnPressed = context.performed;
-            if (_isAttackBtnPressed)
-                _isAttacking = true;
+            _attackBtnPressed = context.performed;
         }
 
         private void OnTarget(InputAction.CallbackContext context)
@@ -156,7 +186,6 @@ namespace SLOTC.Core.Player
 
         private void OnGuard(InputAction.CallbackContext context)
         {
-            _guardBtnPressed = context.performed;
         }
 
         private void OnApplicationFocus(bool focus)

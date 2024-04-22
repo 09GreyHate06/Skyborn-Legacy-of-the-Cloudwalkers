@@ -5,9 +5,9 @@ namespace SLOTC.Core.Player.States
 {
     public class FallingState : IState
     {
-        private int _fallingAnimHash = Animator.StringToHash("Falling");
-        private Animator _animator;
-        private float _animTransitionDuration;
+        private readonly int _fallingAnimHash = Animator.StringToHash("Falling");
+        private readonly Animator _animator;
+        private readonly float _animTransitionDuration;
 
         public FallingState(Animator animator, float animTransitionDuration)
         {

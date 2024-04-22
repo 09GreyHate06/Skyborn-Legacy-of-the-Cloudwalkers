@@ -682,8 +682,8 @@ MonoBehaviour:
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
-  m_HorizontalDamping: 0
-  m_VerticalDamping: 0
+  m_HorizontalDamping: 1
+  m_VerticalDamping: 1
   m_ScreenX: 0.5
   m_ScreenY: 0.5
   m_DeadZoneWidth: 0
@@ -809,8 +809,8 @@ MonoBehaviour:
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
-  m_HorizontalDamping: 0
-  m_VerticalDamping: 0
+  m_HorizontalDamping: 1
+  m_VerticalDamping: 1
   m_ScreenX: 0.5
   m_ScreenY: 0.55
   m_DeadZoneWidth: 0
@@ -964,7 +964,7 @@ MonoBehaviour:
     m_VirtualCamera: {fileID: 1717440415860157147}
     m_ActivateAfter: 0
     m_MinDuration: 0
-  - m_FullHash: -1877976797
+  - m_FullHash: -1883118542
     m_VirtualCamera: {fileID: 8664575739326121986}
     m_ActivateAfter: 0
     m_MinDuration: 0
@@ -1178,8 +1178,8 @@ MonoBehaviour:
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
-  m_HorizontalDamping: 0
-  m_VerticalDamping: 0
+  m_HorizontalDamping: 1
+  m_VerticalDamping: 1
   m_ScreenX: 0.5
   m_ScreenY: 0.6
   m_DeadZoneWidth: 0
@@ -1251,8 +1251,8 @@ MonoBehaviour:
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
-  m_HorizontalDamping: 0.3
-  m_VerticalDamping: 0.3
+  m_HorizontalDamping: 1
+  m_VerticalDamping: 1
   m_ScreenX: 0.5
   m_ScreenY: 0.5
   m_DeadZoneWidth: 0

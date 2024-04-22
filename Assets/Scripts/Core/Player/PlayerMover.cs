@@ -2,15 +2,14 @@ using UnityEngine;
 
 namespace SLOTC.Core.Player
 {
-    [RequireComponent(typeof(CharacterController))]
     public class PlayerMover : MonoBehaviour
     {
+        [SerializeField] CharacterController _controller = null;
         [SerializeField] float _forceSmoothDampTime = 0.3f;
         [SerializeField] float _gravityMultiplier = 1.0f;
         [field: SerializeField] public bool UseGravity { get; set; } = true;
 
 
-        private CharacterController _controller;
         private Vector3 _force;
         private Vector3 _dampingVelocity;
 

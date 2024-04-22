@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5840aeb8931cd2e4fba7d89aa19605e3, type: 3}
   m_Name: Attack4
   m_EditorClassIdentifier: 
-  _animName: Attack4
-  _animTag: ComboAttack1
-  <TransitionDuration>k__BackingField: 0.25
   _damageModifiers: []
-  <ComboAttackExitNormalizedTime>k__BackingField: 1
   <Force>k__BackingField: {x: 0, y: 0, z: 15}
-  <ForceNormalizedTime>k__BackingField: 0.14
   <KnockbackForce>k__BackingField: 4
+  _animName: Attack4
+  <AnimNormalizedTimeToApplyForce>k__BackingField: 0.34
+  <AnimNormalizedExitTime>k__BackingField: 0.4
+  <AnimNormalizedTransitionDuration>k__BackingField: 0.25
+  <AnimNormalizedTransitionOffset>k__BackingField: 0.2
   _animNameHash: -1924723795
-  _animTagHash: -1073580744
