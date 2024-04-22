@@ -9,6 +9,14 @@ namespace SLOTC.Core.Player.States
 {
     public class AttackState : IState
     {
+        public enum EventType
+        {
+            Enter,
+            AttackEnded,
+            AnimationEnded,
+            Exit
+        }
+
         private readonly PlayerMover _playerMover;
         private readonly Animator _animator;
         private readonly Attack[] _combo;
@@ -22,10 +30,10 @@ namespace SLOTC.Core.Player.States
         private Attack _activeAttack;
         private bool _applyForceFlag;
 
-        private bool _onAttackFinishedCalled = true;
-        private bool _onAnimationFinishedCalled = true;
-        public event Action OnAttackFinished;
-        public event Action OnAnimationFinished;
+        private bool _eventAttackEndedCalled;
+        private bool _eventAnimationEndedCalled;
+        public Action<EventType> OnEvent;
+
 
         public AttackState(PlayerMover playerMover, PlayerInput playerInput, Animator animator, Attack[] combo, float comboGraceTime, float rotationSpeed)
         {
@@ -44,6 +52,7 @@ namespace SLOTC.Core.Player.States
 
         public void OnEnter()
         {
+            Debug.Log("OnEnter " + _comboCounter);
             _playerMover.velocity.x = 0.0f;
             _playerMover.velocity.z = 0.0f;
             //if (!_playerMover.IsGrounded)
@@ -60,22 +69,24 @@ namespace SLOTC.Core.Player.States
             _animator.CrossFade(_activeAttack.AnimNameHash, _activeAttack.AnimNormalizedTransitionDuration, 0, _activeAttack.AnimNormalizedTransitionOffset);
 
             _applyForceFlag = true;
-            _onAttackFinishedCalled = false;
-            _onAnimationFinishedCalled = false;
+            _eventAttackEndedCalled = false;
+            _eventAnimationEndedCalled = false;
+            OnEvent?.Invoke(EventType.Enter);
         }
 
         public void OnExit()
         {
+            _applyForceFlag = false;
+            _eventAttackEndedCalled = true;
+            _eventAnimationEndedCalled = true;
             _activeAttack = null;
+            OnEvent?.Invoke(EventType.Exit);
         }
 
         public void OnUpdate(float deltaTime)
         {
             Vector2 inputAxis = _playerInput.Axis;
-            float inputMagnitude = Mathf.Clamp01(inputAxis.magnitude);
-
-            Vector3 velocity = Vector3.zero;
-            if (inputMagnitude > float.Epsilon)
+            if (inputAxis.sqrMagnitude > float.Epsilon)
             {
                 Vector3 forward = Camera.main.transform.forward;
                 forward.y = 0.0f;
@@ -99,28 +110,18 @@ namespace SLOTC.Core.Player.States
                 _applyForceFlag = false;
             }
 
-            if (!_onAttackFinishedCalled && IsAttackFinished())
+            if(!_eventAttackEndedCalled && GetNormalizedTime() >= _activeAttack.AnimNormalizedExitTime)
             {
+                OnEvent?.Invoke(EventType.AttackEnded);
                 _lastAttackTime = Time.realtimeSinceStartup;
-                OnAttackFinished?.Invoke();
-                _onAttackFinishedCalled = true;
+                _eventAttackEndedCalled = true;
             }
 
-            if(!_onAnimationFinishedCalled && IsAnimationFinished())
+            if(!_eventAnimationEndedCalled && GetNormalizedTime() >= 1.0f - float.Epsilon)
             {
-                OnAnimationFinished?.Invoke();
-                _onAnimationFinishedCalled = true;
+                OnEvent?.Invoke(EventType.AnimationEnded);
+                _eventAnimationEndedCalled = true;
             }
-        }
-
-        private bool IsAttackFinished()
-        {
-            return GetNormalizedTime() >= _activeAttack.AnimNormalizedExitTime;
-        }
-
-        private bool IsAnimationFinished()
-        {
-            return GetNormalizedTime() >= 1.0f - float.Epsilon;
         }
 
         private float GetNormalizedTime()

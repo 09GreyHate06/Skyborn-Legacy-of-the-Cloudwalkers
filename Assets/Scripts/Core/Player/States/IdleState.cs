@@ -7,6 +7,9 @@ namespace SLOTC.Core.Player.States
     {
         private readonly int _idleAnimHash = Animator.StringToHash("Idle");
         private readonly int _moveMagnitudeParamHash = Animator.StringToHash("MoveMagnitude");
+        private readonly int _inputXParamHash = Animator.StringToHash("InputX");
+        private readonly int _inputYParamHash = Animator.StringToHash("InputY");
+
         private readonly Animator _animator;
         private readonly float _animTransitionDuration;
         private readonly PlayerMover _playerMover;
@@ -38,6 +41,8 @@ namespace SLOTC.Core.Player.States
         public void OnUpdate(float deltaTime)
         {
             _animator.SetFloat(_moveMagnitudeParamHash, 0.0f, _animDampTime, deltaTime);
+            _animator.SetFloat(_inputXParamHash, 0.0f, _animDampTime, deltaTime);
+            _animator.SetFloat(_inputYParamHash, 0.0f, _animDampTime, deltaTime);
         }
     }
 }

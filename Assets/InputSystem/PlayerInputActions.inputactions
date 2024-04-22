@@ -51,7 +51,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Guard",
+                    "name": "Dodge",
                     "type": "Button",
                     "id": "5cb085de-afc4-447a-8ea2-5c29fcc50723",
                     "expectedControlType": "Button",
@@ -185,11 +185,11 @@
                 {
                     "name": "",
                     "id": "8f2a02f5-5db3-40d6-b2db-c564ebfc42df",
-                    "path": "<Mouse>/rightButton",
+                    "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
-                    "action": "Guard",
+                    "action": "Dodge",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

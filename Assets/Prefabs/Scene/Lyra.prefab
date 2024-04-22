@@ -1105,15 +1105,19 @@ MonoBehaviour:
   _rotationSpeed: 500
   _jumpForce: 6
   _timeLeavedGroundBeforeFallState: 0.5
+  _dodgeForce: 50
+  _dodgeCooldown: 1
   _targetLocker: {fileID: 4276808443775462674}
-  _toIdleAnimTransitonDuration: 0.25
-  _toFreeLookAnimTransitonDuration: 0.25
-  _toTargetLockedAnimTransitonDuration: 0.25
-  _toJumpAnimTransitonDuration: 0.25
-  _toFallingAnimTransitonDuration: 0.25
-  _idleDampTime: 0.05
-  _freeLookBlendTreeDampTime: 0.05
-  _targetLockedBlendTreeDampTime: 0.05
+  _toIdleAnimTransitionDuration: 0.25
+  _toMoveAnimTransitionDuration: 0.25
+  _toJumpAnimTransitionDuration: 0.25
+  _toFallingAnimTransitionDuration: 0.25
+  _toDodgeAnimTransitionDuration: 0.25
+  _idleAnimDampTime: 0.05
+  _moveAnimDampTime: 0.05
+  _dodgeAnimNormExitTime: 0.3335
+  _dodgeAnimTransitionDuration: 0.25
+  _dodgeAnimDampTime: 0.05
 --- !u!1 &3305595358625345092
 GameObject:
   m_ObjectHideFlags: 0

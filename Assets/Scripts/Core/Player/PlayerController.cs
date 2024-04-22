@@ -15,22 +15,25 @@ namespace SLOTC.Core.Player
 
         [Space(10)]
         [Header("Locomotion Settings")]
-        [SerializeField] float _moveSpeed = 3.0f;
+        [SerializeField] float _moveSpeed = 6.0f;
         [SerializeField] float _rotationSpeed = 50.0f;
-        [SerializeField] float _jumpForce = 5.0f;
+        [SerializeField] float _jumpForce = 6.0f;
         [SerializeField] float _timeLeavedGroundBeforeFallState = 1.0f;
+        [SerializeField] float _dodgeForce = 50.0f;
+        [SerializeField] float _dodgeCooldown = 1.0f;
         [SerializeField] TargetLocker _targetLocker;
 
         [Space(10)]
         [Header("Animation Settings")]
-        [SerializeField] float _toIdleAnimTransitonDuration = 0.25f;
-        [SerializeField] float _toFreeLookAnimTransitonDuration = 0.25f;
-        [SerializeField] float _toTargetLockedAnimTransitonDuration = 0.25f;
-        [SerializeField] float _toJumpAnimTransitonDuration = 0.25f;
-        [SerializeField] float _toFallingAnimTransitonDuration = 0.25f;
-        [SerializeField] float _idleDampTime = 0.05f;
-        [SerializeField] float _freeLookBlendTreeDampTime = 0.05f;
-        [SerializeField] float _targetLockedBlendTreeDampTime = 0.05f;
+        [SerializeField] float _toIdleAnimTransitionDuration = 0.25f;
+        [SerializeField] float _toMoveAnimTransitionDuration = 0.25f;
+        [SerializeField] float _toJumpAnimTransitionDuration = 0.25f;
+        [SerializeField] float _toFallingAnimTransitionDuration = 0.25f;
+        [SerializeField] float _idleAnimDampTime = 0.05f;
+        [SerializeField] float _moveAnimDampTime = 0.05f;
+        [SerializeField] float _dodgeAnimNormExitTime = 1.0f;
+        [SerializeField] float _toDodgeAnimTransitionDuration = 0.25f;
+        [SerializeField] float _dodgeAnimDampTime = 0.05f;
 
         private StateMachine _stateMachine;
         private PlayerInput _playerInput;
@@ -39,11 +42,15 @@ namespace SLOTC.Core.Player
         private bool _jumpBtnPressed;
         private bool _attackBtnPressed;
         private bool _moveBtnPressed;
-        private bool _isAttacking = false;
-        private bool _attackAnimFinished = true;
+        private bool _dodgeBtnPressed;
 
-        private bool _leavedGroundFlag;
+        private bool _isAttacking;
+        private bool _attackAnimationEnded = true;
+        private bool _isDodging;
+        private bool _dodgeAnimationEnded = true;
+
         private float _timeSinceLeaveGround;
+        private float _timeSinceLastDodge;
 
         private void Awake()
         {
@@ -56,70 +63,54 @@ namespace SLOTC.Core.Player
             Animator animator = GetComponent<Animator>();
             _playerMover = GetComponent<PlayerMover>();
 
-            IdleState idleState = new IdleState(_playerMover, animator, _toIdleAnimTransitonDuration, _idleDampTime);
-            FreeLookMoveState freeLookMoveState = new FreeLookMoveState(_playerMover, _playerInput, animator, 
-                _toFreeLookAnimTransitonDuration, _freeLookBlendTreeDampTime, _moveSpeed, _rotationSpeed);
-            TargetLockedMoveState targetLockMoveState = new TargetLockedMoveState(_playerMover, _playerInput, animator, 
-                _toTargetLockedAnimTransitonDuration, _targetLockedBlendTreeDampTime, _moveSpeed, _rotationSpeed);
-            JumpState jumpState = new JumpState(_playerMover, animator, _toJumpAnimTransitonDuration, _jumpForce);
-            FallingState fallingState = new FallingState(animator, _toFallingAnimTransitonDuration);
+            IdleState idleState = new IdleState(_playerMover, animator, _toIdleAnimTransitionDuration, _idleAnimDampTime);
+            MoveState moveState = new MoveState(_playerMover, _playerInput, _targetLocker, animator, _toMoveAnimTransitionDuration, _moveAnimDampTime, _moveSpeed, _rotationSpeed);
+            JumpState jumpState = new JumpState(_playerMover, animator, _toJumpAnimTransitionDuration, _jumpForce);
+            FallingState fallingState = new FallingState(animator, _toFallingAnimTransitionDuration);
             AttackState attackState = new AttackState(_playerMover, _playerInput, animator, _combo, _comboGraceTime, _rotationSpeed);
+            DodgeState dodgeState = new DodgeState(_playerMover, _playerInput, _targetLocker, animator, _dodgeAnimNormExitTime, 
+                _toDodgeAnimTransitionDuration, _dodgeAnimDampTime, _dodgeForce);
 
-            attackState.OnAttackFinished += () => { _isAttacking = false; };
-            attackState.OnAnimationFinished += () => { _attackAnimFinished = true; };
+            attackState.OnEvent += OnAttackStateEvent;
+            dodgeState.OnEvent += OnDodgeStateEvent;
 
             void AT(IState from, IState to, Func<bool> condition) => _stateMachine.AddTransition(from, to, condition);
 
             // to IdleState
-            AT(freeLookMoveState, idleState, () => { return _playerMover.IsGrounded && !_moveBtnPressed; });
-            AT(targetLockMoveState, idleState, () => { return _playerMover.IsGrounded && !_moveBtnPressed; });
+            AT(moveState, idleState, () => { return _playerMover.IsGrounded && !_moveBtnPressed; });
             AT(jumpState, idleState, () => { return _playerMover.IsGrounded; });
             AT(fallingState, idleState, () => { return _playerMover.IsGrounded; });
-            AT(attackState, idleState, () => { return _playerMover.IsGrounded && _attackAnimFinished; });
+            AT(attackState, idleState, () => { return _playerMover.IsGrounded && _attackAnimationEnded; });
+            AT(dodgeState, idleState, () => { return _playerMover.IsGrounded && _dodgeAnimationEnded; });
 
-            // to FreeLookMoveState
-            bool toFLMoveBase() { return _playerMover.IsGrounded && !_targetLocker.HasTarget && _moveBtnPressed; }
-            AT(idleState, freeLookMoveState, toFLMoveBase);
-            AT(targetLockMoveState, freeLookMoveState, toFLMoveBase);
-            AT(attackState, freeLookMoveState, () => { return toFLMoveBase() && !_isAttacking; });
-
-            // to TargetLockMoveState
-            bool toTLMoveBase() { return _playerMover.IsGrounded && _targetLocker.HasTarget && _moveBtnPressed; }
-            AT(idleState, targetLockMoveState, toTLMoveBase);
-            AT(freeLookMoveState, targetLockMoveState, toTLMoveBase);
-            AT(attackState, freeLookMoveState, () => { return toTLMoveBase() && !_isAttacking; });
+            // to MoveState
+            bool toMoveBase() { return _playerMover.IsGrounded && _moveBtnPressed; }
+            AT(idleState, moveState, toMoveBase);
+            AT(attackState, moveState, () => { return toMoveBase() && !_isAttacking; });
+            AT(dodgeState, moveState, () => { return toMoveBase() && !_isDodging; });
 
             // to jumpState
             bool toJumpStateBase() { return _playerMover.IsGrounded && _jumpBtnPressed; }
             AT(idleState, jumpState, toJumpStateBase);
-            AT(freeLookMoveState, jumpState, toJumpStateBase);
-            AT(targetLockMoveState, jumpState, toJumpStateBase);
+            AT(moveState, jumpState, toJumpStateBase);
             AT(attackState, jumpState, () => { return toJumpStateBase() && !_isAttacking; });
+            AT(dodgeState, jumpState, () => { return toJumpStateBase() && !_isDodging; });
 
             // to FallingState 
-            // todo: walking when falling and rotating
             bool isFallingBase() { return _timeSinceLeaveGround >= _timeLeavedGroundBeforeFallState; }
             AT(idleState, fallingState, isFallingBase);
-            AT(freeLookMoveState, fallingState, isFallingBase);
-            AT(targetLockMoveState, fallingState, isFallingBase);
+            AT(moveState, fallingState, isFallingBase);
             AT(jumpState, fallingState, isFallingBase);
             AT(attackState, fallingState, () => { return isFallingBase() && !_isAttacking; });
+            AT(dodgeState, fallingState, () => { return isFallingBase() && !_isDodging; });
 
             // to AttackState
-            _stateMachine.AddAnyTransition(attackState, true, () => 
-            { 
-                bool result = _attackBtnPressed && !_isAttacking;
+            _stateMachine.AddAnyTransition(attackState, true, () => { return _attackBtnPressed && !_isAttacking; });
 
-                if (result)
-                {
-                    _isAttacking = true;
-                    _attackAnimFinished = false;
-                }
+            // to DodgeState
+            _stateMachine.AddAnyTransition(dodgeState, false, () => { return _dodgeBtnPressed && _timeSinceLastDodge >= _dodgeCooldown && !_isDodging; });
 
-                return result;
-            });
-
-            _stateMachine.SetState(freeLookMoveState);
+            _stateMachine.SetState(idleState);
         }
 
         private void OnEnable()
@@ -128,7 +119,7 @@ namespace SLOTC.Core.Player
             _playerInput.OnJumpEvent += OnJump;
             _playerInput.OnAttackEvent += OnAttack;
             _playerInput.OnTargetEvent += OnTarget;
-            _playerInput.OnGuardEvent += OnGuard;
+            _playerInput.OnDodgeEvent += OnDodge;
         }
 
         private void OnDisable()
@@ -137,7 +128,7 @@ namespace SLOTC.Core.Player
             _playerInput.OnJumpEvent -= OnJump;
             _playerInput.OnAttackEvent -= OnAttack;
             _playerInput.OnTargetEvent -= OnTarget;
-            _playerInput.OnGuardEvent -= OnGuard;
+            _playerInput.OnDodgeEvent -= OnDodge;
         }
 
         private void OnValidate()
@@ -151,9 +142,14 @@ namespace SLOTC.Core.Player
         {
             if (!_playerMover.IsGrounded)
                 _timeSinceLeaveGround += Time.deltaTime;
-            else 
+            else
                 _timeSinceLeaveGround = 0.0f;
-            
+
+            if (!_isDodging)
+                _timeSinceLastDodge += Time.deltaTime;
+            else
+                _timeSinceLastDodge = 0.0f;
+
             _stateMachine.OnUpdate(Time.deltaTime);
         }
 
@@ -184,8 +180,57 @@ namespace SLOTC.Core.Player
                 _targetLocker.SelectTarget();
         }
 
-        private void OnGuard(InputAction.CallbackContext context)
+        private void OnDodge(InputAction.CallbackContext context)
         {
+            _dodgeBtnPressed = context.performed;
+        }
+
+        private void OnAttackStateEvent(AttackState.EventType type)
+        {
+            switch(type)
+            {
+                case AttackState.EventType.Enter:
+                    _isAttacking = true;
+                    _attackAnimationEnded = false;
+                    break;
+
+                case AttackState.EventType.AttackEnded:
+                    _isAttacking = false;
+                    break;
+
+                case AttackState.EventType.AnimationEnded:
+                    _attackAnimationEnded = true;
+                    break;
+
+                case AttackState.EventType.Exit:
+                    _isAttacking = false;
+                    _attackAnimationEnded = true;
+                    break;
+            }
+        }
+
+        private void OnDodgeStateEvent(DodgeState.EventType type)
+        {
+            switch (type)
+            {
+                case DodgeState.EventType.Enter:
+                    _isDodging = true;
+                    _dodgeAnimationEnded = false;
+                    break;
+
+                case DodgeState.EventType.DodgeEnded:
+                    _isDodging = false;
+                    break;
+
+                case DodgeState.EventType.AnimationEnded:
+                    _dodgeAnimationEnded = true;
+                    break;
+
+                case DodgeState.EventType.Exit:
+                    _isDodging = false;
+                    _dodgeAnimationEnded = true;
+                    break;
+            }
         }
 
         private void OnApplicationFocus(bool focus)
