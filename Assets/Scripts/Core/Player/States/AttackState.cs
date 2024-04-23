@@ -52,7 +52,6 @@ namespace SLOTC.Core.Player.States
 
         public void OnEnter()
         {
-            Debug.Log("OnEnter " + _comboCounter);
             _playerMover.velocity.x = 0.0f;
             _playerMover.velocity.z = 0.0f;
             //if (!_playerMover.IsGrounded)

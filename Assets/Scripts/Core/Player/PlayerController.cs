@@ -15,29 +15,30 @@ namespace SLOTC.Core.Player
 
         [Space(10)]
         [Header("Locomotion Settings")]
+        [SerializeField] PlayerMover _playerMover;
+        [SerializeField] TargetLocker _targetLocker;
         [SerializeField] float _moveSpeed = 6.0f;
         [SerializeField] float _rotationSpeed = 50.0f;
         [SerializeField] float _jumpForce = 6.0f;
-        [SerializeField] float _timeLeavedGroundBeforeFallState = 1.0f;
+        [SerializeField] float _timeLeavedGroundBeforeFallState = 0.5f;
         [SerializeField] float _dodgeForce = 50.0f;
         [SerializeField] float _dodgeCooldown = 1.0f;
-        [SerializeField] TargetLocker _targetLocker;
 
         [Space(10)]
         [Header("Animation Settings")]
+        [SerializeField] Animator _animator;
         [SerializeField] float _toIdleAnimTransitionDuration = 0.25f;
+        [SerializeField] float _idleAnimDampTime = 0.05f;
         [SerializeField] float _toMoveAnimTransitionDuration = 0.25f;
+        [SerializeField] float _moveAnimDampTime = 0.05f;
         [SerializeField] float _toJumpAnimTransitionDuration = 0.25f;
         [SerializeField] float _toFallingAnimTransitionDuration = 0.25f;
-        [SerializeField] float _idleAnimDampTime = 0.05f;
-        [SerializeField] float _moveAnimDampTime = 0.05f;
-        [SerializeField] float _dodgeAnimNormExitTime = 1.0f;
         [SerializeField] float _toDodgeAnimTransitionDuration = 0.25f;
+        [SerializeField] float _dodgeAnimNormExitTime = 1.0f;
         [SerializeField] float _dodgeAnimDampTime = 0.05f;
 
         private StateMachine _stateMachine;
         private PlayerInput _playerInput;
-        private PlayerMover _playerMover;
 
         private bool _jumpBtnPressed;
         private bool _attackBtnPressed;
@@ -60,15 +61,12 @@ namespace SLOTC.Core.Player
 
         void Start()
         {
-            Animator animator = GetComponent<Animator>();
-            _playerMover = GetComponent<PlayerMover>();
-
-            IdleState idleState = new IdleState(_playerMover, animator, _toIdleAnimTransitionDuration, _idleAnimDampTime);
-            MoveState moveState = new MoveState(_playerMover, _playerInput, _targetLocker, animator, _toMoveAnimTransitionDuration, _moveAnimDampTime, _moveSpeed, _rotationSpeed);
-            JumpState jumpState = new JumpState(_playerMover, animator, _toJumpAnimTransitionDuration, _jumpForce);
-            FallingState fallingState = new FallingState(animator, _toFallingAnimTransitionDuration);
-            AttackState attackState = new AttackState(_playerMover, _playerInput, animator, _combo, _comboGraceTime, _rotationSpeed);
-            DodgeState dodgeState = new DodgeState(_playerMover, _playerInput, _targetLocker, animator, _dodgeAnimNormExitTime, 
+            IdleState idleState = new IdleState(_playerMover, _animator, _toIdleAnimTransitionDuration, _idleAnimDampTime);
+            MoveState moveState = new MoveState(_playerMover, _playerInput, _targetLocker, _animator, _toMoveAnimTransitionDuration, _moveAnimDampTime, _moveSpeed, _rotationSpeed);
+            JumpState jumpState = new JumpState(_playerMover, _animator, _toJumpAnimTransitionDuration, _jumpForce);
+            FallingState fallingState = new FallingState(_animator, _toFallingAnimTransitionDuration);
+            AttackState attackState = new AttackState(_playerMover, _playerInput, _animator, _combo, _comboGraceTime, _rotationSpeed);
+            DodgeState dodgeState = new DodgeState(_playerMover, _playerInput, _targetLocker, _animator, _dodgeAnimNormExitTime, 
                 _toDodgeAnimTransitionDuration, _dodgeAnimDampTime, _dodgeForce);
 
             attackState.OnEvent += OnAttackStateEvent;
@@ -133,6 +131,8 @@ namespace SLOTC.Core.Player
 
         private void OnValidate()
         {
+            if (!Application.isPlaying) return;
+
             Awake();
             Start();
         }

@@ -1,11 +1,12 @@
+using SLOTC.Core.Physics;
 using UnityEngine;
 
 namespace SLOTC.Core.Player
 {
-    public class PlayerMover : MonoBehaviour
+    public class PlayerMover : MonoBehaviour, IForceReceiver
     {
         [SerializeField] CharacterController _controller = null;
-        [SerializeField] float _forceSmoothDampTime = 0.3f;
+        [SerializeField] float _forceSmoothDampTime = 0.1f;
         [SerializeField] float _gravityMultiplier = 1.0f;
         [field: SerializeField] public bool UseGravity { get; set; } = true;
 
@@ -47,7 +48,7 @@ namespace SLOTC.Core.Player
             if (velocity.y < 0.0f && _controller.isGrounded)
                 velocity.y = -1.5f;
             else
-                velocity += Physics.gravity * _gravityMultiplier * Time.deltaTime;
+                velocity += UnityEngine.Physics.gravity * _gravityMultiplier * Time.deltaTime;
         }
     }
 }

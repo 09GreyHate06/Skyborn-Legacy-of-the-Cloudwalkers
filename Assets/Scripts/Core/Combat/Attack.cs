@@ -11,7 +11,7 @@ namespace SLOTC.Core.Combat
         [Header("Core Settings")]
         [SerializeField] DamageModifier[] _damageModifiers;
         [field: SerializeField] public Vector3 Force { get; private set; }
-        [field: SerializeField] public float KnockbackForce { get; private set; }
+        [field: SerializeField] public Vector3 TargetForce { get; private set; }
 
         [Space(10)]
         [Header("Animation Settings")]
