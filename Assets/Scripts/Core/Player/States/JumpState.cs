@@ -1,41 +1,50 @@
 using UnityEngine;
 using SLOTC.Utils.StateMachine;
+using SLOTC.Core.Combat;
 
 namespace SLOTC.Core.Player.States
 {
-    public class JumpState : IState
+    public class JumpState : MoveableState
     {
         private readonly int _jumpAnimHash = Animator.StringToHash("Jump");
-        private readonly PlayerMover _playerMover;
+        private readonly PlayerInput _playerInput;
+        private readonly TargetLocker _targetLocker;
         private readonly Animator _animator;
         private readonly float _jumpForce;
         private readonly float _animTransitionDuration;
 
-        public JumpState(PlayerMover playerMover, Animator animator, float animTransitionDuration, float jumpForce)
+        public JumpState(PlayerMover playerMover, PlayerInput playerInput, TargetLocker targetLocker, Animator animator, float animTransitionDuration, float moveSpeed, float rotationSpeed, float jumpForce)
+            : base(playerMover, moveSpeed, rotationSpeed)
         {
-            _playerMover = playerMover;
+            _playerInput = playerInput;
+            _targetLocker = targetLocker;
             _animator = animator;
             _animTransitionDuration = animTransitionDuration;
             _jumpForce = jumpForce;
         }
 
-        public string GetID()
+        public override string GetID()
         {
             return GetType().ToString();
         }
 
-        public void OnEnter()
+        public override void OnEnter()
         {
             _playerMover.velocity.y = _jumpForce;
             _animator.CrossFadeInFixedTime(_jumpAnimHash, _animTransitionDuration);
         }
 
-        public void OnExit()
+        public override void OnExit()
         {
         }
 
-        public void OnUpdate(float deltaTime)
+        public override void OnUpdate(float deltaTime)
         {
+            Vector2 inputAxis = _playerInput.Axis;
+            if (_targetLocker.HasTarget)
+                TargetLockedMove(inputAxis, inputAxis.magnitude, deltaTime);
+            else
+                FreeLookMove(inputAxis, inputAxis.magnitude, deltaTime);
         }
     }
 }

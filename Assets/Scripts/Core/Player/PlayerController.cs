@@ -63,8 +63,8 @@ namespace SLOTC.Core.Player
         {
             IdleState idleState = new IdleState(_playerMover, _animator, _toIdleAnimTransitionDuration, _idleAnimDampTime);
             MoveState moveState = new MoveState(_playerMover, _playerInput, _targetLocker, _animator, _toMoveAnimTransitionDuration, _moveAnimDampTime, _moveSpeed, _rotationSpeed);
-            JumpState jumpState = new JumpState(_playerMover, _animator, _toJumpAnimTransitionDuration, _jumpForce);
-            FallingState fallingState = new FallingState(_animator, _toFallingAnimTransitionDuration);
+            JumpState jumpState = new JumpState(_playerMover, _playerInput, _targetLocker, _animator, _toJumpAnimTransitionDuration, _moveSpeed, _rotationSpeed, _jumpForce);
+            FallingState fallingState = new FallingState(_playerMover, _playerInput, _targetLocker, _animator, _toFallingAnimTransitionDuration, _moveSpeed, _rotationSpeed);
             AttackState attackState = new AttackState(_playerMover, _playerInput, _animator, _combo, _comboGraceTime, _rotationSpeed);
             DodgeState dodgeState = new DodgeState(_playerMover, _playerInput, _targetLocker, _animator, _dodgeAnimNormExitTime, 
                 _toDodgeAnimTransitionDuration, _dodgeAnimDampTime, _dodgeForce);

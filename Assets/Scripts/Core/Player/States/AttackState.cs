@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 namespace SLOTC.Core.Player.States
 {
-    public class AttackState : IState
+    public class AttackState : MoveableState
     {
         public enum EventType
         {
@@ -17,12 +17,10 @@ namespace SLOTC.Core.Player.States
             Exit
         }
 
-        private readonly PlayerMover _playerMover;
         private readonly Animator _animator;
+        private readonly PlayerInput _playerInput;
         private readonly Attack[] _combo;
         private readonly float _comboGraceTime;
-        private readonly PlayerInput _playerInput;
-        private readonly float _rotationSpeed;
         private int _comboCounter;
         private float _lastAttackTime = float.MinValue;
 
@@ -36,21 +34,20 @@ namespace SLOTC.Core.Player.States
 
 
         public AttackState(PlayerMover playerMover, PlayerInput playerInput, Animator animator, Attack[] combo, float comboGraceTime, float rotationSpeed)
+            : base(playerMover, 0.0f, rotationSpeed)
         {
-            _playerMover = playerMover;
             _playerInput = playerInput;
             _animator = animator;
             _combo = combo;
             _comboGraceTime = comboGraceTime;
-            _rotationSpeed = rotationSpeed;
         }
 
-        public string GetID()
+        public override string GetID() 
         {
             return GetType().ToString();
         }
 
-        public void OnEnter()
+        public override void OnEnter()
         {
             _playerMover.velocity.x = 0.0f;
             _playerMover.velocity.z = 0.0f;
@@ -73,7 +70,7 @@ namespace SLOTC.Core.Player.States
             OnEvent?.Invoke(EventType.Enter);
         }
 
-        public void OnExit()
+        public override void OnExit()
         {
             _applyForceFlag = false;
             _eventAttackEndedCalled = true;
@@ -82,25 +79,17 @@ namespace SLOTC.Core.Player.States
             OnEvent?.Invoke(EventType.Exit);
         }
 
-        public void OnUpdate(float deltaTime)
+        public override void OnUpdate(float deltaTime)
         {
             Vector2 inputAxis = _playerInput.Axis;
-            if (inputAxis.sqrMagnitude > float.Epsilon)
-            {
-                Vector3 forward = Camera.main.transform.forward;
-                forward.y = 0.0f;
-                forward = forward.normalized;
-                Vector3 right = Camera.main.transform.right;
-                Vector3 heading = (right * inputAxis.x + forward * inputAxis.y).normalized;
-
-                Quaternion headingQuat = Quaternion.LookRotation(heading, Vector3.up);
-                _playerMover.transform.rotation = Quaternion.RotateTowards(_playerMover.transform.rotation, headingQuat, _rotationSpeed * deltaTime);
-            }
+            FreeLookMove(inputAxis, inputAxis.magnitude, deltaTime);
 
             if (_activeAttack == null)
                 return;
 
-            if(_applyForceFlag && GetNormalizedTime() >= _activeAttack.AnimNormalizedTimeToApplyForce)
+            float n = GetNormalizedTime();
+
+            if (_applyForceFlag && n >= _activeAttack.AnimNormalizedTimeToApplyForce)
             {
                 Vector3 right = _playerMover.transform.right * _activeAttack.Force.x;
                 Vector3 up = _playerMover.transform.up * _activeAttack.Force.y;
@@ -109,21 +98,21 @@ namespace SLOTC.Core.Player.States
                 _applyForceFlag = false;
             }
 
-            if(!_eventAttackEndedCalled && GetNormalizedTime() >= _activeAttack.AnimNormalizedExitTime)
+            if(!_eventAttackEndedCalled && n >= _activeAttack.AnimNormalizedExitTime)
             {
                 OnEvent?.Invoke(EventType.AttackEnded);
                 _lastAttackTime = Time.realtimeSinceStartup;
                 _eventAttackEndedCalled = true;
             }
 
-            if(!_eventAnimationEndedCalled && GetNormalizedTime() >= 1.0f - float.Epsilon)
+            if(!_eventAnimationEndedCalled && n >= 1.0f - float.Epsilon)
             {
                 OnEvent?.Invoke(EventType.AnimationEnded);
                 _eventAnimationEndedCalled = true;
             }
         }
 
-        private float GetNormalizedTime()
+        protected float GetNormalizedTime()
         {
             AnimatorStateInfo currentInfo = _animator.GetCurrentAnimatorStateInfo(0);
             AnimatorStateInfo nextInfo = _animator.GetNextAnimatorStateInfo(0);

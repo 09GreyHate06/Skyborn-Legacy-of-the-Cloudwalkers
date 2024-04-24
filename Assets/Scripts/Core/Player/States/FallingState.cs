@@ -1,36 +1,47 @@
 using UnityEngine;
 using SLOTC.Utils.StateMachine;
+using SLOTC.Core.Combat;
 
 namespace SLOTC.Core.Player.States
 {
-    public class FallingState : IState
+    public class FallingState : MoveableState
     {
         private readonly int _fallingAnimHash = Animator.StringToHash("Falling");
+        private readonly PlayerInput _playerInput;
+        private readonly TargetLocker _targetLocker;
         private readonly Animator _animator;
         private readonly float _animTransitionDuration;
 
-        public FallingState(Animator animator, float animTransitionDuration)
+        public FallingState(PlayerMover playerMover, PlayerInput playerInput, TargetLocker targetLocker, Animator animator, float animTransitionDuration, float moveSpeed, float rotationSpeed)
+            : base(playerMover, moveSpeed, rotationSpeed)
         {
+            _playerInput = playerInput;
+            _targetLocker = targetLocker;
             _animator = animator;
             _animTransitionDuration = animTransitionDuration;
         }
 
-        public string GetID()
+        public override string GetID()
         {
             return GetType().ToString();
         }
 
-        public void OnEnter()
+        public override void OnEnter()
         {
             _animator.CrossFadeInFixedTime(_fallingAnimHash, _animTransitionDuration);
         }
 
-        public void OnExit()
+        public override void OnExit()
         {
         }
 
-        public void OnUpdate(float deltaTime)
+        public override void OnUpdate(float deltaTime)
         {
+            Vector2 inputAxis = _playerInput.Axis;
+            if (_targetLocker.HasTarget)
+                TargetLockedMove(inputAxis, inputAxis.magnitude, deltaTime);
+            else
+                FreeLookMove(inputAxis, inputAxis.magnitude, deltaTime);
         }
     }
 }
