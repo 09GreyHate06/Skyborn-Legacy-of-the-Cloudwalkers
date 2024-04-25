@@ -21,7 +21,7 @@ namespace SLOTC.Core.Stats
         [SerializeField] Stat[] _stats = new Stat[8];
         [SerializeField] UnityEvent _onStatChanged;
         [SerializeField] int _maxStatValue = 999999;
-        private Dictionary<object, StatModifier[]> _modifiers = new Dictionary<object, StatModifier[]>();
+        private Dictionary<string /*ID*/, StatModifier[]> _modifiers = new Dictionary<string /*ID*/, StatModifier[]>();
 
 #if UNITY_EDITOR
         private void OnValidate()
@@ -45,27 +45,27 @@ namespace SLOTC.Core.Stats
             return _stats.First(x => x.type == type).value;
         }
 
-        public bool ModifierExists(object source)
+        public bool ModifierExists(IStatModifier source)
         {
-            return _modifiers.ContainsKey(source);
+            return _modifiers.ContainsKey(source.GetID());
         }
 
-        public bool AddModifiers(object source, StatModifier[] modifiers)
+        public bool AddModifiers(IStatModifier source)
         {
-            if (_modifiers.ContainsKey(source))
+            if (_modifiers.ContainsKey(source.GetID()))
                 return false;
 
-            _modifiers[source] = modifiers;
+            _modifiers[source.GetID()] = source.GetStatModifiers();
             UpdateStats();
             return true;
         }
 
-        public bool RemoveModifiers(object source)
+        public bool RemoveModifiers(IStatModifier source)
         {
-            if (!_modifiers.ContainsKey(source))
+            if (!_modifiers.ContainsKey(source.GetID()))
                 return false;
 
-            _modifiers.Remove(source);
+            _modifiers.Remove(source.GetID());
             UpdateStats();
             return true;
         }
@@ -132,7 +132,7 @@ namespace SLOTC.Core.Stats
             flat = 0;
             percent = 0;
 
-            foreach (KeyValuePair<object, StatModifier[]> pair in _modifiers)
+            foreach (KeyValuePair<string, StatModifier[]> pair in _modifiers)
             {
                 foreach (StatModifier modifier in pair.Value)
                 {

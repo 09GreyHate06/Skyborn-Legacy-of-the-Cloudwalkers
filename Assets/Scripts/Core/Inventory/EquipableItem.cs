@@ -6,13 +6,22 @@ using System;
 namespace SLOTC.Core.Inventory
 {
     [CreateAssetMenu(menuName = "Inventory/Equipable Item")]
-    public class EquipableItem : InventoryItem
+    public class EquipableItem : InventoryItem, IStatModifier
     {
         [SerializeField] StatModifier[] _statModifiers;
         [SerializeField] EquipLocation _equipLocations;
         
 
         public EquipLocation EquipLocation { get { return _equipLocations; } }
-        public  StatModifier[] StatModifiers { get { return (StatModifier[])_statModifiers.Clone(); } }
+
+        public string GetID()
+        {
+            return ItemID;
+        }
+
+        public StatModifier[] GetStatModifiers()
+        {
+            return _statModifiers;
+        }
     }
 }

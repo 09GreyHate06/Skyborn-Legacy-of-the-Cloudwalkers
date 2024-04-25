@@ -35,7 +35,7 @@ namespace SLOTC.Core.Inventory
         public bool Equip(EquipableItem equipableItem)
         {
             Unequip(equipableItem.EquipLocation);
-            _status.AddModifiers(equipableItem, equipableItem.StatModifiers);
+            _status.AddModifiers(equipableItem);
             _equipments[equipableItem.EquipLocation] = equipableItem;
 
             OnEquipChanged?.Invoke();

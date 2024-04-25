@@ -466,7 +466,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 095f2b08242c60c4ebd4bffcd37e950e, type: 2}
+  - {fileID: 2100000, guid: 949a71c2c170c0742a0c39930f4dea71, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1201,7 +1201,7 @@ GameObject:
   - component: {fileID: 8529172450871540556}
   - component: {fileID: 8173020965373992976}
   m_Layer: 0
-  m_Name: LyraMesh
+  m_Name: LyraModel
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1299,7 +1299,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 036fc8e056862a247b5200be026c7d60, type: 2}
+  - {fileID: 2100000, guid: b94ffa6e7e85e8141a9f191806bb3c44, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2012,7 +2012,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 902730610fa78a748b7efe4e61be4905, type: 2}
+  - {fileID: 2100000, guid: d4f83edb7dc5eeb489ba1255e0fe8984, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2859,7 +2859,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a2919772fdde26041b39ff296b5663cd, type: 2}
+  - {fileID: 2100000, guid: bf4541e2378fe5c4bba3e9358e0de6ce, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

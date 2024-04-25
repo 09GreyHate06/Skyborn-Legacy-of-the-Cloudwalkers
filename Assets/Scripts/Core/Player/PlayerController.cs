@@ -18,7 +18,7 @@ namespace SLOTC.Core.Player
         [SerializeField] PlayerMover _playerMover;
         [SerializeField] TargetLocker _targetLocker;
         [SerializeField] float _moveSpeed = 6.0f;
-        [SerializeField] float _rotationSpeed = 50.0f;
+        [SerializeField] float _rotationSpeed = 500.0f;
         [SerializeField] float _jumpForce = 6.0f;
         [SerializeField] float _timeLeavedGroundBeforeFallState = 0.5f;
         [SerializeField] float _dodgeForce = 50.0f;

@@ -100,7 +100,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 2122799499143766895}
-  m_Tag: Locomotion
+  m_Tag: Movement
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -126,7 +126,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 4fefa7f4f68db53409d9c1290f34b63d, type: 2}
-  m_Tag: ComboAttack1
+  m_Tag: ComboAttack
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -152,7 +152,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: de3cc76ab5db4aa40967cd873604f29b, type: 2}
-  m_Tag: Action
+  m_Tag: Movement
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -336,7 +336,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 78f79e23f9b0c694aa1d2b6c1e95b782, type: 2}
-  m_Tag: ComboAttack1
+  m_Tag: ComboAttack
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -362,7 +362,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: f2ae687ad5a6d334db2f71ba06949cab, type: 2}
-  m_Tag: ComboAttack1
+  m_Tag: ComboAttack
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -576,7 +576,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: e12482b5ac7e41940929b61ad88202f2, type: 2}
-  m_Tag: Action
+  m_Tag: Movement
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -602,7 +602,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 3d9141b6da38c09459d7bab0718d72c4, type: 2}
-  m_Tag: Locomotion
+  m_Tag: Movement
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -628,7 +628,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: -562441878828073580}
-  m_Tag: Action
+  m_Tag: Damage
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -654,7 +654,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: -1836065697013250580}
-  m_Tag: Action
+  m_Tag: Movement
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -680,7 +680,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 1e4d57325174e27499cfc89bdc7214d1, type: 2}
-  m_Tag: ComboAttack1
+  m_Tag: ComboAttack
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -738,7 +738,7 @@ AnimatorStateMachine:
     m_Position: {x: 390, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5980974789837054870}
-    m_Position: {x: 390, y: 320, z: 0}
+    m_Position: {x: 730, y: 0, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
