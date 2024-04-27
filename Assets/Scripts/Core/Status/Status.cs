@@ -1,5 +1,3 @@
-using SLOTC.Core.Saving;
-using SLOTC.Core.Stats;
 using System;
 using System.Collections.Generic;
 using System.Linq;

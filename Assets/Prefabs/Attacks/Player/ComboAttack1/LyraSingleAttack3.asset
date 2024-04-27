@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2261e1cf36179584f8de2dfdec4312a8, type: 3}
+  m_Name: LyraSingleAttack3
+  m_EditorClassIdentifier: 
+  _damageModifiers: []
+  <Force>k__BackingField: {x: 0, y: 0, z: 15}
+  <TargetForce>k__BackingField: {x: 0, y: 0, z: 15}
+  _animName: SingleAttack3
+  _animNameHash: -1824164724

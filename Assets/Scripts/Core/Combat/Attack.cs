@@ -5,31 +5,12 @@ using System.ComponentModel;
 
 namespace SLOTC.Core.Combat
 {
-    [CreateAssetMenu(fileName = "New Attack", menuName = "Combat/Attack")]
     public class Attack : ScriptableObject
     {
         [Header("Core Settings")]
         [SerializeField] DamageModifier[] _damageModifiers;
         [field: SerializeField] public Vector3 Force { get; private set; }
         [field: SerializeField] public Vector3 TargetForce { get; private set; }
-
-        [Space(10)]
-        [Header("Animation Settings")]
-        [field: SerializeField] string _animName;
-        [field: SerializeField] public float AnimNormalizedTimeToApplyForce { get; private set; }
-        [field: SerializeField] public float AnimNormalizedExitTime { get; private set; }
-        [field: SerializeField] public float AnimNormalizedTransitionDuration { get; private set; }
-        [field: SerializeField] public float AnimNormalizedTransitionOffset { get; private set; }
-
-        [ReadOnly(true), SerializeField] int _animNameHash;
-        
-
-        public int AnimNameHash { get { return _animNameHash; } }
-
-        private void OnValidate()
-        {
-            _animNameHash = Animator.StringToHash(_animName);
-        }
 
         public int CalcDamage(Status user, Status target)
         {

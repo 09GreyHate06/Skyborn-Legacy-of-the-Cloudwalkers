@@ -77,7 +77,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3118696237218978991}
-  - component: {fileID: 7919764176555845730}
   - component: {fileID: 5573711407659153100}
   m_Layer: 0
   m_Name: SavingSystem
@@ -101,21 +100,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7415638426831887774}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7919764176555845730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2221059019066007864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 268490f4e33dbbf4295b64d8623782c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _saveKey: 115
-  _loadKey: 108
-  _deleteKey: 100
 --- !u!114 &5573711407659153100
 MonoBehaviour:
   m_ObjectHideFlags: 0

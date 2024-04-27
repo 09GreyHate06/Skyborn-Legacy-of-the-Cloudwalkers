@@ -112,8 +112,8 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Attack2
-  m_Speed: 1.5
+  m_Name: SingleAttack2
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -125,7 +125,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 4fefa7f4f68db53409d9c1290f34b63d, type: 2}
+  m_Motion: {fileID: 7400000, guid: 10a2cb0b5461ac74197a4a4a2d220e9b, type: 2}
   m_Tag: ComboAttack
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -322,8 +322,8 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Attack1
-  m_Speed: 1.5
+  m_Name: SingleAttack1
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -335,7 +335,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 78f79e23f9b0c694aa1d2b6c1e95b782, type: 2}
+  m_Motion: {fileID: 7400000, guid: 8266c719c6c4dbc4a89a8c89e0b23123, type: 2}
   m_Tag: ComboAttack
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -348,8 +348,8 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Attack3
-  m_Speed: 1.5
+  m_Name: SingleAttack3
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -361,7 +361,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: f2ae687ad5a6d334db2f71ba06949cab, type: 2}
+  m_Motion: {fileID: 7400000, guid: 565ae464cbfd8d942a6d470515628a6b, type: 2}
   m_Tag: ComboAttack
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -666,8 +666,8 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Attack4
-  m_Speed: 1.5
+  m_Name: SingleAttack4
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -679,7 +679,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 1e4d57325174e27499cfc89bdc7214d1, type: 2}
+  m_Motion: {fileID: 7400000, guid: a0000a9c9b30a294dbcb571a28ff759c, type: 2}
   m_Tag: ComboAttack
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -717,13 +717,13 @@ AnimatorStateMachine:
     m_Position: {x: 390, y: 220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2875824050380256416}
-    m_Position: {x: 730, y: 130, z: 0}
+    m_Position: {x: 730, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7403280422146306037}
-    m_Position: {x: 730, y: 190, z: 0}
+    m_Position: {x: 730, y: 180, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2257213138567254284}
-    m_Position: {x: 730, y: 260, z: 0}
+    m_Position: {x: 730, y: 250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5734926589240851032}
     m_Position: {x: 390, y: 70, z: 0}
