@@ -47,6 +47,17 @@ namespace SLOTC.Core.Movement.Enemy
             if (UseGravity)
                 ApplyGravity();
 
+            //if (_navMeshAgent.isOnOffMeshLink)
+            //{
+            //    _navMeshAgent.enabled = true;
+            //    _controller.enabled = false;
+            //    return;
+            //}
+            //else
+            //{
+            //    _controller.enabled = true;
+            //}
+
             _navMeshAgent.enabled = _force.sqrMagnitude < 0.2f * 0.2f;
             Vector3 velocity = Vector3.zero;
             if (_navMeshAgent.enabled && _navMeshAgent.hasPath)

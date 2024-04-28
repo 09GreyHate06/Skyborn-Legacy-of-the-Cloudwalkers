@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace SLOTC.Utils
 {
-    public static class Tags
+    public struct Tags
     {
-        public static string Player { get; private set; } = "Player";
+        public const string Player = "Player";
+        public const string Enemy = "Enemy";
     }
 }

@@ -22,6 +22,7 @@ namespace SLOTC.Core.States.Enemy
         private readonly Animator _animator;
         private readonly CombatAnimationEvent _combatAnimationEvent;
         private readonly Transform _target;
+        private readonly WeaponHandler _weaponHandler;
         private readonly SingleAttack[] _combo;
         private readonly float _comboGraceTime;
         private readonly float _transitionDuration;
@@ -32,12 +33,13 @@ namespace SLOTC.Core.States.Enemy
 
         public event Action<EventType> OnEvent;
 
-        public AttackState(EnemyMover enemyMover, Animator animator, float transitionDuration, Transform target, SingleAttack[] combo, float comboGraceTime)
+        public AttackState(EnemyMover enemyMover, Animator animator, float transitionDuration, Transform target, WeaponHandler weaponHandler, SingleAttack[] combo, float comboGraceTime)
         {
             _enemyMover = enemyMover;
             _animator = animator;
             _transitionDuration = transitionDuration;
             _target = target;
+            _weaponHandler = weaponHandler;
             _combo = combo;
             _comboGraceTime = comboGraceTime;
             _combatAnimationEvent = _animator.GetComponent<CombatAnimationEvent>();
@@ -112,9 +114,11 @@ namespace SLOTC.Core.States.Enemy
                     break;
 
                 case CombatAnimationEvent.Type.ActivateWeapon:
+                    _weaponHandler.Activate(_activeAttack);
                     break;
 
                 case CombatAnimationEvent.Type.DeactivateWeapon:
+                    _weaponHandler.Deactivate();
                     _lastAttackTime = Time.realtimeSinceStartup;
                     OnEvent?.Invoke(EventType.AttackEnded);
                     break;

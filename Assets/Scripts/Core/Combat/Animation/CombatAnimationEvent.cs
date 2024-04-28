@@ -8,7 +8,7 @@ namespace SLOTC.Core.Combat.Animation
     {
         public enum Type
         {
-            DodgeEnded,
+            DodgeEnded = 0,
             ApplyForce,
             ActivateWeapon, // or fire projectile
             DeactivateWeapon,

@@ -11,6 +11,7 @@ namespace SLOTC.Core.Controller.Enemy
     {
         [Header("Combat Settings")]
         [SerializeField] Transform _target;
+        [SerializeField] WeaponHandler _weaponHandler;
         [SerializeField] SingleAttack[] _combo;
         [SerializeField] float _comboGraceTime;
         [SerializeField] float _attackRate;
@@ -44,7 +45,7 @@ namespace SLOTC.Core.Controller.Enemy
             IdleState idleState = new IdleState(_enemyMover, _animator, _toIdleAnimTransitionDuration);
             PatrolState patrolState = new PatrolState(_enemyMover, _patrolPoints, _animator, _toMoveAnimTransitionDuration);
             FollowTargetState followTargetState = new FollowTargetState(_enemyMover, _target.transform, _animator, _toMoveAnimTransitionDuration);
-            AttackState attackState = new AttackState(_enemyMover, _animator, _toAttackAnimTransitionDuration, _target.transform, _combo, _comboGraceTime);
+            AttackState attackState = new AttackState(_enemyMover, _animator, _toAttackAnimTransitionDuration, _target.transform, _weaponHandler, _combo, _comboGraceTime);
 
             attackState.OnEvent += OnAttackStateEvent;
 
@@ -53,7 +54,7 @@ namespace SLOTC.Core.Controller.Enemy
             // to IdleState
             AT(patrolState, idleState, () => { return !_enemyMover.HasPath; });
             AT(followTargetState, idleState, () => { return Vector3.Distance(transform.position, _target.transform.position) > _followTargetDistance; });
-            AT(attackState, idleState, () => { return _attackAnimationEnded && Vector3.Distance(transform.position, _target.transform.position) > _followTargetDistance; });
+            AT(attackState, idleState, () => { return _attackAnimationEnded; });
 
             // to PatrolState
             AT(idleState, patrolState, () => { return _timeSinceIdle >= _idleDurationBeforePatrol; });
@@ -62,7 +63,8 @@ namespace SLOTC.Core.Controller.Enemy
             bool toFollowStateBase() 
             {
                 Vector3 toTarget = _target.transform.position - transform.position;
-                return Vector3.Distance(transform.position, _target.transform.position) <= _followTargetDistance && Vector3.Angle(transform.forward, toTarget) <= _viewConeAngle * 0.5f;
+                float dist = toTarget.magnitude;
+                return dist <= _followTargetDistance && dist > _attackRange && Vector3.Angle(transform.forward, toTarget) <= _viewConeAngle * 0.5f;
             }
             AT(idleState, followTargetState, toFollowStateBase);
             AT(patrolState, followTargetState, toFollowStateBase);

@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 7163680095157699201}
   - component: {fileID: 6496043311369194208}
   - component: {fileID: 6080947708018356479}
+  - component: {fileID: 7741143025656655934}
   m_Layer: 0
   m_Name: MobEnemyBase
   m_TagString: Enemy
@@ -348,3 +349,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentSkillPoints: 35
   _maxSkillPoints: 35
+--- !u!114 &7741143025656655934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6900778018424657625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31c6feb0f6647fd42a2ba437e3956f42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Owner>k__BackingField: {fileID: 7163680095157699201}

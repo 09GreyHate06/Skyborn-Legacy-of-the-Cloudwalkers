@@ -11,6 +11,7 @@ namespace SLOTC.Core.Controller.Player
     public class PlayerController : MonoBehaviour
     {
         [Header("Combat Settings")]
+        [SerializeField] WeaponHandler _weaponHandler;
         [SerializeField] SingleAttack[] _combo;
         [SerializeField] float _comboGraceTime;
         [SerializeField] float _dodgeForce = 50.0f;
@@ -34,6 +35,7 @@ namespace SLOTC.Core.Controller.Player
         [SerializeField] float _toFallingAnimTransitionDuration = 0.25f;
         [SerializeField] float _toAttackAnimTransitionDuration = 0.25f;
         [SerializeField] float _toDodgeAnimTransitionDuration = 0.25f;
+        [SerializeField] float _toStaggerAnimTransitionDuration = 0.25f;
         [SerializeField] float _animParamDampTime = 0.05f;
 
         private StateMachine _stateMachine;
@@ -64,7 +66,7 @@ namespace SLOTC.Core.Controller.Player
             MoveState moveState = new MoveState(_playerMover, _playerInput, _targetLocker, _animator, _toMoveAnimTransitionDuration, _animParamDampTime, _moveSpeed, _rotationSpeed);
             JumpState jumpState = new JumpState(_playerMover, _playerInput, _targetLocker, _animator, _toJumpAnimTransitionDuration, _moveSpeed, _rotationSpeed, _jumpForce);
             FallingState fallingState = new FallingState(_playerMover, _playerInput, _targetLocker, _animator, _toFallingAnimTransitionDuration, _moveSpeed, _rotationSpeed);
-            AttackState attackState = new AttackState(_playerMover, _playerInput, _animator, _toAttackAnimTransitionDuration, _combo, _comboGraceTime, _rotationSpeed);
+            AttackState attackState = new AttackState(_playerMover, _playerInput, _animator, _toAttackAnimTransitionDuration, _weaponHandler, _combo, _comboGraceTime, _rotationSpeed);
             DodgeState dodgeState = new DodgeState(_playerMover, _playerInput, _targetLocker, _animator, _toDodgeAnimTransitionDuration, _animParamDampTime, _dodgeForce);
 
             attackState.OnEvent += OnAttackStateEvent;

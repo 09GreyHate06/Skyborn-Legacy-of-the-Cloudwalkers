@@ -21,6 +21,7 @@ namespace SLOTC.Core.States.Player
         private readonly Animator _animator;
         private readonly float _transitionDuration;
         private readonly CombatAnimationEvent _combatAnimationEvent;
+        private readonly WeaponHandler _weaponHandler;
         private readonly SingleAttack[] _combo;
         private readonly float _comboGraceTime;
         private int _comboCounter;
@@ -32,12 +33,13 @@ namespace SLOTC.Core.States.Player
         public Action<EventType> OnEvent;
 
 
-        public AttackState(PlayerMover playerMover, PlayerInput playerInput, Animator animator, float transitionDuration, SingleAttack[] combo, float comboGraceTime, float rotationSpeed)
+        public AttackState(PlayerMover playerMover, PlayerInput playerInput, Animator animator, float transitionDuration, WeaponHandler weaponHandler, SingleAttack[] combo, float comboGraceTime, float rotationSpeed)
             : base(playerMover, 0.0f, rotationSpeed)
         {
             _playerInput = playerInput;
             _animator = animator;
             _transitionDuration = transitionDuration;
+            _weaponHandler = weaponHandler;
             _combo = combo;
             _comboGraceTime = comboGraceTime;
 
@@ -65,7 +67,7 @@ namespace SLOTC.Core.States.Player
 
             int comboIndex = _comboCounter++ % _combo.Length;
             _activeAttack = _combo[comboIndex];
-            _animator.CrossFadeInFixedTime(_activeAttack.AnimNameHash, 0.25f, 0);
+            _animator.CrossFadeInFixedTime(_activeAttack.AnimNameHash, _transitionDuration);
             OnEvent?.Invoke(EventType.Enter);
         }
 
@@ -99,9 +101,11 @@ namespace SLOTC.Core.States.Player
                     break;
 
                 case CombatAnimationEvent.Type.ActivateWeapon:
+                    _weaponHandler.Activate(_activeAttack);
                     break;
 
                 case CombatAnimationEvent.Type.DeactivateWeapon:
+                    _weaponHandler.Deactivate();
                     _lastAttackTime = Time.realtimeSinceStartup;
                     OnEvent?.Invoke(EventType.AttackEnded);
                     break;
