@@ -9,6 +9,8 @@ namespace SLOTC.Core.Movement.Enemy
     {
         [SerializeField] float _forceSmoothDampTime = 0.1f;
         [SerializeField] float _gravityMultiplier = 1.0f;
+        [SerializeField] float _groundedYVelocity = -1.5f;
+
         [field: SerializeField] public bool UseGravity { get; set; } = true;
 
         private NavMeshAgent _navMeshAgent;
@@ -58,7 +60,16 @@ namespace SLOTC.Core.Movement.Enemy
             //    _controller.enabled = true;
             //}
 
-            _navMeshAgent.enabled = _force.sqrMagnitude < 0.2f * 0.2f;
+            if(_force.sqrMagnitude >= 0.2f * 0.2f)
+            {
+                ResetPath();
+                _navMeshAgent.enabled = false;
+            }
+            else
+            {
+                _navMeshAgent.enabled = true;
+            }
+
             Vector3 velocity = Vector3.zero;
             if (_navMeshAgent.enabled && _navMeshAgent.hasPath)
                 velocity = _navMeshAgent.desiredVelocity;
@@ -81,9 +92,9 @@ namespace SLOTC.Core.Movement.Enemy
         private void ApplyGravity()
         {
             if (_yVelocity < 0.0f && _controller.isGrounded)
-                _yVelocity = -1.5f;
+                _yVelocity = _groundedYVelocity;
             else
-                _yVelocity += UnityEngine.Physics.gravity.y * _gravityMultiplier * Time.deltaTime;
+                _yVelocity += Physics.gravity.y * _gravityMultiplier * Time.deltaTime;
         }
     }
 }

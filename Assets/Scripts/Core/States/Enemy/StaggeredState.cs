@@ -1,10 +1,10 @@
 using UnityEngine;
 using SLOTC.Utils.StateMachine;
-using SLOTC.Core.Movement.Player;
+using SLOTC.Core.Movement.Enemy;
 using System;
 using SLOTC.Core.Combat.Animation;
 
-namespace SLOTC.Core.States.Player
+namespace SLOTC.Core.States.Enemy
 {
     public class StaggeredState : IState
     {
@@ -18,17 +18,17 @@ namespace SLOTC.Core.States.Player
         private readonly int _staggerAnimHash = Animator.StringToHash("Stagger");
 
         private readonly float _animTransitionDuration;
-        private readonly PlayerMover _playerMover;
+        private readonly EnemyMover _enemyMover;
         private readonly Animator _animator;
         private readonly CombatAnimationEvent _combatAnimationEvent;
 
         public event Action<EventType> OnEvent;
-        
-        public StaggeredState(PlayerMover playerMover, Animator animator, float animTransitionDuration)
+
+        public StaggeredState(EnemyMover playerMover, Animator animator, float animTransitionDuration)
         {
             _animator = animator;
             _animTransitionDuration = animTransitionDuration;
-            _playerMover = playerMover;
+            _enemyMover = playerMover;
 
             _combatAnimationEvent = _animator.GetComponent<CombatAnimationEvent>();
         }
@@ -41,8 +41,7 @@ namespace SLOTC.Core.States.Player
         public void OnEnter()
         {
             _combatAnimationEvent.Listeners += OnCombatAnimEvent;
-            _playerMover.velocity.x = 0.0f;
-            _playerMover.velocity.z = 0.0f;
+            _enemyMover.ResetPath();
             _animator.CrossFadeInFixedTime(_staggerAnimHash, _animTransitionDuration);
             OnEvent?.Invoke(EventType.Enter);
         }
@@ -59,7 +58,7 @@ namespace SLOTC.Core.States.Player
 
         private void OnCombatAnimEvent(CombatAnimationEvent.Type type)
         {
-            if(type == CombatAnimationEvent.Type.ExitTime)
+            if (type == CombatAnimationEvent.Type.ExitTime)
                 OnEvent?.Invoke(EventType.StaggerEnded);
         }
     }

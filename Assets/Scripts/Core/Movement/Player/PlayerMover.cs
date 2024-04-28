@@ -7,6 +7,8 @@ namespace SLOTC.Core.Movement.Player
     {
         [SerializeField] float _forceSmoothDampTime = 0.1f;
         [SerializeField] float _gravityMultiplier = 1.0f;
+        [SerializeField] float _groundedYVelocity = -1.5f;
+
         [field: SerializeField] public bool UseGravity { get; set; } = true;
 
 
@@ -46,9 +48,9 @@ namespace SLOTC.Core.Movement.Player
                 return;
 
             if (velocity.y < 0.0f && _controller.isGrounded)
-                velocity.y = -1.5f;
+                velocity.y = _groundedYVelocity;
             else
-                velocity += UnityEngine.Physics.gravity * _gravityMultiplier * Time.deltaTime;
+                velocity += Physics.gravity * _gravityMultiplier * Time.deltaTime;
         }
     }
 }

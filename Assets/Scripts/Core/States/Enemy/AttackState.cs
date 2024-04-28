@@ -123,7 +123,7 @@ namespace SLOTC.Core.States.Enemy
                     OnEvent?.Invoke(EventType.AttackEnded);
                     break;
 
-                case CombatAnimationEvent.Type.AnimationEnded:
+                case CombatAnimationEvent.Type.ExitTime:
                     OnEvent?.Invoke(EventType.AnimationEnded);
                     break;
             }

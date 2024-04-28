@@ -840,6 +840,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _forceSmoothDampTime: 0.1
   _gravityMultiplier: 1
+  _groundedYVelocity: -3
   <UseGravity>k__BackingField: 1
   velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &4881141433118552055
@@ -876,6 +877,7 @@ MonoBehaviour:
   _toFallingAnimTransitionDuration: 0.25
   _toAttackAnimTransitionDuration: 0.25
   _toDodgeAnimTransitionDuration: 0.25
+  _toStaggerAnimTransitionDuration: 0.25
   _animParamDampTime: 0.05
 --- !u!114 &2158682582382907724
 MonoBehaviour:
@@ -1042,6 +1044,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e308fc0c3bc62d74397194088e0a2dfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _forceResistance: 0
+  _minForceMagnitudeToGetStagger: 0
 --- !u!1 &2138127251149269262
 GameObject:
   m_ObjectHideFlags: 0
@@ -3161,9 +3165,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.4
-  m_Height: 1.3
+  m_Height: 1.5
   m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0.65}
+  m_Center: {x: 0, y: 0, z: 0.8}
 --- !u!114 &5958604941234738226
 MonoBehaviour:
   m_ObjectHideFlags: 0

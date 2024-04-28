@@ -110,7 +110,7 @@ namespace SLOTC.Core.States.Player
                     _eventDodgeEndedCalled = true;
                     break;
 
-                case CombatAnimationEvent.Type.AnimationEnded:
+                case CombatAnimationEvent.Type.ExitTime:
                     if (_eventAnimationEndedCalled) 
                         break;
 

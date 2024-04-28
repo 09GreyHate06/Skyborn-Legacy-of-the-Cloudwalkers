@@ -57,8 +57,6 @@ namespace SLOTC.Core.Combat
             if (other == _weaponCollider || !other.CompareTag(_targetTag) || !other.TryGetComponent(out Hitbox hitbox) || _alreadyDealtWith.Contains(hitbox.Owner))
                 return;
 
-            Debug.Log(_user.name + " Hit " + hitbox.Owner.name);
-            
             int damage = _activeAttack.CalcDamage(_user, hitbox.Owner);
             hitbox.Owner.GetComponent<HitPoint>().TakeDamage(damage);
             if (hitbox.Owner.TryGetComponent(out Knockbackable knockbackable))

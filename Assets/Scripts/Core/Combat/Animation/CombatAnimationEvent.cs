@@ -12,7 +12,7 @@ namespace SLOTC.Core.Combat.Animation
             ApplyForce,
             ActivateWeapon, // or fire projectile
             DeactivateWeapon,
-            AnimationEnded,
+            ExitTime,
             //ExitTime,
         }
 

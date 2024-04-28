@@ -1786,11 +1786,11 @@ PrefabInstance:
       objectReference: {fileID: 6611627924002403154}
     - target: {fileID: 7372940454881507393, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
       propertyPath: _attackRate
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7372940454881507393, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
       propertyPath: _attackRange
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7372940454881507393, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
       propertyPath: _viewConeAngle
@@ -1802,7 +1802,7 @@ PrefabInstance:
       objectReference: {fileID: 3733904112158640613}
     - target: {fileID: 7372940454881507393, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
       propertyPath: _comboGraceTime
-      value: 1.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7372940454881507393, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
       propertyPath: _combo.Array.size
@@ -1817,8 +1817,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 9233214c032940c49ada56ab5b6de184, type: 2}
     - target: {fileID: 7372940454881507393, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
+      propertyPath: _followTargetDistance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372940454881507393, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
+      propertyPath: _targetLockedDuration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372940454881507393, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
       propertyPath: _patrolPoints.Array.size
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372940454881507393, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
+      propertyPath: _autoFollowTargetDistance
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7724418503719897972, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1859,6 +1871,14 @@ PrefabInstance:
     - target: {fileID: 7724418503719897972, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7997759687775167319, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
+      propertyPath: avoidancePriority
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7997759687775167319, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1907,3 +1927,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e308fc0c3bc62d74397194088e0a2dfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _forceResistance: 0
+  _minForceMagnitudeToGetStagger: 0
