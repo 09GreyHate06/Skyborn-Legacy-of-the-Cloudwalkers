@@ -5,6 +5,9 @@ using SLOTC.Core.Combat;
 using SLOTC.Core.Movement.Player;
 using SLOTC.Core.Input;
 using System;
+using Animancer;
+using SLOTC.Core.Combat.Animation;
+using System.Collections;
 
 namespace SLOTC.Core.Controller.Player
 {
@@ -28,15 +31,15 @@ namespace SLOTC.Core.Controller.Player
 
         [Space(10)]
         [Header("Animation Settings")]
-        [SerializeField] Animator _animator;
-        [SerializeField] float _toIdleAnimTransitionDuration = 0.25f;
-        [SerializeField] float _toMoveAnimTransitionDuration = 0.25f;
-        [SerializeField] float _toJumpAnimTransitionDuration = 0.25f;
-        [SerializeField] float _toFallingAnimTransitionDuration = 0.25f;
-        [SerializeField] float _toAttackAnimTransitionDuration = 0.25f;
-        [SerializeField] float _toDodgeAnimTransitionDuration = 0.25f;
-        [SerializeField] float _toStaggerAnimTransitionDuration = 0.25f;
-        [SerializeField] float _animParamDampTime = 0.05f;
+        [SerializeField] AnimancerComponent _animancer;
+        [SerializeField] MixerTransition2D _moveAnim;
+        [EventNames(CombatAnimationEventNames.DodgeEnded, CombatAnimationEventNames.Exit)]
+        [SerializeField] MixerTransition2D _dodgeAnim;
+        [SerializeField] ClipTransition _jumpAnim;
+        [SerializeField] ClipTransition _fallingAnim;
+        [EventNames(CombatAnimationEventNames.StaggerEnded, CombatAnimationEventNames.Exit)]
+        [SerializeField] ClipTransition _staggerAnim;
+        [SerializeField] float _animBlendSpeed;
 
         private StateMachine _stateMachine;
         private PlayerInput _playerInput;
@@ -46,15 +49,13 @@ namespace SLOTC.Core.Controller.Player
         private bool _moveBtnPressed;
         private bool _dodgeBtnPressed;
 
-        private bool _isAttacking;
         private bool _attackAnimationEnded = true;
-        private bool _isDodging;
         private bool _dodgeAnimationEnded = true;
-        private bool _isStaggering;
+        private bool _staggerAnimationEnded = true;
         private bool _shouldStagger;
+        private bool _canDodge = true;
 
         private float _timeSinceLeaveGround;
-        private float _timeSinceLastDodge;
 
         private void Awake()
         {
@@ -64,16 +65,19 @@ namespace SLOTC.Core.Controller.Player
         void Start()
         {
             _stateMachine = new StateMachine();
-            IdleState idleState = new IdleState(_playerMover, _animator, _toIdleAnimTransitionDuration, _animParamDampTime);
-            MoveState moveState = new MoveState(_playerMover, _playerInput, _targetLocker, _animator, _toMoveAnimTransitionDuration, _animParamDampTime, _moveSpeed, _rotationSpeed);
-            JumpState jumpState = new JumpState(_playerMover, _playerInput, _targetLocker, _animator, _toJumpAnimTransitionDuration, _moveSpeed, _rotationSpeed, _jumpForce);
-            FallingState fallingState = new FallingState(_playerMover, _playerInput, _targetLocker, _animator, _toFallingAnimTransitionDuration, _moveSpeed, _rotationSpeed);
-            AttackState attackState = new AttackState(_playerMover, _playerInput, _animator, _toAttackAnimTransitionDuration, _weaponHandler, _combo, _comboGraceTime, _rotationSpeed);
-            DodgeState dodgeState = new DodgeState(_playerMover, _playerInput, _targetLocker, _animator, _toDodgeAnimTransitionDuration, _animParamDampTime, _dodgeForce);
+            _animancer.States.GetOrCreate(_moveAnim);
+            IdleState idleState = new IdleState(_playerMover, _animancer, _moveAnim, _animBlendSpeed);
+            MoveState moveState = new MoveState(_playerMover, _playerInput, _targetLocker, _animancer, _moveAnim, _animBlendSpeed, _moveSpeed, _rotationSpeed);
+            JumpState jumpState = new JumpState(_playerMover, _playerInput, _targetLocker, _animancer, _jumpAnim, _moveSpeed, _rotationSpeed, _jumpForce);
+            FallingState fallingState = new FallingState(_playerMover, _playerInput, _targetLocker, _animancer, _fallingAnim, _moveSpeed, _rotationSpeed);
+            AttackState attackState = new AttackState(_playerMover, _playerInput, _animancer, _weaponHandler, _combo, _comboGraceTime, _rotationSpeed);
+            DodgeState dodgeState = new DodgeState(_playerMover, _playerInput, _targetLocker, _animancer, _dodgeAnim, _animBlendSpeed, _dodgeForce);
+            StaggeredState staggeredState = new StaggeredState(_playerMover, _animancer, _staggerAnim);
 
-            attackState.OnEvent += OnAttackStateEvent;
-            dodgeState.OnEvent += OnDodgeStateEvent;
-
+            attackState.OnAnimationEnded += () => _attackAnimationEnded = true;
+            dodgeState.OnAnimationEnded += () => _dodgeAnimationEnded = true;
+            staggeredState.OnAnimationEnded += () => _staggerAnimationEnded = true;
+            
             void AT(IState from, IState to, Func<bool> condition) => _stateMachine.AddTransition(from, to, condition);
 
             // to IdleState
@@ -83,6 +87,7 @@ namespace SLOTC.Core.Controller.Player
                 AT(fallingState, idleState, () => _playerMover.IsGrounded);
                 AT(attackState, idleState, () => _playerMover.IsGrounded && _attackAnimationEnded);
                 AT(dodgeState, idleState, () => _playerMover.IsGrounded && _dodgeAnimationEnded);
+                AT(staggeredState, idleState, () => _playerMover.IsGrounded && _staggerAnimationEnded);
             }
 
 
@@ -90,59 +95,100 @@ namespace SLOTC.Core.Controller.Player
             bool ToMoveBase() { return _playerMover.IsGrounded && _moveBtnPressed; }
             {
                 AT(idleState, moveState, ToMoveBase);
-                AT(attackState, moveState, () => ToMoveBase() && !_isAttacking);
-                AT(dodgeState, moveState, () => ToMoveBase() && !_isDodging);
+                AT(attackState, moveState, ToMoveBase);
+                AT(dodgeState, moveState, ToMoveBase);
+                AT(staggeredState, moveState, ToMoveBase);
             }
-
 
             // to jumpState
             bool ToJumpStateBase() { return _playerMover.IsGrounded && _jumpBtnPressed; }
             {
                 AT(idleState, jumpState, ToJumpStateBase);
                 AT(moveState, jumpState, ToJumpStateBase);
-                AT(attackState, jumpState, () => ToJumpStateBase() && !_isAttacking);
-                AT(dodgeState, jumpState, () => ToJumpStateBase() && !_isDodging);
+                AT(attackState, jumpState, ToJumpStateBase);
+                AT(dodgeState, jumpState, ToJumpStateBase);
+                AT(staggeredState, jumpState, ToJumpStateBase);
             }
-
-
+            
+            
             // to FallingState 
             bool ToFallingStateBase() { return _timeSinceLeaveGround >= _timeLeavedGroundBeforeFallState && _playerMover.velocity.y < -1.5f; }
             {
                 AT(idleState, fallingState, ToFallingStateBase);
                 AT(moveState, fallingState, ToFallingStateBase);
                 AT(jumpState, fallingState, ToFallingStateBase);
-                AT(attackState, fallingState, () => ToFallingStateBase() && !_isAttacking);
-                AT(dodgeState, fallingState, () => ToFallingStateBase() && !_isDodging);
+                AT(attackState, fallingState, ToFallingStateBase);
+                AT(dodgeState, fallingState, ToFallingStateBase);
+                AT(staggeredState, fallingState, ToFallingStateBase);
             }
-
-
+            
+            
             // to AttackState
-            _stateMachine.AddAnyTransition(attackState, true, () => _attackBtnPressed && !_isAttacking && !_isStaggering);
-
-            // to DodgeState
-            _stateMachine.AddAnyTransition(dodgeState, false, () => _dodgeBtnPressed && _timeSinceLastDodge >= _dodgeCooldown && !_isDodging && !_isStaggering);
-
-            // StaggeredState
-            if(TryGetComponent(out Knockbackable knockbackable))
+            _stateMachine.AddAnyTransition(attackState, true, () => 
             {
-                knockbackable.OnKnockback += (Knockbackable.KnockbackType knockbackType) =>
+                if (!_attackBtnPressed || (_stateMachine.CurrentState.GetID() == attackState.GetID() && !_stateMachine.CurrentState.CanExit)
+                    || (!_stateMachine.CurrentState.CanExit && _stateMachine.CurrentState.GetID() == staggeredState.GetID()))
+                    return false;
+
+                _stateMachine.CurrentState.CanExit = true;
+                return true;
+            });
+            
+            // to DodgeState
+            _stateMachine.AddAnyTransition(dodgeState, false, () => 
+            {
+                if (!_canDodge || !_dodgeBtnPressed || (!_stateMachine.CurrentState.CanExit && _stateMachine.CurrentState.GetID() == staggeredState.GetID()))
+                    return false;
+
+                _stateMachine.CurrentState.CanExit = true;
+                return true;
+            });
+
+            // to StaggeredState
+            {
+                GetComponent<Knockbackable>().OnKnockback += (Knockbackable.KnockbackType knockbackType) =>
                 {
-                    if (knockbackType == Knockbackable.KnockbackType.Stagger && !_isAttacking && !_isStaggering)
+                    if (knockbackType == Knockbackable.KnockbackType.Stagger && (_stateMachine.CurrentState.GetID() != attackState.GetID() || _stateMachine.CurrentState.CanExit))
                         _shouldStagger = true;
                 };
 
-                StaggeredState staggeredState = new StaggeredState(_playerMover, _animator, _toStaggerAnimTransitionDuration);
-                staggeredState.OnEvent += OnStaggerStateEvent;
 
                 _stateMachine.AddAnyTransition(staggeredState, false, () => _shouldStagger);
-
-                AT(staggeredState, idleState, () => _playerMover.IsGrounded && !_isStaggering);
-                AT(staggeredState, moveState, () => ToMoveBase() && !_isStaggering);
-                AT(staggeredState, jumpState, () => ToJumpStateBase() && !_isStaggering);
-                AT(staggeredState, fallingState, () => ToFallingStateBase() && !_isStaggering);
             }
 
             _stateMachine.SetState(idleState);
+
+            _stateMachine.OnBeforeChangeState += (IState nextState) =>
+            {
+                _shouldStagger = false;
+
+                if (_stateMachine.CurrentState.GetID() == attackState.GetID())
+                {
+                    _attackAnimationEnded = true;
+                }
+                else if(_stateMachine.CurrentState.GetID() == dodgeState.GetID())
+                {
+                    _dodgeAnimationEnded = true;
+                }
+                else if (_stateMachine.CurrentState.GetID() == staggeredState.GetID())
+                {
+                    _staggerAnimationEnded = true;
+                }
+
+                if (nextState.GetID() == attackState.GetID())
+                {
+                    _attackAnimationEnded = false;
+                }
+                else if (nextState.GetID() == dodgeState.GetID())
+                {
+                    StartCoroutine(DodgeCooldown());
+                    _dodgeAnimationEnded = false;
+                }
+                else if (_stateMachine.CurrentState.GetID() == staggeredState.GetID())
+                {
+                    _staggerAnimationEnded = false;
+                }
+            };
         }
 
         private void OnEnable()
@@ -166,7 +212,7 @@ namespace SLOTC.Core.Controller.Player
         private void OnValidate()
         {
             if (!Application.isPlaying) return;
-
+            
             Awake();
             Start();
         }
@@ -180,11 +226,6 @@ namespace SLOTC.Core.Controller.Player
                 _timeSinceLeaveGround += Time.deltaTime;
             else
                 _timeSinceLeaveGround = 0.0f;
-
-            if (!_isDodging)
-                _timeSinceLastDodge += Time.deltaTime;
-            else
-                _timeSinceLastDodge = 0.0f;
 
             _shouldStagger = false;
         }
@@ -220,7 +261,7 @@ namespace SLOTC.Core.Controller.Player
         {
             _dodgeBtnPressed = context.performed;
         }
-
+/*
         private void OnAttackStateEvent(AttackState.EventType type)
         {
             switch(type)
@@ -283,6 +324,13 @@ namespace SLOTC.Core.Controller.Player
                     _isStaggering = false;
                     break;
             }
+        }*/
+
+        private IEnumerator DodgeCooldown()
+        {
+            _canDodge = false;
+            yield return new WaitForSeconds(_dodgeCooldown);
+            _canDodge = true;
         }
 
         private void OnApplicationFocus(bool focus)

@@ -2,27 +2,30 @@ using UnityEngine;
 using SLOTC.Core.Combat;
 using SLOTC.Core.Input;
 using SLOTC.Core.Movement.Player;
+using Animancer;
 
 namespace SLOTC.Core.States.Player
 {
     public class JumpState : MoveableState
     {
-        private readonly int _jumpAnimHash = Animator.StringToHash("Jump");
         private readonly PlayerInput _playerInput;
         private readonly TargetLocker _targetLocker;
-        private readonly Animator _animator;
+        private readonly AnimancerComponent _animancer;
+        private readonly ClipTransition _jumpAnim;
         private readonly float _jumpForce;
-        private readonly float _animTransitionDuration;
 
-        public JumpState(PlayerMover playerMover, PlayerInput playerInput, TargetLocker targetLocker, Animator animator, float animTransitionDuration, float moveSpeed, float rotationSpeed, float jumpForce)
+        public override bool CanExit { get; set; }
+
+        public JumpState(PlayerMover playerMover, PlayerInput playerInput, TargetLocker targetLocker, AnimancerComponent animancer, ClipTransition jumpAnim, float moveSpeed, float rotationSpeed, float jumpForce)
             : base(playerMover, moveSpeed, rotationSpeed)
         {
             _playerInput = playerInput;
             _targetLocker = targetLocker;
-            _animator = animator;
-            _animTransitionDuration = animTransitionDuration;
+            _animancer = animancer;
+            _jumpAnim = jumpAnim;
             _jumpForce = jumpForce;
         }
+
 
         public override string GetID()
         {
@@ -31,8 +34,10 @@ namespace SLOTC.Core.States.Player
 
         public override void OnEnter()
         {
+            CanExit = true;
             _playerMover.velocity.y = _jumpForce;
-            _animator.CrossFadeInFixedTime(_jumpAnimHash, _animTransitionDuration);
+
+            _animancer.Play(_jumpAnim);
         }
 
         public override void OnExit()
@@ -41,11 +46,10 @@ namespace SLOTC.Core.States.Player
 
         public override void OnUpdate(float deltaTime)
         {
-            Vector2 inputAxis = _playerInput.Axis;
             if (_targetLocker.HasTarget)
-                TargetLockedMove(inputAxis, inputAxis.magnitude, deltaTime);
+                TargetLockedMove(_playerInput.Axis, deltaTime);
             else
-                FreeLookMove(inputAxis, inputAxis.magnitude, deltaTime);
+                FreeLookMove(_playerInput.Axis, deltaTime);
         }
     }
 }

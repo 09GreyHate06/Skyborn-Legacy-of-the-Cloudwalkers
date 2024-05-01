@@ -1,4 +1,5 @@
 
+using Animancer;
 using SLOTC.Core.Movement.Enemy;
 using SLOTC.Utils.StateMachine;
 using UnityEngine;
@@ -7,18 +8,21 @@ namespace SLOTC.Core.States.Enemy
 {
     public class IdleState : IState
     {
-        private readonly int _idleAnimHash = Animator.StringToHash("Idle");
-
         private readonly EnemyMover _enemyMover;
-        private readonly Animator _animator;
-        private readonly float _animTransitionDuration;
+        private readonly AnimancerComponent _animancer;
+        private readonly ClipTransition _idleAnim;
 
-        public IdleState(EnemyMover enemyMover, Animator animator, float animTransitionDuration)
+        private AnimancerState _curAnimState;
+        
+        public bool CanExit { get; set; }
+        
+        public IdleState(EnemyMover enemyMover, AnimancerComponent animancer, ClipTransition idleAnim)
         {
             _enemyMover = enemyMover;
-            _animator = animator;
-            _animTransitionDuration = animTransitionDuration;
+            _animancer = animancer;
+            _idleAnim = idleAnim;
         }
+
 
         public string GetID()
         {
@@ -27,8 +31,10 @@ namespace SLOTC.Core.States.Enemy
 
         public void OnEnter()
         {
+            CanExit = true;
             _enemyMover.ResetPath();
-            _animator.CrossFadeInFixedTime(_idleAnimHash, _animTransitionDuration);
+            if(_curAnimState == null || !_curAnimState.IsPlaying)
+                _curAnimState = _animancer.Play(_idleAnim);
         }
 
         public void OnExit()

@@ -2,31 +2,32 @@ using UnityEngine;
 using SLOTC.Core.Combat;
 using SLOTC.Core.Input;
 using SLOTC.Core.Movement.Player;
+using Animancer;
 
 namespace SLOTC.Core.States.Player
 {
     public class MoveState : MoveableState
     {
-        private readonly int _moveAnimHash = Animator.StringToHash("Move");
-        private readonly int _moveMagnitudeParamHash = Animator.StringToHash("MoveMagnitude");
-        private readonly int _inputXParamHash = Animator.StringToHash("InputX");
-        private readonly int _inputYParamHash = Animator.StringToHash("InputY");
-
         private readonly PlayerInput _playerInput;
+        private readonly AnimancerComponent _animancer;
+        private readonly MixerTransition2D _moveAnim;
         private readonly TargetLocker _targetLocker;
-        private readonly Animator _animator;
-        private readonly float _animTransitionDuration;
-        private readonly float _animDampTime;
+        private readonly float _blendSpeed;
 
-        public MoveState(PlayerMover playerMover, PlayerInput playerInput, TargetLocker targetLocker, Animator animator, float animTransitionDuration, float animDampTime, float moveSpeed, float rotationSpeed)
+        //private MixerState<Vector2> _curAnimState;
+
+        public override bool CanExit { get; set; }
+
+        public MoveState(PlayerMover playerMover, PlayerInput playerInput, TargetLocker targetLocker, AnimancerComponent animancer, MixerTransition2D moveAnim, float blendSpeed, float moveSpeed, float rotationSpeed)
             : base(playerMover, moveSpeed, rotationSpeed)
         {
             _playerInput = playerInput;
             _targetLocker = targetLocker;
-            _animator = animator;
-            _animTransitionDuration = animTransitionDuration;
-            _animDampTime = animDampTime;
+            _animancer = animancer;
+            _moveAnim = moveAnim;
+            _blendSpeed = blendSpeed;
         }
+
 
         public override string GetID()
         {
@@ -35,7 +36,10 @@ namespace SLOTC.Core.States.Player
 
         public override void OnEnter()
         {
-            _animator.CrossFadeInFixedTime(_moveAnimHash, _animTransitionDuration);
+            CanExit = true;
+            //if (_curAnimState == null || !_curAnimState.IsPlaying)
+            //_curAnimState = (MixerState<Vector2>)_animancer.Play(_moveAnim);
+            _animancer.Play(_moveAnim);
         }
 
         public override void OnExit()
@@ -52,24 +56,15 @@ namespace SLOTC.Core.States.Player
 
         private void FreeLook(float deltaTime)
         {
-            Vector2 inputAxis = _playerInput.Axis;
-            float inputMagnitude = Mathf.Clamp01(inputAxis.magnitude);
-            FreeLookMove(inputAxis, inputMagnitude, deltaTime);
-
-            _animator.SetFloat(_moveMagnitudeParamHash, inputMagnitude, _animDampTime, deltaTime);
-            _animator.SetFloat(_inputXParamHash, 0.0f, _animDampTime, deltaTime);
-            _animator.SetFloat(_inputYParamHash, 1.0f, _animDampTime, deltaTime);
+            FreeLookMove(_playerInput.Axis, deltaTime);
+            _moveAnim.State.Parameter = Vector2.MoveTowards(_moveAnim.State.Parameter, new Vector2(0.0f, 1.0f), _blendSpeed * Time.deltaTime);
         }
 
         private void TargetLocked(float deltaTime)
         {
             Vector2 inputAxis = _playerInput.Axis;
-            float inputMagnitude = Mathf.Clamp01(inputAxis.magnitude);
-            TargetLockedMove(inputAxis, inputMagnitude, deltaTime);
-
-            _animator.SetFloat(_inputXParamHash, inputAxis.x, _animDampTime, deltaTime);
-            _animator.SetFloat(_inputYParamHash, inputAxis.y, _animDampTime, deltaTime);
-            _animator.SetFloat(_moveMagnitudeParamHash, inputMagnitude, _animDampTime, deltaTime);
+            TargetLockedMove(inputAxis, deltaTime);
+            _moveAnim.State.Parameter = Vector2.MoveTowards(_moveAnim.State.Parameter, inputAxis, _blendSpeed * Time.deltaTime);
         }
     }
 }

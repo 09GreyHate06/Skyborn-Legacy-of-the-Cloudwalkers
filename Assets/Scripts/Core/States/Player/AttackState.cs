@@ -1,9 +1,10 @@
 using UnityEngine;
 using SLOTC.Core.Combat;
 using System;
-using SLOTC.Core.Combat.Animation;
 using SLOTC.Core.Input;
 using SLOTC.Core.Movement.Player;
+using Animancer;
+using SLOTC.Core.Combat.Animation;
 
 namespace SLOTC.Core.States.Player
 {
@@ -11,18 +12,14 @@ namespace SLOTC.Core.States.Player
     {
         public enum EventType
         {
-            Enter,
-            AttackEnded,
             AnimationEnded,
-            Exit
         }
 
         private readonly PlayerInput _playerInput;
-        private readonly Animator _animator;
-        private readonly float _transitionDuration;
-        private readonly CombatAnimationEvent _combatAnimationEvent;
+        private readonly AnimancerComponent _animancer;
         private readonly WeaponHandler _weaponHandler;
-        private readonly SingleAttack[] _combo;
+        private readonly SingleAttack[] _attacks;
+        private readonly AnimancerEvent.Sequence[] _attacksAnimEvents;
         private readonly float _comboGraceTime;
         private int _comboCounter;
         private float _lastAttackTime = float.MinValue;
@@ -30,20 +27,31 @@ namespace SLOTC.Core.States.Player
 
         private SingleAttack _activeAttack;
 
-        public Action<EventType> OnEvent;
+        public override bool CanExit { get; set; }
+
+        public event Action OnAnimationEnded;
 
 
-        public AttackState(PlayerMover playerMover, PlayerInput playerInput, Animator animator, float transitionDuration, WeaponHandler weaponHandler, SingleAttack[] combo, float comboGraceTime, float rotationSpeed)
+        public AttackState(PlayerMover playerMover, PlayerInput playerInput, AnimancerComponent animancer, WeaponHandler weaponHandler, SingleAttack[] attacks, float comboGraceTime, float rotationSpeed)
             : base(playerMover, 0.0f, rotationSpeed)
         {
             _playerInput = playerInput;
-            _animator = animator;
-            _transitionDuration = transitionDuration;
+            _animancer = animancer;
             _weaponHandler = weaponHandler;
-            _combo = combo;
+            _attacks = attacks;
             _comboGraceTime = comboGraceTime;
 
-            _combatAnimationEvent = _animator.GetComponent<CombatAnimationEvent>();
+            _attacksAnimEvents = new AnimancerEvent.Sequence[attacks.Length];
+            for (int i = 0; i < attacks.Length; i++)
+            {
+                var events = new AnimancerEvent.Sequence(_attacks[i].AttackAnim.Events);
+                events.AddCallback(CombatAnimationEventNames.ApplyForce, ApplyForce);
+                events.AddCallback(CombatAnimationEventNames.ActivateWeapon, ActivateWeapon);
+                events.AddCallback(CombatAnimationEventNames.DeactivateWeapon, DeactivateWeapon);
+                events.AddCallback(CombatAnimationEventNames.Exit, AnimationEnded);
+                events.OnEnd = null;
+                _attacksAnimEvents[i] = events;
+            }
         }
 
         public override string GetID() 
@@ -53,11 +61,11 @@ namespace SLOTC.Core.States.Player
 
         public override void OnEnter()
         {
-            _combatAnimationEvent.Listeners += OnCombatAnimEvent;
             //if(GetNormalizedTime(_animator, "ComboAttack") < -0.1f)
             //{
             //    Debug.Log("from idle");
             //}
+            CanExit = false;
 
             _playerMover.velocity.x = 0.0f;
             _playerMover.velocity.z = 0.0f;
@@ -65,23 +73,20 @@ namespace SLOTC.Core.States.Player
             if (timeSinceLastAttack > _comboGraceTime)
                 _comboCounter = 0;
 
-            int comboIndex = _comboCounter++ % _combo.Length;
-            _activeAttack = _combo[comboIndex];
-            _animator.CrossFadeInFixedTime(_activeAttack.AnimNameHash, _transitionDuration);
-            OnEvent?.Invoke(EventType.Enter);
+            int comboIndex = _comboCounter++ % _attacks.Length;
+            _activeAttack = _attacks[comboIndex];
+            AnimancerState state = _animancer.Play(_activeAttack.AttackAnim);
+            state.Events = _attacksAnimEvents[comboIndex];
         }
 
         public override void OnExit()
         {
-            _combatAnimationEvent.Listeners -= OnCombatAnimEvent;
             _activeAttack = null;
-            OnEvent?.Invoke(EventType.Exit);
         }
 
         public override void OnUpdate(float deltaTime)
         {
-            Vector2 inputAxis = _playerInput.Axis;
-            FreeLookMove(inputAxis, inputAxis.magnitude, deltaTime);
+            FreeLookMove(_playerInput.Axis, deltaTime);
         }
 
         private void ApplyForce()
@@ -92,28 +97,21 @@ namespace SLOTC.Core.States.Player
             _playerMover.AddForce(right + up + forward);
         }
 
-        private void OnCombatAnimEvent(CombatAnimationEvent.Type type)
+        private void ActivateWeapon()
         {
-            switch (type)
-            {
-                case CombatAnimationEvent.Type.ApplyForce:
-                    ApplyForce();
-                    break;
+            _weaponHandler.Activate(_activeAttack);
+        }
 
-                case CombatAnimationEvent.Type.ActivateWeapon:
-                    _weaponHandler.Activate(_activeAttack);
-                    break;
+        private void DeactivateWeapon()
+        {
+            _lastAttackTime = Time.realtimeSinceStartup;
+            _weaponHandler.Deactivate();
+            CanExit = true;
+        }
 
-                case CombatAnimationEvent.Type.DeactivateWeapon:
-                    _weaponHandler.Deactivate();
-                    _lastAttackTime = Time.realtimeSinceStartup;
-                    OnEvent?.Invoke(EventType.AttackEnded);
-                    break;
-
-                case CombatAnimationEvent.Type.ExitTime:
-                    OnEvent?.Invoke(EventType.AnimationEnded);
-                    break;
-            }
+        private void AnimationEnded()
+        {
+            OnAnimationEnded?.Invoke();
         }
     }
 }

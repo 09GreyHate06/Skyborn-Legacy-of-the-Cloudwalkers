@@ -1,4 +1,5 @@
 
+using Animancer;
 using SLOTC.Core.Movement.Enemy;
 using SLOTC.Utils.StateMachine;
 using UnityEngine;
@@ -7,20 +8,23 @@ namespace SLOTC.Core.States.Enemy
 {
     public class FollowTargetState : IState
     {
-        private readonly int _moveAnimHash = Animator.StringToHash("Move");
-
         private readonly EnemyMover _enemyMover;
         private readonly Transform _target;
-        private readonly Animator _animator;
-        private readonly float _animTransitionDuration;
+        private readonly AnimancerComponent _animancer;
+        private readonly ClipTransition _moveAnim;
 
-        public FollowTargetState(EnemyMover enemyMover, Transform target, Animator animator, float animTransitionDuration)
+        private AnimancerState _curAnimState;
+
+        public bool CanExit { get; set; }
+
+        public FollowTargetState(EnemyMover enemyMover, Transform target, AnimancerComponent animancer, ClipTransition moveAnim)
         {
             _enemyMover = enemyMover;
             _target = target;
-            _animator = animator;
-            _animTransitionDuration = animTransitionDuration;
+            _animancer = animancer;
+            _moveAnim = moveAnim;
         }
+
 
         public string GetID()
         {
@@ -29,7 +33,9 @@ namespace SLOTC.Core.States.Enemy
 
         public void OnEnter()
         {
-            _animator.CrossFadeInFixedTime(_moveAnimHash, _animTransitionDuration);
+            CanExit = true;
+            if (_curAnimState == null || !_curAnimState.IsPlaying)
+                _curAnimState = _animancer.Play(_moveAnim);
         }
 
         public void OnExit()

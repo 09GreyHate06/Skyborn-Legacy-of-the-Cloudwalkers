@@ -10,11 +10,14 @@ namespace SLOTC.Core.States.Enemy
         private readonly EnemyMover _enemyMover;
         private readonly Transform _target;
 
+        public bool CanExit { get; set; }
+
         public LookAtTargetState(EnemyMover enemyMover, Transform target)
         {
             _enemyMover = enemyMover;
             _target = target;
         }
+
 
         public string GetID()
         {
@@ -23,6 +26,7 @@ namespace SLOTC.Core.States.Enemy
 
         public void OnEnter()
         {
+            CanExit = true;
             _enemyMover.ResetPath();
         }
 

@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a2d01d4f425b3848938f199392c9afb, type: 3}
+  m_Name: Walk
+  m_EditorClassIdentifier: 
+  _Transition:
+    rid: 8680769226591174659
+  references:
+    version: 2
+    RefIds:
+    - rid: 8680769226591174659
+      type: {class: MixerTransition2D, ns: Animancer, asm: Animancer}
+      data:
+        _FadeDuration: 0.25
+        _Events:
+          _NormalizedTimes: []
+          _Callbacks: []
+          _Names: []
+        _Speed: 1
+        _Animations:
+        - {fileID: 7400000, guid: 5b17581194ec0c146a0e4ede976dbfc6, type: 2}
+        - {fileID: 7400000, guid: 5b17581194ec0c146a0e4ede976dbfc6, type: 2}
+        - {fileID: 7400000, guid: da8079dec7189424f8a8697f70425131, type: 2}
+        - {fileID: 7400000, guid: 35243108fc69715469b78f592eec9b91, type: 2}
+        - {fileID: 7400000, guid: 98d512ad735e66546a355272d17f4a5a, type: 2}
+        - {fileID: 7400000, guid: 2a07e5a6cf9683e4897fc0f58345fb3e, type: 2}
+        - {fileID: 7400000, guid: 66475e86fadac4246948ec0f98771aa6, type: 2}
+        - {fileID: 7400000, guid: d4f41c034bbb46b49920aa96b3e9fe3d, type: 2}
+        - {fileID: 7400000, guid: 2a1062db6f1cd2b4982ca2e938da6910, type: 2}
+        _Speeds: []
+        _SynchronizeChildren: 
+        _Thresholds:
+        - {x: 0, y: 0}
+        - {x: 0, y: 1}
+        - {x: 1, y: 1}
+        - {x: 1, y: 0}
+        - {x: 1, y: -1}
+        - {x: 0, y: -1}
+        - {x: -1, y: -1}
+        - {x: -1, y: 0}
+        - {x: -1, y: 1}
+        _DefaultParameter: {x: 0, y: 0}
+        _Type: 1

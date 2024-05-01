@@ -3,34 +3,31 @@ using SLOTC.Utils.StateMachine;
 using SLOTC.Core.Movement.Enemy;
 using System;
 using SLOTC.Core.Combat.Animation;
+using Animancer;
 
 namespace SLOTC.Core.States.Enemy
 {
     public class StaggeredState : IState
     {
-        public enum EventType
-        {
-            Enter,
-            StaggerEnded,
-            Exit,
-        }
-
-        private readonly int _staggerAnimHash = Animator.StringToHash("Stagger");
-
-        private readonly float _animTransitionDuration;
         private readonly EnemyMover _enemyMover;
-        private readonly Animator _animator;
-        private readonly CombatAnimationEvent _combatAnimationEvent;
+        private readonly AnimancerComponent _animancer;
+        private readonly ClipTransition _staggerAnim;
+        private readonly AnimancerEvent.Sequence _staggerAnimEvents;
 
-        public event Action<EventType> OnEvent;
+        public bool CanExit { get; set; }
 
-        public StaggeredState(EnemyMover playerMover, Animator animator, float animTransitionDuration)
+        public event Action OnAnimationEnded;
+
+        public StaggeredState(EnemyMover enemyMover, AnimancerComponent animancer, ClipTransition staggerAnim)
         {
-            _animator = animator;
-            _animTransitionDuration = animTransitionDuration;
-            _enemyMover = playerMover;
+            _enemyMover = enemyMover;
+            _animancer = animancer;
+            _staggerAnim = staggerAnim;
 
-            _combatAnimationEvent = _animator.GetComponent<CombatAnimationEvent>();
+            _staggerAnimEvents = new AnimancerEvent.Sequence(_staggerAnim.Events);
+            _staggerAnimEvents.SetCallback(CombatAnimationEventNames.StaggerEnded, () => CanExit = true);
+            _staggerAnimEvents.SetCallback(CombatAnimationEventNames.Exit, () => OnAnimationEnded?.Invoke());
+            _staggerAnimEvents.OnEnd = null;
         }
 
         public string GetID()
@@ -40,26 +37,19 @@ namespace SLOTC.Core.States.Enemy
 
         public void OnEnter()
         {
-            _combatAnimationEvent.Listeners += OnCombatAnimEvent;
+            CanExit = false;
+
             _enemyMover.ResetPath();
-            _animator.CrossFadeInFixedTime(_staggerAnimHash, _animTransitionDuration);
-            OnEvent?.Invoke(EventType.Enter);
+            AnimancerState state = _animancer.Play(_staggerAnim);
+            state.Events = _staggerAnimEvents;
         }
 
         public void OnExit()
         {
-            _combatAnimationEvent.Listeners -= OnCombatAnimEvent;
-            OnEvent?.Invoke(EventType.Exit);
         }
 
         public void OnUpdate(float deltaTime)
         {
-        }
-
-        private void OnCombatAnimEvent(CombatAnimationEvent.Type type)
-        {
-            if (type == CombatAnimationEvent.Type.ExitTime)
-                OnEvent?.Invoke(EventType.StaggerEnded);
         }
     }
 }

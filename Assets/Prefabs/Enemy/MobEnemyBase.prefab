@@ -112,6 +112,7 @@ GameObject:
   - component: {fileID: 6496043311369194208}
   - component: {fileID: 6080947708018356479}
   - component: {fileID: 7741143025656655934}
+  - component: {fileID: 4998061165541216327}
   m_Layer: 0
   m_Name: MobEnemyBase
   m_TagString: Enemy
@@ -196,19 +197,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
+  _weaponHandler: {fileID: 0}
   _combo: []
   _comboGraceTime: 0.5
   _attackRate: 0.5
   _followTargetDistance: 10
-  _viewConeAngle: 60
   _attackRange: 1.5
+  _targetLockedDuration: 0
   _enemyMover: {fileID: 1186689158438028216}
   _patrolPoints: []
   _idleDurationBeforePatrol: 2
-  _animator: {fileID: 0}
-  _toIdleAnimTransitionDuration: 0.25
-  _toMoveAnimTransitionDuration: 0.25
-  _toAttackAnimTransitionDuration: 0.25
+  _animancer: {fileID: 0}
+  _idleAnim:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 0}
+    _Speed: 1
+    _NormalizedStartTime: 0
+  _moveAnim:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 0}
+    _Speed: 1
+    _NormalizedStartTime: 0
+  _staggerAnim:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 0}
+    _Speed: 1
+    _NormalizedStartTime: 0
 --- !u!114 &1186689158438028216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,6 +249,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _forceSmoothDampTime: 0.1
   _gravityMultiplier: 1
+  _groundedYVelocity: -3
   <UseGravity>k__BackingField: 1
 --- !u!114 &8839326117040927969
 MonoBehaviour:
@@ -362,3 +389,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Owner>k__BackingField: {fileID: 7163680095157699201}
+--- !u!114 &4998061165541216327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6900778018424657625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e308fc0c3bc62d74397194088e0a2dfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _forceResistance: 0
+  _minForceMagnitudeToGetStagger: 0

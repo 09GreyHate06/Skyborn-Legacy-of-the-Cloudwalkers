@@ -14,6 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageModifiers: []
   <Force>k__BackingField: {x: 0, y: 0, z: 15}
-  <TargetForce>k__BackingField: {x: 0, y: 0, z: 15}
-  _animName: SingleAttack3
-  _animNameHash: -1824164724
+  <TargetForce>k__BackingField: {x: 0, y: 0, z: 10}
+  _attackAnim:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes:
+      - 0.16666667
+      - 0.16666667
+      - 0.3
+      - 1
+      - NaN
+      _Callbacks: []
+      _Names:
+      - ApplyForce
+      - ActivateWeapon
+      - DeactivateWeapon
+      - Exit
+    _Clip: {fileID: 7400000, guid: 565ae464cbfd8d942a6d470515628a6b, type: 2}
+    _Speed: 1
+    _NormalizedStartTime: 0

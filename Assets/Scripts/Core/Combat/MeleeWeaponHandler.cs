@@ -44,7 +44,8 @@ namespace SLOTC.Core.Combat
             Vector3 forward = _user.transform.forward * _activeAttack.TargetForce.z;
             _activeAttackKnockbackForceDir = right + up + forward;
             _activeAttackKnockbackForceMagnitude = _activeAttackKnockbackForceDir.magnitude;
-            _activeAttackKnockbackForceDir /= _activeAttackKnockbackForceMagnitude;
+            if(_activeAttackKnockbackForceMagnitude > float.Epsilon)
+                _activeAttackKnockbackForceDir /= _activeAttackKnockbackForceMagnitude;
         }
 
         public override void Deactivate()
@@ -59,10 +60,7 @@ namespace SLOTC.Core.Combat
 
             int damage = _activeAttack.CalcDamage(_user, hitbox.Owner);
             hitbox.Owner.GetComponent<HitPoint>().TakeDamage(damage);
-            if (hitbox.Owner.TryGetComponent(out Knockbackable knockbackable))
-            {
-                knockbackable.Knockback(_activeAttackKnockbackForceDir, _activeAttackKnockbackForceMagnitude);
-            }
+            hitbox.Owner.GetComponent<Knockbackable>().Knockback(_activeAttackKnockbackForceDir, _activeAttackKnockbackForceMagnitude);
         }
     }
 }

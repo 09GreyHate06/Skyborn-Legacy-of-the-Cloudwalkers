@@ -1,7 +1,6 @@
 using UnityEngine;
 using SLOTC.Core.Stats;
 using SLOTC.Core.GlobalSetting;
-using System.ComponentModel;
 
 namespace SLOTC.Core.Combat
 {

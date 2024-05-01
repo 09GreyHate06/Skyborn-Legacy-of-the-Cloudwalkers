@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace SLOTC.Utils.StateMachine
 {
@@ -12,10 +13,15 @@ namespace SLOTC.Utils.StateMachine
         private List<Transition> _currentTransitions = new List<Transition>();
         private List<Transition> _anyTransitions = new List<Transition>();
 
-        private IState _currentState;
+        public IState CurrentState { get; private set; }
+
+        public bool CanExit { get; set; } = true;
+
+        public event Action<IState /* nextState */> OnBeforeChangeState;
 
         public void OnEnter()
         {
+            CanExit = true;
         }
 
         public void OnExit()
@@ -33,17 +39,25 @@ namespace SLOTC.Utils.StateMachine
             if (transition != null)
                 SetState(transition.To);
 
-            _currentState?.OnUpdate(deltaTime);
+            CurrentState?.OnUpdate(deltaTime);
         }
 
         public void SetState(IState state)
         {
-            _currentState?.OnExit();
-            _currentState = state;
-            if(!_transitions.TryGetValue(_currentState.GetID(), out _currentTransitions))
+            if (CurrentState != null && !CurrentState.CanExit)
+            {
+                //Debug.LogWarning("State: " + CurrentState.GetID() + " is not ready to exit. Cause: " + state.GetID());
+                return;
+            }
+
+            OnBeforeChangeState?.Invoke(state);
+
+            CurrentState?.OnExit();
+            CurrentState = state;
+            if(!_transitions.TryGetValue(CurrentState.GetID(), out _currentTransitions))
                 _currentTransitions = new List<Transition>();
 
-            _currentState?.OnEnter();
+            CurrentState?.OnEnter();
         }
 
         public void AddTransition(IState from, IState to, Func<bool> condition)
@@ -66,7 +80,7 @@ namespace SLOTC.Utils.StateMachine
         {
             foreach (Transition transition in _anyTransitions)
             {
-                if (!transition.CanTransitionToItself && object.ReferenceEquals(_currentState, transition.To))
+                if (!transition.CanTransitionToItself && object.ReferenceEquals(CurrentState, transition.To))
                     continue;
 
                 if (transition.Condition())

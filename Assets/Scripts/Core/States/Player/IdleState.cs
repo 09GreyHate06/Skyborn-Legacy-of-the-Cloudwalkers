@@ -1,28 +1,29 @@
 using UnityEngine;
 using SLOTC.Utils.StateMachine;
 using SLOTC.Core.Movement.Player;
+using Animancer;
 
 namespace SLOTC.Core.States.Player
 {
     public class IdleState : IState
     {
-        private readonly int _idleAnimHash = Animator.StringToHash("Idle");
-        private readonly int _moveMagnitudeParamHash = Animator.StringToHash("MoveMagnitude");
-        private readonly int _inputXParamHash = Animator.StringToHash("InputX");
-        private readonly int _inputYParamHash = Animator.StringToHash("InputY");
-
-        private readonly Animator _animator;
-        private readonly float _animTransitionDuration;
         private readonly PlayerMover _playerMover;
-        private readonly float _animDampTime;
-        
-        public IdleState(PlayerMover playerMover, Animator animator, float animTransitionDuration, float animDampTime)
+        private readonly AnimancerComponent _animancer;
+        private readonly MixerTransition2D _moveAnim;
+        private readonly float _blendSpeed;
+
+        //private MixerState<Vector2> _curAnimState;
+
+        public bool CanExit { get; set; }
+
+        public IdleState(PlayerMover playerMover, AnimancerComponent animancer, MixerTransition2D moveAnim, float blendSpeed)
         {
-            _animator = animator;
-            _animTransitionDuration = animTransitionDuration;
             _playerMover = playerMover;
-            _animDampTime = animDampTime;
+            _animancer = animancer;
+            _moveAnim = moveAnim;
+            _blendSpeed = blendSpeed;
         }
+
 
         public string GetID()
         {
@@ -31,8 +32,14 @@ namespace SLOTC.Core.States.Player
 
         public void OnEnter()
         {
+            CanExit = true;
+
             _playerMover.velocity = Vector3.zero;
-            _animator.CrossFadeInFixedTime(_idleAnimHash, _animTransitionDuration);
+
+            //if (_curAnimState == null || !_curAnimState.IsPlaying)
+            //    _curAnimState = (MixerState<Vector2>)_animancer.Play(_moveAnim);
+
+            _animancer.Play(_moveAnim);
         }
 
         public void OnExit()
@@ -41,9 +48,7 @@ namespace SLOTC.Core.States.Player
 
         public void OnUpdate(float deltaTime)
         {
-            _animator.SetFloat(_moveMagnitudeParamHash, 0.0f, _animDampTime, deltaTime);
-            _animator.SetFloat(_inputXParamHash, 0.0f, _animDampTime, deltaTime);
-            _animator.SetFloat(_inputYParamHash, 0.0f, _animDampTime, deltaTime);
+            _moveAnim.State.Parameter = Vector2.MoveTowards(_moveAnim.State.Parameter, Vector2.zero, _blendSpeed * Time.deltaTime);
         }
     }
 }

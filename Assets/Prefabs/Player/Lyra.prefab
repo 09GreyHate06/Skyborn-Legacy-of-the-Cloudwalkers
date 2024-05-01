@@ -870,15 +870,99 @@ MonoBehaviour:
   _rotationSpeed: 500
   _jumpForce: 6
   _timeLeavedGroundBeforeFallState: 0.5
-  _animator: {fileID: 8173020965373992976}
-  _toIdleAnimTransitionDuration: 0.25
-  _toMoveAnimTransitionDuration: 0.25
-  _toJumpAnimTransitionDuration: 0.25
-  _toFallingAnimTransitionDuration: 0.25
-  _toAttackAnimTransitionDuration: 0.25
-  _toDodgeAnimTransitionDuration: 0.25
-  _toStaggerAnimTransitionDuration: 0.25
-  _animParamDampTime: 0.05
+  _animancer: {fileID: 4147362548377169278}
+  _moveAnim:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Speed: 1
+    _Animations:
+    - {fileID: 7400000, guid: 3d9141b6da38c09459d7bab0718d72c4, type: 2}
+    - {fileID: 7400000, guid: c632e9c2625651d4e854df9dd99e35b3, type: 2}
+    - {fileID: 7400000, guid: 64fff6a6bc008eb4c9a011d1d1199f1d, type: 2}
+    - {fileID: 7400000, guid: c8c8371379ed6bd4a83af56aa192be84, type: 2}
+    - {fileID: 7400000, guid: 52ce325bb0398004fbd77b2dbf661f95, type: 2}
+    - {fileID: 7400000, guid: 13040799682e83847a5654822e5d8fda, type: 2}
+    - {fileID: 7400000, guid: e596c4172305c144db772403e124830a, type: 2}
+    - {fileID: 7400000, guid: d5a1330de505f894b9a42f006d8bf2a1, type: 2}
+    - {fileID: 7400000, guid: dd4da747d0c8ee748ba749507d9bbf4c, type: 2}
+    _Speeds: []
+    _SynchronizeChildren: 00
+    _Thresholds:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: -1}
+    - {x: 0, y: -1}
+    - {x: -1, y: -1}
+    - {x: -1, y: 0}
+    - {x: -1, y: 1}
+    _DefaultParameter: {x: 0, y: 0}
+    _Type: 1
+  _dodgeAnim:
+    _FadeDuration: 0.1
+    _Events:
+      _NormalizedTimes:
+      - 0.2
+      - 1
+      - NaN
+      _Callbacks: []
+      _Names:
+      - DodgeEnded
+      - Exit
+    _Speed: 1
+    _Animations:
+    - {fileID: 7400000, guid: a60d1f1e790b35042951a29d031087c7, type: 2}
+    - {fileID: 7400000, guid: a60d1f1e790b35042951a29d031087c7, type: 2}
+    - {fileID: 7400000, guid: 3d8e58b12fc665243a86ab997732cfed, type: 2}
+    - {fileID: 7400000, guid: 5ae1e35feebbd6b46b3c8a06a6552cbe, type: 2}
+    - {fileID: 7400000, guid: 5b2db8513db5b014ba81b284b99e8676, type: 2}
+    _Speeds: []
+    _SynchronizeChildren: 
+    _Thresholds:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 0, y: -1}
+    - {x: -1, y: 0}
+    _DefaultParameter: {x: 0, y: 0}
+    _Type: 1
+  _jumpAnim:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 7400000, guid: e12482b5ac7e41940929b61ad88202f2, type: 2}
+    _Speed: 1
+    _NormalizedStartTime: 0
+  _fallingAnim:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 7400000, guid: de3cc76ab5db4aa40967cd873604f29b, type: 2}
+    _Speed: 1
+    _NormalizedStartTime: 0
+  _staggerAnim:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes:
+      - 0.49999997
+      - 0.99999994
+      - NaN
+      _Callbacks: []
+      _Names:
+      - StaggerEnded
+      - Exit
+    _Clip: {fileID: 7400000, guid: 52ec925edb9b36b44896e392ae4ad6e5, type: 2}
+    _Speed: 1
+    _NormalizedStartTime: 0
+  _animBlendSpeed: 5
 --- !u!114 &2158682582382907724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1374,7 +1458,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8529172450871540556}
   - component: {fileID: 8173020965373992976}
-  - component: {fileID: 1509125715980425019}
+  - component: {fileID: 4147362548377169278}
   m_Layer: 0
   m_Name: LyraModel
   m_TagString: Player
@@ -1411,7 +1495,7 @@ Animator:
   m_GameObject: {fileID: 4002160167795496435}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 0c4d0fb732ecc584ab9474adf2dfe2d1, type: 3}
-  m_Controller: {fileID: 9100000, guid: 34558cfeea912874f9092be6658b06b3, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1422,7 +1506,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1509125715980425019
+--- !u!114 &4147362548377169278
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1431,9 +1515,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4002160167795496435}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b29eb76496e61541b93505d23586de7, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ad50f81b1d25c441943c37a89ba23f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Animator: {fileID: 8173020965373992976}
+  _ActionOnDisable: 0
 --- !u!1 &4137981240729939229
 GameObject:
   m_ObjectHideFlags: 0

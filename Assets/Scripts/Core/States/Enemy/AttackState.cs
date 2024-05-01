@@ -5,44 +5,48 @@ using SLOTC.Core.Combat;
 using System;
 using SLOTC.Core.Combat.Animation;
 using SLOTC.Core.Movement.Enemy;
+using Animancer;
 
 namespace SLOTC.Core.States.Enemy
 {
     public class AttackState : IState
     {
-        public enum EventType
-        {
-            Enter,
-            AttackEnded,
-            AnimationEnded,
-            Exit
-        }
-
         private readonly EnemyMover _enemyMover;
-        private readonly Animator _animator;
-        private readonly CombatAnimationEvent _combatAnimationEvent;
+        private readonly AnimancerComponent _animancer;
         private readonly Transform _target;
         private readonly WeaponHandler _weaponHandler;
-        private readonly SingleAttack[] _combo;
+        private readonly SingleAttack[] _attacks;
+        private readonly AnimancerEvent.Sequence[] _attacksAnimEvents;
         private readonly float _comboGraceTime;
-        private readonly float _transitionDuration;
 
         private SingleAttack _activeAttack;
         private int _comboCounter;
         private float _lastAttackTime = float.MinValue;
 
-        public event Action<EventType> OnEvent;
+        public bool CanExit { get; set; }
 
-        public AttackState(EnemyMover enemyMover, Animator animator, float transitionDuration, Transform target, WeaponHandler weaponHandler, SingleAttack[] combo, float comboGraceTime)
+        public event Action OnAnimationEnded;
+
+        public AttackState(EnemyMover enemyMover, AnimancerComponent animancer, Transform target, WeaponHandler weaponHandler, SingleAttack[] attacks, float comboGraceTime)
         {
             _enemyMover = enemyMover;
-            _animator = animator;
-            _transitionDuration = transitionDuration;
+            _animancer = animancer;
             _target = target;
             _weaponHandler = weaponHandler;
-            _combo = combo;
+            _attacks = attacks;
             _comboGraceTime = comboGraceTime;
-            _combatAnimationEvent = _animator.GetComponent<CombatAnimationEvent>();
+
+            _attacksAnimEvents = new AnimancerEvent.Sequence[attacks.Length];
+            for (int i = 0; i < attacks.Length; i++)
+            {
+                var events = new AnimancerEvent.Sequence(_attacks[i].AttackAnim.Events);
+                events.AddCallback(CombatAnimationEventNames.ApplyForce, ApplyForce);
+                events.AddCallback(CombatAnimationEventNames.ActivateWeapon, ActivateWeapon);
+                events.AddCallback(CombatAnimationEventNames.DeactivateWeapon, DeactivateWeapon);
+                events.AddCallback(CombatAnimationEventNames.Exit, AnimationEnded);
+                events.OnEnd = null;
+                _attacksAnimEvents[i] = events;
+            }
         }
 
         public string GetID()
@@ -52,29 +56,24 @@ namespace SLOTC.Core.States.Enemy
 
         public void OnEnter()
         {
-            _combatAnimationEvent.Listeners += OnCombatAnimEvent;
+            CanExit = false;
+
             _enemyMover.ResetPath();
-            //if (!_playerMover.IsGrounded)
-            //{
-            //    _playerMover.velocity.y = 5.0f;
-            //}
 
             float timeSinceLastAttack = Time.realtimeSinceStartup - _lastAttackTime;
             if (timeSinceLastAttack > _comboGraceTime)
                 _comboCounter = 0;
 
-            int comboIndex = _comboCounter++ % _combo.Length;
-            _activeAttack = _combo[comboIndex];
-            _animator.CrossFadeInFixedTime(_activeAttack.AnimNameHash, _transitionDuration);
+            int comboIndex = _comboCounter++ % _attacks.Length;
+            _activeAttack = _attacks[comboIndex];
 
-            OnEvent?.Invoke(EventType.Enter);
+            AnimancerState state = _animancer.Play(_activeAttack.AttackAnim);
+            state.Events = _attacksAnimEvents[comboIndex];
         }
 
         public void OnExit()
         {
-            _combatAnimationEvent.Listeners -= OnCombatAnimEvent;
             _activeAttack = null;
-            OnEvent?.Invoke(EventType.Exit);
         }
 
         public void OnUpdate(float deltaTime)
@@ -86,15 +85,6 @@ namespace SLOTC.Core.States.Enemy
             toTarget.y = 0.0f;
             Quaternion headingQuat = Quaternion.LookRotation(toTarget, Vector3.up);
             _enemyMover.transform.rotation = Quaternion.RotateTowards(_enemyMover.transform.rotation, headingQuat, _enemyMover.AngularSpeed * deltaTime);
-
-            //if (_applyForceFlag && n >= _activeAttack.AnimNormalizedTimeToApplyForce)
-            //{
-            //    Vector3 right = _playerMover.transform.right * _activeAttack.Force.x;
-            //    Vector3 up = _playerMover.transform.up * _activeAttack.Force.y;
-            //    Vector3 forward = _playerMover.transform.forward * _activeAttack.Force.z;
-            //    _playerMover.AddForce(right + up + forward);
-            //    _applyForceFlag = false;
-            //}
         }
 
         private void ApplyForce()
@@ -105,28 +95,21 @@ namespace SLOTC.Core.States.Enemy
             _enemyMover.AddForce(right + up + forward);
         }
 
-        private void OnCombatAnimEvent(CombatAnimationEvent.Type type)
+        private void ActivateWeapon()
         {
-            switch (type)
-            {
-                case CombatAnimationEvent.Type.ApplyForce:
-                    ApplyForce();
-                    break;
+            _weaponHandler.Activate(_activeAttack);
+        }
 
-                case CombatAnimationEvent.Type.ActivateWeapon:
-                    _weaponHandler.Activate(_activeAttack);
-                    break;
+        private void DeactivateWeapon()
+        {
+            _lastAttackTime = Time.realtimeSinceStartup;
+            _weaponHandler.Deactivate();
+            CanExit = true;
+        }
 
-                case CombatAnimationEvent.Type.DeactivateWeapon:
-                    _weaponHandler.Deactivate();
-                    _lastAttackTime = Time.realtimeSinceStartup;
-                    OnEvent?.Invoke(EventType.AttackEnded);
-                    break;
-
-                case CombatAnimationEvent.Type.ExitTime:
-                    OnEvent?.Invoke(EventType.AnimationEnded);
-                    break;
-            }
+        private void AnimationEnded()
+        {
+            OnAnimationEnded?.Invoke();
         }
     }
 }
