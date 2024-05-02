@@ -10,13 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4b71e3d6451f5a49a927a9adf91b3f4, type: 3}
-  m_Name: weapon
+  m_Name: temp
   m_EditorClassIdentifier: 
-  _itemID: 27268b70-e8cb-4216-8e7a-76ce12698868
+  _itemID: a5ace9aa-a32c-4803-a800-cc38cbbc8c98
   _sprite: {fileID: 0}
-  _displayName: weapon
+  _displayName: 
   _description: 
   _stackable: 0
-  _statModifiers: []
+  _statModifiers:
+  - statType: 2
+    modifierType: 0
+    value: 20
   _equipLocations: 0
-  _weaponMeshPrefab: {fileID: 406277840142457754, guid: f399695d2376c324b8ac574fede6344a, type: 3}
+  _weaponMeshPrefab: {fileID: 6036632914303561494, guid: 0fe79d4eeb2229445b171d6042e5e91d, type: 3}

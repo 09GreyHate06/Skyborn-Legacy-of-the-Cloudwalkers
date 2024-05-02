@@ -1,22 +1,51 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 using SLOTC.Core.Stats;
 using SLOTC.Core.Saving;
+using UnityEngine.InputSystem;
 
 namespace SLOTC.Core.Inventory
 {
     public class Equipment : MonoBehaviour, ISaveable
     {
+        [SerializeField] EquipableItem _defaultWeapon;
+        [SerializeField] EquipableItem temp;
+        [SerializeField] GameObject _weaponHolder;
+
         private Dictionary<EquipLocation, EquipableItem> _equipments = new Dictionary<EquipLocation, EquipableItem>();
         private Status _status;
 
         public event Action OnEquipChanged;
 
+        private bool _equipping;
+
+        private void OnValidate()
+        {
+            if (_defaultWeapon != null && _defaultWeapon.EquipLocation != EquipLocation.Weapon)
+                Debug.LogError("You set DefaultWeapon as " + _defaultWeapon.name + " which is not a weapon");
+        }
+
         private void Awake()
         {
             _status = GetComponent<Status>();
+        }
+
+        private void Start()
+        {
+            Equip(_defaultWeapon);
+        }
+
+        private void Update()
+        {
+            if (Keyboard.current.tKey.wasPressedThisFrame)
+            {
+                Unequip(EquipLocation.Weapon);
+            }
+            if (Keyboard.current.eKey.wasPressedThisFrame)
+            {
+                Equip(temp);
+            }
         }
 
         public bool HasEquipmentAt(EquipLocation location)
@@ -34,11 +63,18 @@ namespace SLOTC.Core.Inventory
 
         public bool Equip(EquipableItem equipableItem)
         {
+            _equipping = true;
+
             Unequip(equipableItem.EquipLocation);
             _status.AddModifiers(equipableItem);
             _equipments[equipableItem.EquipLocation] = equipableItem;
 
+            if (equipableItem.EquipLocation == EquipLocation.Weapon)
+                Instantiate(equipableItem.WeaponMesh, _weaponHolder.transform);
+
             OnEquipChanged?.Invoke();
+
+            _equipping = false;
             return true;
         }
 
@@ -50,6 +86,16 @@ namespace SLOTC.Core.Inventory
             EquipableItem item = _equipments[location];
             _status.RemoveModifiers(item);
             _equipments.Remove(location);
+
+            if (location == EquipLocation.Weapon && _weaponHolder.transform.childCount > 0)
+            {
+                Destroy(_weaponHolder.transform.GetChild(0).gameObject);
+                // equip default if not equipping
+                if (!_equipping)
+                {
+                    Equip(_defaultWeapon);
+                }
+            }
 
             OnEquipChanged?.Invoke();
             return true;

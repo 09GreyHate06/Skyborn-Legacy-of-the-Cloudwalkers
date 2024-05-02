@@ -1,7 +1,5 @@
 using UnityEngine;
 using SLOTC.Core.Stats;
-using Unity.VisualScripting;
-using System;
 
 namespace SLOTC.Core.Inventory
 {
@@ -10,9 +8,22 @@ namespace SLOTC.Core.Inventory
     {
         [SerializeField] StatModifier[] _statModifiers;
         [SerializeField] EquipLocation _equipLocations;
-        
+
+        [Header("Weapon settings only")]
+        [SerializeField] GameObject _weaponMeshPrefab;
+
 
         public EquipLocation EquipLocation { get { return _equipLocations; } }
+        public GameObject WeaponMesh { get { return _weaponMeshPrefab; } }
+
+
+        private void OnValidate()
+        {
+            if (_equipLocations == EquipLocation.Weapon && _weaponMeshPrefab == null)
+            {
+                Debug.LogWarning("EquipableLocation is Weapon but WeaponMeshPrefab is null");
+            }
+        }
 
         public string GetID()
         {
