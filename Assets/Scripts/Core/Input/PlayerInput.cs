@@ -24,12 +24,13 @@ namespace SLOTC.Core.Input
 
         private void OnEnable()
         {
-            _actions.Gameplay.Enable();
+            EnableGameplayActions();
+            DisableGameplayActions();
         }
 
         private void OnDisable()
         {
-            _actions.Gameplay.Disable();
+            DisableGameplayActions();
         }
 
         public void OnMove(InputAction.CallbackContext context)
@@ -59,6 +60,16 @@ namespace SLOTC.Core.Input
         public void OnDodge(InputAction.CallbackContext context)
         {
             OnDodgeEvent?.Invoke(context);
+        }
+
+        public void EnableGameplayActions()
+        {
+            _actions.Gameplay.Enable();
+        }
+
+        public void DisableGameplayActions()
+        {
+            _actions.Gameplay.Disable();
         }
     }
 }

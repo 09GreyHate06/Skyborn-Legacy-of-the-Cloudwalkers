@@ -26,5 +26,10 @@ namespace SLOTC.Core.Stats
 
         ///<summary>abbreviated as Crit ATK%</summary>
         CriticalHitBonusDamage,
+
+        AirResistance,
+        EarthResistance,
+        WaterResistance,
+        FireResistance
     }
 }

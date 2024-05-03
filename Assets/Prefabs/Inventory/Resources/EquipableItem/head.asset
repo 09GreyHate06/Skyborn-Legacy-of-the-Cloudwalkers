@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: head
   m_EditorClassIdentifier: 
   _itemID: 9c8ce655-e880-40b8-bd42-79dfb8bfbbff
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: 0cce89de23b88fb44b324db62f50d31c, type: 3}
   _displayName: head
-  _description: 
+  _description: Temp helmet
   _stackable: 0
   _statModifiers:
   - statType: 5
@@ -24,4 +24,5 @@ MonoBehaviour:
   - statType: 5
     modifierType: 1
     value: 5
-  _equipLocations: 3
+  _equipLocations: 0
+  _weaponMeshPrefab: {fileID: 0}

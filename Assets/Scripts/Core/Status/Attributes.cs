@@ -21,6 +21,7 @@ namespace SLOTC.Core.Stats
 
         private Experience _exp;
 
+        public UnityEvent OnAttributesChanged { get { return _onAttributesChanged; } }
         public int AttributePoints { get; private set; } = 0;
 
         private void Awake()

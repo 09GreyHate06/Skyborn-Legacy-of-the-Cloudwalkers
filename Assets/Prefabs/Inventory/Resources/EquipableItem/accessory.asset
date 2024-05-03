@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: accessory
   m_EditorClassIdentifier: 
   _itemID: c200e2f5-9ad5-4844-bc27-c7cff3a81e9c
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: a518ce81621bd4946a0ddb435f77e41f, type: 3}
   _displayName: accessory
-  _description: 
+  _description: Temp accessory
   _stackable: 0
   _statModifiers:
   - statType: 6
@@ -24,4 +24,5 @@ MonoBehaviour:
   - statType: 7
     modifierType: 1
     value: 5
-  _equipLocations: 1
+  _equipLocations: 4
+  _weaponMeshPrefab: {fileID: 0}

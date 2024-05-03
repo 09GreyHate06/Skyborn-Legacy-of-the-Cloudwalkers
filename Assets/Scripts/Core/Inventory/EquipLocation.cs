@@ -3,11 +3,14 @@ namespace SLOTC.Core.Inventory
 {
     public enum EquipLocation
     {
-        Weapon,
-        Accessory,
-        Pendant,
         Head,
-        Body,
-        Shoes,
+        Chest,
+        Legs,
+        Feet,
+        Hands,
+        Neck,
+        Fingers,
+        Ears,
+        Weapon,
     }
 }

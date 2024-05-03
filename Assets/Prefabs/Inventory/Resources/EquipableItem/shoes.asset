@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: shoes
   m_EditorClassIdentifier: 
   _itemID: a1fa2300-d1ca-4693-8df7-7242dec3047c
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: 1a66b143857a85045be540907cc3eae6, type: 3}
   _displayName: shoes
-  _description: 
+  _description: Temp shoes
   _stackable: 0
   _statModifiers:
   - statType: 6
     modifierType: 0
     value: 5
-  _equipLocations: 4
+  _equipLocations: 3
+  _weaponMeshPrefab: {fileID: 0}

@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: temp
   m_EditorClassIdentifier: 
   _itemID: a5ace9aa-a32c-4803-a800-cc38cbbc8c98
-  _sprite: {fileID: 0}
-  _displayName: 
-  _description: 
+  _sprite: {fileID: 21300000, guid: 19d2e28804847a0488a34177b0b7dec3, type: 3}
+  _displayName: Temp
+  _description: 'Temp '
   _stackable: 0
   _statModifiers:
   - statType: 2
     modifierType: 0
     value: 20
-  _equipLocations: 0
+  _equipLocations: 8
   _weaponMeshPrefab: {fileID: 6036632914303561494, guid: 0fe79d4eeb2229445b171d6042e5e91d, type: 3}

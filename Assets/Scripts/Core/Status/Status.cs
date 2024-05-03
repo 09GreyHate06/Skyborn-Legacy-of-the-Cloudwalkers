@@ -21,11 +21,13 @@ namespace SLOTC.Core.Stats
         [SerializeField] int _maxStatValue = 999999;
         private Dictionary<string /*ID*/, StatModifier[]> _modifiers = new Dictionary<string /*ID*/, StatModifier[]>();
 
+        public UnityEvent OnStatChanged { get { return _onStatChanged; } }
+
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            if (_stats.Length != 8)
-                _stats = new Stat[8];
+            if (_stats.Length != Enum.GetValues(typeof(StatType)).Length)
+                _stats = new Stat[Enum.GetValues(typeof(StatType)).Length];
 
             for (int i = 0; i < _stats.Length; i++)
             {
@@ -119,6 +121,15 @@ namespace SLOTC.Core.Stats
                 case StatType.CriticalHitBonusDamage:
                     // CRIT ATK% = (Strength * 1.5) +  (Luck * 0.2)
                     return Mathf.Clamp(Mathf.FloorToInt(_attributes.GetAttribute(AttributeType.Strength) * 1.5f + _attributes.GetAttribute(AttributeType.Luck) * 0.2f), 0, _maxStatValue);
+
+                case StatType.AirResistance:
+                    return 0;
+                case StatType.WaterResistance:
+                    return 0;
+                case StatType.EarthResistance:
+                    return 0;
+                case StatType.FireResistance:
+                    return 0;
 
             }
 

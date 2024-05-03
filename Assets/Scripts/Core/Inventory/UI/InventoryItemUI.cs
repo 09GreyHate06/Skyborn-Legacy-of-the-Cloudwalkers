@@ -1,7 +1,7 @@
 using SLOTC.Utils.UI.Dragging;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace SLOTC.Core.Inventory.UI
 {
