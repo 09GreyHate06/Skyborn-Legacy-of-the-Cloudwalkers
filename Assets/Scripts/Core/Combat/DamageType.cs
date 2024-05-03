@@ -1,8 +1,15 @@
-﻿namespace SLOTC.Core.Combat
+﻿using SLOTC.Core.Stats;
+
+namespace SLOTC.Core.Combat
 {
     public enum DamageType
     {
         Physical,
-        // Fire, Lighting... etc
+
+        // magics
+        Air, 
+        Water,
+        Earth,
+        Fire,
     }
 }

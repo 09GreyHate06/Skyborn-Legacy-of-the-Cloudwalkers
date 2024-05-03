@@ -1,14 +1,13 @@
 
+using SLOTC.Core.Stats;
 using UnityEngine;
 
 namespace SLOTC.Core.Inventory
 {
     public abstract class ActionItem : InventoryItem
     {
-        [SerializeField] bool _isConsumable;
+        [field: SerializeField] public bool IsConsumable { get; private set; }
 
-        public bool IsConsumable { get { return _isConsumable; } }
-
-        
+        public abstract bool Use(Status user);
     }
 }

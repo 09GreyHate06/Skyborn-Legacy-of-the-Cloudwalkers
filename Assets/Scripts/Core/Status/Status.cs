@@ -110,9 +110,9 @@ namespace SLOTC.Core.Stats
                     // DEF =  (Vitality * 0.6) + (Dexterity * 0.4)
                     return Mathf.Clamp(Mathf.FloorToInt(_attributes.GetAttribute(AttributeType.Vitality) * 0.6f + _attributes.GetAttribute(AttributeType.Dexterity) * 0.4f), 0, _maxStatValue);
 
-                case StatType.MagicDefense:
-                    // MDEF =  (Intelligence * 0.8) + (Vitality * 0.2)
-                    return Mathf.Clamp(Mathf.FloorToInt(_attributes.GetAttribute(AttributeType.Intelligence) * 0.8f + _attributes.GetAttribute(AttributeType.Vitality) * 0.2f), 0, _maxStatValue);
+                //case StatType.MagicDefense:
+                //    // MDEF =  (Intelligence * 0.8) + (Vitality * 0.2)
+                //    return Mathf.Clamp(Mathf.FloorToInt(_attributes.GetAttribute(AttributeType.Intelligence) * 0.8f + _attributes.GetAttribute(AttributeType.Vitality) * 0.2f), 0, _maxStatValue);
 
                 case StatType.CriticalHitChance:
                     // CRIT% =  (Dexterity * 0.1) + (Luck * 0.4)
@@ -123,13 +123,13 @@ namespace SLOTC.Core.Stats
                     return Mathf.Clamp(Mathf.FloorToInt(_attributes.GetAttribute(AttributeType.Strength) * 1.5f + _attributes.GetAttribute(AttributeType.Luck) * 0.2f), 0, _maxStatValue);
 
                 case StatType.AirResistance:
-                    return 0;
+                    return _stats[(int)StatType.AirResistance].value;
                 case StatType.WaterResistance:
-                    return 0;
+                    return _stats[(int)StatType.WaterResistance].value;
                 case StatType.EarthResistance:
-                    return 0;
+                    return _stats[(int)StatType.EarthResistance].value;
                 case StatType.FireResistance:
-                    return 0;
+                    return _stats[(int)StatType.FireResistance].value;
 
             }
 

@@ -49,12 +49,10 @@ namespace SLOTC.Core.Stats
             }
         }
 
-#if UNITY_EDITOR
         private void OnValidate()
         {
             SetExperienceProgression();
         }
-#endif 
 
         public void GainExperience(int exp)
         {

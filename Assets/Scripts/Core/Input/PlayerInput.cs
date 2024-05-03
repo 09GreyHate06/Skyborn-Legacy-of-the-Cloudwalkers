@@ -25,7 +25,6 @@ namespace SLOTC.Core.Input
         private void OnEnable()
         {
             EnableGameplayActions();
-            DisableGameplayActions();
         }
 
         private void OnDisable()

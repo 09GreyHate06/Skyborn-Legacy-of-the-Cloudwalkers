@@ -65,6 +65,7 @@ namespace SLOTC.Core.Combat
                 return false;
 
             CurrentTarget = closestTarget;
+            CurrentTarget.OnDestroyed += RemoveTarget;
             _cmTargetLock.LookAt = CurrentTarget.transform;
             _cmStateMachine.Play(_targetLockedStateHash);
             return true;

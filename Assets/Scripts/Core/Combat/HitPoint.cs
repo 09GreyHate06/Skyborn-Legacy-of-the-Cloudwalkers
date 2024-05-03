@@ -31,19 +31,20 @@ namespace SLOTC.Core.Combat
         public int MaxHitPoints { get { return _maxHitPoints; } }
         public bool IsDead { get; private set; } = false;
 
-#if UNITY_EDITOR
         private void OnValidate()
         {
             _currentHitPoints = Mathf.Clamp(_currentHitPoints, 0, _maxHitPoints);
         }
-#endif
 
         public void TakeDamage(int damage)
         {
             _currentHitPoints = Mathf.Clamp(_currentHitPoints - damage, 0, _maxHitPoints);
 
             if (_currentHitPoints <= 0)
+            {
                 IsDead = true;
+                return;
+            }
 
             _onTakeDamage?.Invoke(damage);
         }

@@ -1799,6 +1799,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7372940454881507393, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
+      propertyPath: _dieAnim._Clip
+      value: 
+      objectReference: {fileID: 7400000, guid: 61317e782aeaf614e912296ac5d5377d, type: 2}
+    - target: {fileID: 7372940454881507393, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
       propertyPath: _viewConeAngle
       value: 90
       objectReference: {fileID: 0}
@@ -1851,6 +1855,14 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7372940454881507393, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
+      propertyPath: _dieAnim._Events._Names.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372940454881507393, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
+      propertyPath: _dieAnim._Events._Names.Array.data[0]
+      value: Exit
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372940454881507393, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
       propertyPath: _staggerAnim._Events._Names.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -1861,6 +1873,18 @@ PrefabInstance:
     - target: {fileID: 7372940454881507393, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
       propertyPath: _staggerAnim._Events._Names.Array.data[1]
       value: Exit
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372940454881507393, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
+      propertyPath: _dieAnim._Events._NormalizedTimes.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372940454881507393, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
+      propertyPath: _dieAnim._Events._NormalizedTimes.Array.data[0]
+      value: 0.99999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372940454881507393, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
+      propertyPath: _dieAnim._Events._NormalizedTimes.Array.data[1]
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 7372940454881507393, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
       propertyPath: _staggerAnim._Events._NormalizedTimes.Array.size

@@ -17,7 +17,6 @@ namespace SLOTC.Core.Stats.UI
         [SerializeField] TextMeshProUGUI _pdamValueTxt;
         [SerializeField] TextMeshProUGUI _mdamValueTxt;
         [SerializeField] TextMeshProUGUI _pdefValueTxt;
-        [SerializeField] TextMeshProUGUI _mdefValueTxt;
         [SerializeField] TextMeshProUGUI _crtChanceValueTxt;
         [SerializeField] TextMeshProUGUI _crtDamValueTxt;
 
@@ -44,11 +43,6 @@ namespace SLOTC.Core.Stats.UI
         {
             _hpValueTxt.text = _hp.CurrentHitPoints + "/" + _hp.MaxHitPoints;
             _spValueTxt.text = _sp.CurrentSkillPoints + "/" + _sp.MaxSkillPoints;
-
-            if (Keyboard.current.xKey.wasPressedThisFrame)
-            {
-                _exp.GainExperience(100);
-            }
         }
 
         private void OnEnable()
@@ -80,14 +74,13 @@ namespace SLOTC.Core.Stats.UI
             _pdamValueTxt.text = _stat.GetStat(StatType.PhysicalDamage).ToString();
             _mdamValueTxt.text = _stat.GetStat(StatType.MagicDamage).ToString();
             _pdefValueTxt.text = _stat.GetStat(StatType.Defense).ToString();
-            _mdefValueTxt.text = _stat.GetStat(StatType.MagicDefense).ToString();
             _crtChanceValueTxt.text = _stat.GetStat(StatType.CriticalHitChance) + "%";
             _crtDamValueTxt.text = _stat.GetStat(StatType.CriticalHitBonusDamage) + "%";
 
-            _airResistValueTxt.text = _stat.GetStat(StatType.AirResistance) + "%";
-            _waterResistValueTxt.text = _stat.GetStat(StatType.WaterResistance) + "%";
-            _earthResistValueTxt.text = _stat.GetStat(StatType.EarthResistance) + "%";
-            _fireResistValueTxt.text = _stat.GetStat(StatType.FireResistance) + "%";
+            //_airResistValueTxt.text = _stat.GetStat(StatType.AirResistance) + "%";
+            //_waterResistValueTxt.text = _stat.GetStat(StatType.WaterResistance) + "%";
+            //_earthResistValueTxt.text = _stat.GetStat(StatType.EarthResistance) + "%";
+            //_fireResistValueTxt.text = _stat.GetStat(StatType.FireResistance) + "%";
         }
     }
 }

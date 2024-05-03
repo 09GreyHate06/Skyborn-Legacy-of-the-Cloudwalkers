@@ -35,6 +35,8 @@ namespace SLOTC.Core.Controller.Enemy
         [SerializeField] ClipTransition _moveAnim;
         [EventNames(CombatAnimationEventNames.StaggerEnded, CombatAnimationEventNames.Exit)]
         [SerializeField] ClipTransition _staggerAnim;
+        [EventNames(CombatAnimationEventNames.Exit)]
+        [SerializeField] ClipTransition _dieAnim;
 
         private StateMachine _stateMachine;
 
@@ -59,6 +61,7 @@ namespace SLOTC.Core.Controller.Enemy
             FollowTargetState followTargetState = new FollowTargetState(_enemyMover, _target.transform, _animancer, _moveAnim);
             AttackState attackState = new AttackState(_enemyMover, _animancer, _target.transform, _weaponHandler, _combo, _comboGraceTime);
             StaggeredState staggeredState = new StaggeredState(_enemyMover, _animancer, _staggerAnim);
+            DeadState deadState = new DeadState(_enemyMover, _animancer, _dieAnim);
 
             attackState.OnAnimationEnded += () => _attackAnimationEnded = true;
             staggeredState.OnAnimationEnded += () => _staggerAnimationEnded = true;
@@ -91,7 +94,8 @@ namespace SLOTC.Core.Controller.Enemy
             // to AttackState
             _stateMachine.AddAnyTransition(attackState, true, () =>
             {
-                if (!_canAttack || TargetDist() > _attackRange || (!_stateMachine.CurrentState.CanExit && _stateMachine.CurrentState.GetID() == staggeredState.GetID()))
+                string curStateID = _stateMachine.CurrentState.GetID();
+                if (!_canAttack || TargetDist() > _attackRange || (!_stateMachine.CurrentState.CanExit && curStateID == staggeredState.GetID()) || curStateID == deadState.GetID())
                     return false;
 
                 _stateMachine.CurrentState.CanExit = true;
@@ -103,13 +107,17 @@ namespace SLOTC.Core.Controller.Enemy
             {
                 GetComponent<Knockbackable>().OnKnockback += (Knockbackable.KnockbackType knockbackType) =>
                 {
-                    if (knockbackType == Knockbackable.KnockbackType.Stagger && (_stateMachine.CurrentState.GetID() != attackState.GetID() || _stateMachine.CurrentState.CanExit))
+                    string curStateID = _stateMachine.CurrentState.GetID();
+                    if (knockbackType == Knockbackable.KnockbackType.Stagger && (curStateID != attackState.GetID() || _stateMachine.CurrentState.CanExit) && curStateID != deadState.GetID())
                         _shouldStagger = true;
                 };
             
             
                 _stateMachine.AddAnyTransition(staggeredState, false, () => _shouldStagger);
             }
+
+            // DeadState
+            _stateMachine.AddAnyTransition(deadState, false, () => GetComponent<HitPoint>().IsDead);
 
             _stateMachine.SetState(idleState);
 

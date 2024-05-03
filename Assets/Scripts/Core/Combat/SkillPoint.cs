@@ -12,12 +12,10 @@ namespace SLOTC.Core.Combat
         public int CurrentSkillPoints { get { return _currentSkillPoints; } }
         public int MaxSkillPoints { get { return _maxSkillPoints; } }
 
-#if UNITY_EDITOR
         private void OnValidate()
         {
             _currentSkillPoints = Mathf.Clamp(_currentSkillPoints, 0, _maxSkillPoints);
         }
-#endif
 
         public void Use(int value)
         {

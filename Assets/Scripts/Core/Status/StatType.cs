@@ -1,7 +1,7 @@
 
 namespace SLOTC.Core.Stats
 {
-    public enum StatType
+    public enum StatType : int
     {
         ///<summary>abbreviated as HP</summary>
         HitPoints,
@@ -17,9 +17,6 @@ namespace SLOTC.Core.Stats
 
         ///<summary>abbreviated as DEF</summary>
         Defense,
-
-        ///<summary>abbreviated as MDEF</summary>
-        MagicDefense,
 
         ///<summary>abbreviated as Crit%</summary>
         CriticalHitChance,

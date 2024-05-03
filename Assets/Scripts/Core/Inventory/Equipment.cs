@@ -10,7 +10,7 @@ namespace SLOTC.Core.Inventory
 {
     public class Equipment : MonoBehaviour, ISaveable
     {
-        //[SerializeField] EquipableItem _defaultWeapon;
+        [SerializeField] EquipableItem _defaultWeapon;
         //[SerializeField] EquipableItem temp;
         [SerializeField] GameObject _weaponHolder;
 
@@ -34,7 +34,7 @@ namespace SLOTC.Core.Inventory
 
         private void Start()
         {
-            //Equip(_defaultWeapon);
+            Equip(_defaultWeapon);
         }
 
         public static Equipment GetPlayerEquipment()

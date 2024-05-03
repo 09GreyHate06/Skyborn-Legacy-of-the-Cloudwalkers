@@ -979,7 +979,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attributes:
   - type: 0
-    value: 10
+    value: 100
   - type: 1
     value: 10
   - type: 2
@@ -1019,11 +1019,11 @@ MonoBehaviour:
   _attributes: {fileID: 2158682582382907724}
   _stats:
   - type: 0
-    value: 140
+    value: 320
   - type: 1
     value: 130
   - type: 2
-    value: 17
+    value: 125
   - type: 3
     value: 15
   - type: 4
@@ -1033,7 +1033,15 @@ MonoBehaviour:
   - type: 6
     value: 5
   - type: 7
-    value: 17
+    value: 152
+  - type: 8
+    value: 0
+  - type: 9
+    value: 0
+  - type: 10
+    value: 0
+  - type: 11
+    value: 0
   _onStatChanged:
     m_PersistentCalls:
       m_Calls:
@@ -1074,8 +1082,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d591ea94f1eb764fbdc160ac03088e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHitPoints: 140
-  _maxHitPoints: 140
+  _currentHitPoints: 122
+  _maxHitPoints: 320
 --- !u!114 &966342305088277749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1131,7 +1139,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultWeapon: {fileID: 11400000, guid: 823756abaa0eea04488c485af357ccc9, type: 2}
-  temp: {fileID: 11400000, guid: 55c8552adf8e2d54ba6fee5b71660691, type: 2}
   _weaponHolder: {fileID: 7994771509573459490}
 --- !u!114 &4298292198148717116
 MonoBehaviour:
@@ -3129,7 +3136,7 @@ GameObject:
   - component: {fileID: 1096040758102675371}
   - component: {fileID: 5958604941234738226}
   m_Layer: 0
-  m_Name: WeponHandler
+  m_Name: WeaponHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
