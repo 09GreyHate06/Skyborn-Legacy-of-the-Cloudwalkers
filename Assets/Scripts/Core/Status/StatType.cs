@@ -25,8 +25,8 @@ namespace SLOTC.Core.Stats
         CriticalHitBonusDamage,
 
         AirResistance,
-        EarthResistance,
         WaterResistance,
+        EarthResistance,
         FireResistance
     }
 }

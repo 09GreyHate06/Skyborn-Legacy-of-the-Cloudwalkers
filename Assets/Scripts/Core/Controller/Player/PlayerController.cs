@@ -57,6 +57,9 @@ namespace SLOTC.Core.Controller.Player
 
         private float _timeSinceLeaveGround;
 
+        //public MartialArt _tempMA;
+        //public bool _temp;
+
         private void Awake()
         {
             _playerInput = FindObjectOfType<PlayerInput>();
@@ -73,6 +76,8 @@ namespace SLOTC.Core.Controller.Player
             AttackState attackState = new AttackState(_playerMover, _playerInput, _animancer, _weaponHandler, _combo, _comboGraceTime, _rotationSpeed);
             DodgeState dodgeState = new DodgeState(_playerMover, _playerInput, _targetLocker, _animancer, _dodgeAnim, _animBlendSpeed, _dodgeForce);
             StaggeredState staggeredState = new StaggeredState(_playerMover, _animancer, _staggerAnim);
+            //MartialArtState martialArtState = new MartialArtState(_playerMover, _playerInput, _animancer, _weaponHandler, _rotationSpeed);
+            //martialArtState.SetMartialArt(_tempMA);
 
             attackState.OnAnimationEnded += () => _attackAnimationEnded = true;
             dodgeState.OnAnimationEnded += () => _dodgeAnimationEnded = true;
@@ -156,6 +161,8 @@ namespace SLOTC.Core.Controller.Player
                 _stateMachine.AddAnyTransition(staggeredState, false, () => _shouldStagger);
             }
 
+            //_stateMachine.AddAnyTransition(martialArtState, true, () => _temp && (martialArtState.CanExit || _stateMachine.CurrentState.GetID() != martialArtState.GetID()));
+
             _stateMachine.SetState(idleState);
 
             _stateMachine.OnBeforeChangeState += (IState nextState) =>
@@ -220,6 +227,15 @@ namespace SLOTC.Core.Controller.Player
 
         void Update()
         {
+            //if (UnityEngine.InputSystem.Keyboard.current.tKey.wasPressedThisFrame)
+            //{
+            //    _temp = true;
+            //}
+            //else
+            //{
+            //    _temp = false;
+            //}
+
             _stateMachine.OnUpdate(Time.deltaTime);
 
             if (!_playerMover.IsGrounded)

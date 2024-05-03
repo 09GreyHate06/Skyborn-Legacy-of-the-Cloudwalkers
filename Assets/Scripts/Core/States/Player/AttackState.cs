@@ -10,11 +10,6 @@ namespace SLOTC.Core.States.Player
 {
     public class AttackState : MoveableState
     {
-        public enum EventType
-        {
-            AnimationEnded,
-        }
-
         private readonly PlayerInput _playerInput;
         private readonly AnimancerComponent _animancer;
         private readonly WeaponHandler _weaponHandler;

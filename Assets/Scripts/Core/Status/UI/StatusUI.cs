@@ -77,10 +77,10 @@ namespace SLOTC.Core.Stats.UI
             _crtChanceValueTxt.text = _stat.GetStat(StatType.CriticalHitChance) + "%";
             _crtDamValueTxt.text = _stat.GetStat(StatType.CriticalHitBonusDamage) + "%";
 
-            //_airResistValueTxt.text = _stat.GetStat(StatType.AirResistance) + "%";
-            //_waterResistValueTxt.text = _stat.GetStat(StatType.WaterResistance) + "%";
-            //_earthResistValueTxt.text = _stat.GetStat(StatType.EarthResistance) + "%";
-            //_fireResistValueTxt.text = _stat.GetStat(StatType.FireResistance) + "%";
+            _airResistValueTxt.text = _stat.GetStat(StatType.AirResistance) + "%";
+            _waterResistValueTxt.text = _stat.GetStat(StatType.WaterResistance) + "%";
+            _earthResistValueTxt.text = _stat.GetStat(StatType.EarthResistance) + "%";
+            _fireResistValueTxt.text = _stat.GetStat(StatType.FireResistance) + "%";
         }
     }
 }

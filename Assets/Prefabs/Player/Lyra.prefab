@@ -965,6 +965,8 @@ MonoBehaviour:
     _Speed: 1
     _NormalizedStartTime: 0
   _animBlendSpeed: 5
+  _tempMA: {fileID: 11400000, guid: ca5923ee14314c94382e4118128588cd, type: 2}
+  _temp: 0
 --- !u!114 &2158682582382907724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1029,18 +1031,16 @@ MonoBehaviour:
   - type: 4
     value: 10
   - type: 5
-    value: 10
-  - type: 6
     value: 5
-  - type: 7
+  - type: 6
     value: 152
+  - type: 7
+    value: 0
   - type: 8
     value: 0
   - type: 9
     value: 0
   - type: 10
-    value: 0
-  - type: 11
     value: 0
   _onStatChanged:
     m_PersistentCalls:
