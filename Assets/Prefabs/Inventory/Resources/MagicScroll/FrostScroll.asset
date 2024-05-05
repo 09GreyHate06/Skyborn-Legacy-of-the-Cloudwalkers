@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 154e98d53076e6b4a83089b6f14ab127, type: 3}
   m_Name: FrostScroll
   m_EditorClassIdentifier: 
-  _itemID: 4d7eadcb-d9b9-4335-8a92-375a2246f1da
+  _itemID: 0ae1fae5-bd9a-4e26-93a0-7427726e0912
   _sprite: {fileID: 21300000, guid: c4eead047111cb847856e2a59a358733, type: 3}
   _displayName: Frost Scroll
   _description: '+10, +15% water damage
