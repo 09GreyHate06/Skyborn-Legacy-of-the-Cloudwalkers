@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: JourneymanGreaves
   m_EditorClassIdentifier: 
   _itemID: 842734f5-499d-450e-be7b-37e14d91dfb5
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: 427be05fe1c36b246920b6aca4799ccb, type: 3}
   _displayName: Journeyman's Greaves
   _description: "HitPoints: +25 \r\nMana: +20 \r\nDefense: +3% (Percent)\r\nEarthResistance:
     +7% (Percent)\n\nEquip location: Legs"

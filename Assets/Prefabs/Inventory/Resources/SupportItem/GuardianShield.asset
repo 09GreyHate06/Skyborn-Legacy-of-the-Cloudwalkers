@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GuardianShield
   m_EditorClassIdentifier: 
   _itemID: f99c3180-cca0-4fea-8143-36206a6b8bf2
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: a9f18ccf939a74a499abe3a0d76f22b5, type: 3}
   _displayName: Guardian's Shield
   _description: "Effect: Buff that temporarily increases Defense and Resistance stats.\r\nDefense
     Boost: +10% \r\nAll Resistance Boost: +10%\r\nDuration: 60 seconds"

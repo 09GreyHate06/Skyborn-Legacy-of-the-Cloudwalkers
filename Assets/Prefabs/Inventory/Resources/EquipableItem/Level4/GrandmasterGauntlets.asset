@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GrandmasterGauntlets
   m_EditorClassIdentifier: 
   _itemID: ab08ba50-75dd-4736-a782-d674ecb961c4
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: d54e87eff54a4ac47bdb786b89a09fe0, type: 3}
   _displayName: Grandmaster's Gauntlets
   _description: "HitPoints: +20\r\nMana: +18 \r\nDefense: +4% \r\nFireResistance:
     +9% \n\nEquip location: Gloves"

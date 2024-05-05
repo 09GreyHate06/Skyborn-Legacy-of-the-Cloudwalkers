@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PendantOfVitality
   m_EditorClassIdentifier: 
   _itemID: 3ad79d96-70ad-4ec7-9b4b-043539b56cbe
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: 3a6f844d1faef9e419ed2106d1ee0a4e, type: 3}
   _displayName: Pendant of Vitality
   _description: 'HitPoints: +25 (Flat)
 

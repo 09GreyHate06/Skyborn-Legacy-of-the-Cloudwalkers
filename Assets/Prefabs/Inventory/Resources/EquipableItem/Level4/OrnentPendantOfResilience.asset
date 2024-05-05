@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OrnentPendantOfResilience
   m_EditorClassIdentifier: 
   _itemID: 981a5412-9218-466a-a062-7688431e1948
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: 3a6f844d1faef9e419ed2106d1ee0a4e, type: 3}
   _displayName: Ornent Pendant of Resilience
   _description: "HitPoints: +55 \r\nMana: +50 \r\nAirResistance: +9% \n\nEquip location:
     Pendant"

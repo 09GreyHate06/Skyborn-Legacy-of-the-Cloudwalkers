@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ExpertHoops
   m_EditorClassIdentifier: 
   _itemID: a407ab30-b23e-44ff-8a24-1572df866903
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: 5b199dffeb689e84b8869a3a8b6712fa, type: 3}
   _displayName: Expert's Hoops
   _description: "HitPoints: +20 \r\nMana: +18\r\nEarthResistance: +7% \n\nEquip location:
     Earrings"

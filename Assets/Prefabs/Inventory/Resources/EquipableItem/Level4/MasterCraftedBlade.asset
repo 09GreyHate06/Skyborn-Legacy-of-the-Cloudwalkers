@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MasterCraftedBlade
   m_EditorClassIdentifier: 
   _itemID: 9e06939a-50e8-4080-871f-fcd8e891315a
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: edbc3d8c43d7cef4a933c0a72eef272e, type: 3}
   _displayName: Master Crafted Blade
   _description: "PhysicalDamage: +12\r\nMagicDamage: +9 \r\nCriticalHitChance: +4%
     \r\nCriticalHitBonusDamage: +12 \n\nEquip location: Weapon"

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NoviceTunic
   m_EditorClassIdentifier: 
   _itemID: 350c07f4-28ba-4ca9-a9d5-ea0e5663fa25
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: ef17082b016c04d4f92e669f0b03cca0, type: 3}
   _displayName: Novice's Tunic
   _description: 'HitPoints: +20
 

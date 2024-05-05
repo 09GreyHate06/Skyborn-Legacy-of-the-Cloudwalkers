@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AmuletOfEndurance
   m_EditorClassIdentifier: 
   _itemID: fef52f04-630a-4245-9742-a9099ffec180
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: 3a6f844d1faef9e419ed2106d1ee0a4e, type: 3}
   _displayName: Amulet of Endurance
   _description: 'HitPoints: +35
 

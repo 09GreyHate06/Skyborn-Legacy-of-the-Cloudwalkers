@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SorcererWisdom
   m_EditorClassIdentifier: 
   _itemID: 3cc8f502-f1aa-4f84-a8ba-fb443144ce8a
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: 6d1a5f0ba35e4584d8c71007321f3c46, type: 3}
   _displayName: Sorcerer's Wisdom
   _description: "Effect: Buff that increases MagicDamage and CriticalHitChance for
     a duration.\r\nMagicDamage Boost: +20\r\nCriticalHitChance Boost: +5% \r\nDuration:

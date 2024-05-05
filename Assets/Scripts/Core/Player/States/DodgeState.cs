@@ -20,17 +20,21 @@ namespace SLOTC.Core.Player.States
         private readonly float _blendSpeed;
         private readonly float _dodgeForce;
 
+        private AudioSource _audioSource;
+        private AudioClip _dodgeSFX;
         private Vector2 _inputXYParam;
 
         public bool CanExit { get; set; } = false;
         public event Action OnAnimationEnded;
 
-        public DodgeState(PlayerMover playerMover, PlayerInput playerInput, TargetLocker targetLocker, AnimancerComponent animancer, MixerTransition2D dodgeAnim, float blendSpeed, float dodgeForce)
+        public DodgeState(PlayerMover playerMover, PlayerInput playerInput, TargetLocker targetLocker, AnimancerComponent animancer, AudioSource audioSource, AudioClip dodgeSFX, MixerTransition2D dodgeAnim, float blendSpeed, float dodgeForce)
         {
             _playerMover = playerMover;
             _playerInput = playerInput;
             _targetLocker = targetLocker;
             _animancer = animancer;
+            _audioSource = audioSource;
+            _dodgeSFX = dodgeSFX;
             _dodgeAnim = dodgeAnim;
             _blendSpeed = blendSpeed;
             _dodgeForce = dodgeForce;
@@ -57,6 +61,9 @@ namespace SLOTC.Core.Player.States
             AnimancerState state = _animancer.Play(_dodgeAnim);
             state.Events = _dodgeAnimEvents;
 
+            //_audioSource.clip = _dodgeSFX;
+            //_audioSource.loop = false;
+            //_audioSource.Play();
 
             if (!_targetLocker.HasTarget || _playerInput.Axis.sqrMagnitude <= float.Epsilon)
             {
@@ -77,6 +84,7 @@ namespace SLOTC.Core.Player.States
 
         public void OnExit()
         {
+            //_audioSource.Stop();
         }
 
         public void OnUpdate(float deltaTime)

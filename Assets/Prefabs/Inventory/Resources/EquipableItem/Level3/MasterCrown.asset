@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MasterCrown
   m_EditorClassIdentifier: 
   _itemID: 0835b1d5-5385-4d97-b538-be3fa72ab49b
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: 57c164dd4fb2fcb42bf03e8236691769, type: 3}
   _displayName: Master's Crown
   _description: "HitPoints: +30\r\nMana: +25\r\nDefense: +4% \r\nFireResistance:
     +10%\n\nEquip location: Head"

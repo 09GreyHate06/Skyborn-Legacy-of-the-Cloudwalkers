@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ManaElixir
   m_EditorClassIdentifier: 
   _itemID: 7e8bc72b-3e3f-45d5-bb6f-4238a9c09613
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: 402778a4ec7ac5747804ac24147ad90c, type: 3}
   _displayName: Mana Elixir
   _description: 'Effect: Consumable item that instantly restores a portion of Mana.
 

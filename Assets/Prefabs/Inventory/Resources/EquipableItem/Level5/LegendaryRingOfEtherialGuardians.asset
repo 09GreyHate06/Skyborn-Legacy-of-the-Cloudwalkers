@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LegendaryRingOfEtherialGuardians
   m_EditorClassIdentifier: 
   _itemID: 06038f43-98b0-4038-8c34-5a923f9d00d0
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: da1bde5ab8d7d4e449d9507f759e52f5, type: 3}
   _displayName: Legendary Ring of Etherial Guardians
   _description: 'HitPoints: +55
 

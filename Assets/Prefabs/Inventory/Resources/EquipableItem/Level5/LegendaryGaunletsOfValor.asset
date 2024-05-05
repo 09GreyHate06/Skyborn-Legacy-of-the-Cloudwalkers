@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LegendaryGaunletsOfValor
   m_EditorClassIdentifier: 
   _itemID: 3b92b1e2-00db-4d92-865d-04a3a3f9fa31
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: d54e87eff54a4ac47bdb786b89a09fe0, type: 3}
   _displayName: Legendary Gauntlets of Valor
   _description: "HitPoints: +25 \r\nMana: +22 \r\nDefense: +5%\r\nFireResistance:
     +11% \n\nEquip location: Gloves"

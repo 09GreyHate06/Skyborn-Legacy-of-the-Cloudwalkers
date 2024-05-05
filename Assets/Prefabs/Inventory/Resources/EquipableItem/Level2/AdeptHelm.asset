@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AdeptHelm
   m_EditorClassIdentifier: 
   _itemID: e16380dd-7428-4741-9843-995cb5fe580a
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: 28fb4e03183d0064faf5ef538d18e700, type: 3}
   _displayName: Adept's Helm
   _description: "HitPoints: +20\r\nMana: +15 \r\nDefense: +3% \r\nFireResistance:
     +7% \n\nEquip location: Head"

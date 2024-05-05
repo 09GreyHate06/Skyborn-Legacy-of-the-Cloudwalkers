@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MasterRing
   m_EditorClassIdentifier: 
   _itemID: 6357afd8-d1a8-481f-9b90-07682de8233b
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: da1bde5ab8d7d4e449d9507f759e52f5, type: 3}
   _displayName: Master's Ring
   _description: 'HitPoints: +35
 

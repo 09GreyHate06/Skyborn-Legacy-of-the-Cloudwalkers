@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AdeptBoots
   m_EditorClassIdentifier: 
   _itemID: aae9b042-71db-41f7-a648-386efeae1ccd
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: b6e78445357980241ab1b09ae317fa25, type: 3}
   _displayName: Adept's Boots
   _description: 'HitPoints: +15
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GrandmasterHelm
   m_EditorClassIdentifier: 
   _itemID: cc687a79-cb88-4dae-b8c8-638b0dc6003a
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: 57c164dd4fb2fcb42bf03e8236691769, type: 3}
   _displayName: Grandmaster's Helm
   _description: "HitPoints: +40 \r\nMana: +35 \r\nDefense: +5% \r\nFireResistance:
     +12% \n\nEquip location: Head"

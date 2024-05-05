@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HeadgearOfTheNovice
   m_EditorClassIdentifier: 
   _itemID: a603d6c4-5c72-4816-a82d-4b0e8d474df2
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: f115f33d9de6c5c44a7d4d3fe2c0e941, type: 3}
   _displayName: Headgear of the Novice
   _description: "HitPoints: +10 \r\nMana: +10 \r\nDefense: +2%\r\nFireResistance:
     +5% \n\nEquip location: Head"

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LegendaryEarringsOfWisdom
   m_EditorClassIdentifier: 
   _itemID: cca6b29a-5994-48c9-b91c-0ce9231837db
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: 5b199dffeb689e84b8869a3a8b6712fa, type: 3}
   _displayName: Grandmaster's Earrings
   _description: "HitPoints: +30 \r\nMana: +28\r\nEarthResistance: +11%  \n\nEquip
     location: Earrings"

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GuardianResilience
   m_EditorClassIdentifier: 
   _itemID: fd352a37-fdf0-4f1f-8a95-240f883281ea
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: a9f18ccf939a74a499abe3a0d76f22b5, type: 3}
   _displayName: Guardian's Resilience
   _description: "Effect: Buff that increases Defense and Resistance for a duration.\r\nDefense
     Boost: +20% \r\nAll Resistance Boost: +15%\r\nDuration: 60 seconds"

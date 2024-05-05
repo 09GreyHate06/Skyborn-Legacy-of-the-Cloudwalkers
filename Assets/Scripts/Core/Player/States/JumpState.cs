@@ -14,14 +14,18 @@ namespace SLOTC.Core.Player.States
         private readonly ClipTransition _jumpAnim;
         private readonly float _jumpForce;
 
+        private AudioSource _audioSource;
+        private AudioClip _jumpSFX;
         public override bool CanExit { get; set; }
 
-        public JumpState(PlayerMover playerMover, PlayerInput playerInput, TargetLocker targetLocker, AnimancerComponent animancer, ClipTransition jumpAnim, float moveSpeed, float rotationSpeed, float jumpForce)
+        public JumpState(PlayerMover playerMover, PlayerInput playerInput, TargetLocker targetLocker, AnimancerComponent animancer, ClipTransition jumpAnim, AudioSource audioSource, AudioClip jumpSFX, float moveSpeed, float rotationSpeed, float jumpForce)
             : base(playerMover, moveSpeed, rotationSpeed)
         {
             _playerInput = playerInput;
             _targetLocker = targetLocker;
             _animancer = animancer;
+            _audioSource = audioSource;
+            _jumpSFX = jumpSFX;
             _jumpAnim = jumpAnim;
             _jumpForce = jumpForce;
         }
@@ -38,10 +42,14 @@ namespace SLOTC.Core.Player.States
             _playerMover.velocity.y = _jumpForce;
 
             _animancer.Play(_jumpAnim);
+            _audioSource.clip = _jumpSFX;
+            _audioSource.loop = false;
+            _audioSource.Play();
         }
 
         public override void OnExit()
         {
+            _audioSource.Stop();
         }
 
         public override void OnUpdate(float deltaTime)

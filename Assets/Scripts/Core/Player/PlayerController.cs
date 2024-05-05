@@ -44,9 +44,16 @@ namespace SLOTC.Core.Player
         [SerializeField] ClipTransition _castAnim;
         [SerializeField] float _animBlendSpeed;
 
+        [Space(10)]
+        [Header("Audio Settings")]
+        [SerializeField] AudioClip _attackSFX;
+        [SerializeField] AudioClip _jumpSFX;
+        [SerializeField] AudioClip _runSFX;
+        [SerializeField] AudioClip _dodgeSFX;
 
         private StateMachine _stateMachine;
         private PlayerInput _playerInput;
+        private AudioSource _audioSource;
 
         private bool _jumpBtnPressed;
         private bool _attackBtnPressed;
@@ -70,6 +77,7 @@ namespace SLOTC.Core.Player
         private void Awake()
         {
             _playerInput = FindObjectOfType<PlayerInput>();
+            _audioSource = GetComponent<AudioSource>();    
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
@@ -79,11 +87,11 @@ namespace SLOTC.Core.Player
             _stateMachine = new StateMachine();
             _animancer.States.GetOrCreate(_moveAnim);
             IdleState idleState = new IdleState(_playerMover, _animancer, _moveAnim, _animBlendSpeed);
-            MoveState moveState = new MoveState(_playerMover, _playerInput, _targetLocker, _animancer, _moveAnim, _animBlendSpeed, _moveSpeed, _rotationSpeed);
-            JumpState jumpState = new JumpState(_playerMover, _playerInput, _targetLocker, _animancer, _jumpAnim, _moveSpeed, _rotationSpeed, _jumpForce);
+            MoveState moveState = new MoveState(_playerMover, _playerInput, _targetLocker, _animancer, _moveAnim, _audioSource, _runSFX, _animBlendSpeed, _moveSpeed, _rotationSpeed);
+            JumpState jumpState = new JumpState(_playerMover, _playerInput, _targetLocker, _animancer, _jumpAnim, _audioSource, _jumpSFX, _moveSpeed, _rotationSpeed, _jumpForce);
             FallingState fallingState = new FallingState(_playerMover, _playerInput, _targetLocker, _animancer, _fallingAnim, _moveSpeed, _rotationSpeed);
-            AttackState attackState = new AttackState(_playerMover, _playerInput, _animancer, _weaponHandler, _combo, _comboGraceTime, _rotationSpeed);
-            DodgeState dodgeState = new DodgeState(_playerMover, _playerInput, _targetLocker, _animancer, _dodgeAnim, _animBlendSpeed, _dodgeForce);
+            AttackState attackState = new AttackState(_playerMover, _playerInput, _animancer, _audioSource, _attackSFX, _weaponHandler, _combo, _comboGraceTime, _rotationSpeed);
+            DodgeState dodgeState = new DodgeState(_playerMover, _playerInput, _targetLocker, _animancer, _audioSource, _dodgeSFX, _dodgeAnim, _animBlendSpeed, _dodgeForce);
             StaggeredState staggeredState = new StaggeredState(_playerMover, _animancer, _staggerAnim);
             _useActionItemState = new UseActionItemState(_playerMover, _animancer, _castAnim, GetComponent<ActionItemBar>());
             //MartialArtState martialArtState = new MartialArtState(_playerMover, _playerInput, _animancer, _weaponHandler, _rotationSpeed);

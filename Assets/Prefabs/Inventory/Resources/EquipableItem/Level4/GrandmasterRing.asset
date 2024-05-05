@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GrandmasterRing
   m_EditorClassIdentifier: 
   _itemID: 33bd366a-f06b-47a6-901f-75d391657227
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: da1bde5ab8d7d4e449d9507f759e52f5, type: 3}
   _displayName: Grandmaster's Ring
   _description: 'HitPoints: +45
 

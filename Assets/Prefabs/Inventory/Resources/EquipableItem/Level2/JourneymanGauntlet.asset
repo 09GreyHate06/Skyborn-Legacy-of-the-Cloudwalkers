@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: JourneymanGauntlet
   m_EditorClassIdentifier: 
   _itemID: 15b11032-2f82-4571-85cf-93eb178b9f34
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: e7259e97024d1ae458e74e83bb6da99f, type: 3}
   _displayName: Journeyman's Gauntlet
   _description: "HitPoints: +10 \r\nMana: +8 \r\nDefense: +2% \r\nFireResistance:
     +5% \n\nEquip location: Gloves"

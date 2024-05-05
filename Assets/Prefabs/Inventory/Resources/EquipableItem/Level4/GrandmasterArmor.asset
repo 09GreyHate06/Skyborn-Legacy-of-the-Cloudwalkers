@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GrandmasterArmor
   m_EditorClassIdentifier: 
   _itemID: c992d88a-dfdf-41a5-b7d7-c929197338db
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: c89b81a10e2691f458cbecf59a5b8e88, type: 3}
   _displayName: Grandmaster's Armor
   _description: "HitPoints: +50 \r\nMana: +45 \r\nDefense: +6% \r\nWaterResistance:
     +12% \n\nEquip location: Chest"

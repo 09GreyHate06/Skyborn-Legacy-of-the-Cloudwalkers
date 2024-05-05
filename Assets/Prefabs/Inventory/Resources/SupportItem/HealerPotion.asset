@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HealerPotion
   m_EditorClassIdentifier: 
   _itemID: 5f6a085a-0446-47f7-a778-b7689269e521
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: fc9190e978caa3f4db65c192104f0451, type: 3}
   _displayName: Healer's Potion
   _description: 'Effect: Consumable item that instantly restores a portion of HitPoints.
 
