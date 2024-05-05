@@ -1778,6 +1778,30 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.538
       objectReference: {fileID: 0}
+    - target: {fileID: 6432216243809712329, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
+      propertyPath: _exp
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6432216243809712329, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
+      propertyPath: _itemsRewards.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6432216243809712329, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
+      propertyPath: _itemsRewards.Array.data[0].qty
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6432216243809712329, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
+      propertyPath: _itemsRewards.Array.data[1].qty
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6432216243809712329, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
+      propertyPath: _itemsRewards.Array.data[0].item
+      value: 
+      objectReference: {fileID: 11400000, guid: 03ff32b84ab35da43b17db8d1447c3f1, type: 2}
+    - target: {fileID: 6432216243809712329, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
+      propertyPath: _itemsRewards.Array.data[1].item
+      value: 
+      objectReference: {fileID: 11400000, guid: 55c8552adf8e2d54ba6fee5b71660691, type: 2}
     - target: {fileID: 6900778018424657625, guid: 296c525a8a1d2544bbabdba4b40ebda9, type: 3}
       propertyPath: m_Name
       value: Skeleton Variant

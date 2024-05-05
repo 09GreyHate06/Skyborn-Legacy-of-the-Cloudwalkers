@@ -113,6 +113,8 @@ GameObject:
   - component: {fileID: 6080947708018356479}
   - component: {fileID: 7741143025656655934}
   - component: {fileID: 4998061165541216327}
+  - component: {fileID: 6432216243809712329}
+  - component: {fileID: 5497554874435973844}
   m_Layer: 0
   m_Name: MobEnemyBase
   m_TagString: Enemy
@@ -235,6 +237,15 @@ MonoBehaviour:
     _Clip: {fileID: 0}
     _Speed: 1
     _NormalizedStartTime: 0
+  _dieAnim:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 0}
+    _Speed: 1
+    _NormalizedStartTime: 0
 --- !u!114 &1186689158438028216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,11 +326,17 @@ MonoBehaviour:
   - type: 4
     value: 5
   - type: 5
-    value: 2
-  - type: 6
     value: 4
-  - type: 7
+  - type: 6
     value: 21
+  - type: 7
+    value: 0
+  - type: 8
+    value: 0
+  - type: 9
+    value: 0
+  - type: 10
+    value: 0
   _onStatChanged:
     m_PersistentCalls:
       m_Calls:
@@ -403,3 +420,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _forceResistance: 0
   _minForceMagnitudeToGetStagger: 0
+--- !u!114 &6432216243809712329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6900778018424657625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e47b7d5d286c7d34c915c4d6f2265ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _exp: 0
+  _itemsRewards: []
+--- !u!114 &5497554874435973844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6900778018424657625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e474f931a8062bf4da81cc9d26434c67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

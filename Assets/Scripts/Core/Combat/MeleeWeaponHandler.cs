@@ -2,6 +2,7 @@ using UnityEngine;
 using SLOTC.Core.Stats;
 using System.Collections.Generic;
 using SLOTC.Utils;
+using SLOTC.Core.Inventory;
 
 namespace SLOTC.Core.Combat
 {
@@ -22,6 +23,7 @@ namespace SLOTC.Core.Combat
             _weaponCollider = GetComponent<Collider>();
             GetComponent<Rigidbody>().isKinematic = true;
         }
+
 
         private void Start()
         {
@@ -56,6 +58,10 @@ namespace SLOTC.Core.Combat
         private void OnTriggerEnter(Collider other)
         {
             if (other == _weaponCollider || !other.CompareTag(_targetTag) || !other.TryGetComponent(out Hitbox hitbox) || _alreadyDealtWith.Contains(hitbox.Owner))
+                return;
+
+            var eq = GetComponentInParent<Equipment>();
+            if (eq != null && !eq.HasEquipmentAt(EquipLocation.Weapon))
                 return;
 
             int damage = _activeAttack.CalcDamage(_user, hitbox.Owner);

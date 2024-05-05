@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4b71e3d6451f5a49a927a9adf91b3f4, type: 3}
+  m_Name: ExpertGloves
+  m_EditorClassIdentifier: 
+  _itemID: 48ae805a-2f57-482c-b725-3dd027af9a8d
+  _sprite: {fileID: 0}
+  _displayName: Expert's Gloves
+  _description: 'HitPoints: +15
+
+    Mana: +12
+
+    Defense: +3%
+
+    FireResistance:
+    +7%
+
+
+    Equip location: Gloves'
+  _stackable: 0
+  _statModifiers:
+  - statType: 0
+    modifierType: 0
+    value: 15
+  - statType: 1
+    modifierType: 0
+    value: 12
+  - statType: 4
+    modifierType: 1
+    value: 3
+  - statType: 10
+    modifierType: 0
+    value: 7
+  _equipLocations: 4
+  _weaponMeshPrefab: {fileID: 0}

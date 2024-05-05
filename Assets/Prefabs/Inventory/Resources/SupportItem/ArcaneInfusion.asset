@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9ac0ba0534638249a3152a3221913e0, type: 3}
+  m_Name: ArcaneInfusion
+  m_EditorClassIdentifier: 
+  _itemID: 7d8c3d0f-87fc-4b9e-a1fa-ef69eee89a9c
+  _sprite: {fileID: 0}
+  _displayName: Arcane Infusion
+  _description: 'Effect: Buff that gradually regenerates Mana over time.
+
+    Mana
+    Regeneration Per Second: +5 Mana
+
+    Duration: 60 seconds'
+  _stackable: 1
+  <IsConsumable>k__BackingField: 1
+  _hpRegen: 0
+  _spRegen: 0
+  _statusEffect:
+    _id: ef12d193-bb4f-45f5-8547-6d186a94beb6
+    _statModifiers: []
+    <DamagePerSeconds>k__BackingField:
+      type: 0
+      modType: 0
+      value: 0
+    <HPRegenPerSeconds>k__BackingField: 0
+    <SPRegenPerSeconds>k__BackingField: 5
+    <Duration>k__BackingField: 60

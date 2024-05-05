@@ -777,6 +777,8 @@ GameObject:
   - component: {fileID: 5518444661124554923}
   - component: {fileID: 4298292198148717116}
   - component: {fileID: 1995984141115269360}
+  - component: {fileID: 1558484192811793329}
+  - component: {fileID: 3172114160549957616}
   m_Layer: 0
   m_Name: Lyra
   m_TagString: Player
@@ -964,9 +966,21 @@ MonoBehaviour:
     _Clip: {fileID: 7400000, guid: 52ec925edb9b36b44896e392ae4ad6e5, type: 2}
     _Speed: 1
     _NormalizedStartTime: 0
+  _castAnim:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes:
+      - 0.5
+      - 1
+      - NaN
+      _Callbacks: []
+      _Names:
+      - DoAction
+      - Exit
+    _Clip: {fileID: 7400000, guid: a5f0956518e7ff342b5f64239e1ecf26, type: 2}
+    _Speed: 1
+    _NormalizedStartTime: 0
   _animBlendSpeed: 5
-  _tempMA: {fileID: 11400000, guid: ca5923ee14314c94382e4118128588cd, type: 2}
-  _temp: 0
 --- !u!114 &2158682582382907724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -981,7 +995,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attributes:
   - type: 0
-    value: 100
+    value: 10
   - type: 1
     value: 10
   - type: 2
@@ -1021,11 +1035,11 @@ MonoBehaviour:
   _attributes: {fileID: 2158682582382907724}
   _stats:
   - type: 0
-    value: 320
+    value: 140
   - type: 1
     value: 130
   - type: 2
-    value: 125
+    value: 17
   - type: 3
     value: 15
   - type: 4
@@ -1033,7 +1047,7 @@ MonoBehaviour:
   - type: 5
     value: 5
   - type: 6
-    value: 152
+    value: 17
   - type: 7
     value: 0
   - type: 8
@@ -1083,7 +1097,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentHitPoints: 122
-  _maxHitPoints: 320
+  _maxHitPoints: 140
 --- !u!114 &966342305088277749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1125,7 +1139,331 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f5c81ec42de208448bd47c2a3133106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slots: []
+  _slots:
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
 --- !u!114 &5518444661124554923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1167,6 +1505,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _forceResistance: 0
   _minForceMagnitudeToGetStagger: 0
+--- !u!114 &1558484192811793329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943361482487218449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 623c20d6b80012c4d9df42cc89122d1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3172114160549957616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943361482487218449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e474f931a8062bf4da81cc9d26434c67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2138127251149269262
 GameObject:
   m_ObjectHideFlags: 0
@@ -1498,7 +1860,7 @@ GameObject:
   - component: {fileID: 4147362548377169278}
   m_Layer: 0
   m_Name: LyraModel
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1855,7 +2217,7 @@ GameObject:
   - component: {fileID: 8527365973764755142}
   m_Layer: 0
   m_Name: CameraFocus
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2951,7 +3313,7 @@ GameObject:
   - component: {fileID: 3773183432409213779}
   m_Layer: 0
   m_Name: TargetLocker
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

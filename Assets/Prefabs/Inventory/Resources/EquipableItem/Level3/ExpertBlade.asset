@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4b71e3d6451f5a49a927a9adf91b3f4, type: 3}
+  m_Name: ExpertBlade
+  m_EditorClassIdentifier: 
+  _itemID: 912acc8e-94c9-4700-a9ff-cd1a3552530c
+  _sprite: {fileID: 0}
+  _displayName: Expert's Blade
+  _description: "PhysicalDamage: +10\r\nMagicDamage: +7 \r\nCriticalHitChance: +3%
+    \r\nCriticalHitBonusDamage: +10 \n\nEquip location: Weapon"
+  _stackable: 0
+  _statModifiers:
+  - statType: 2
+    modifierType: 0
+    value: 10
+  - statType: 3
+    modifierType: 0
+    value: 7
+  - statType: 5
+    modifierType: 0
+    value: 3
+  - statType: 6
+    modifierType: 0
+    value: 10
+  _equipLocations: 8
+  _weaponMeshPrefab: {fileID: 5674745469249468971, guid: b2bbd5ed507c70f4fbc2887fc32dc854, type: 3}

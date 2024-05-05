@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4b71e3d6451f5a49a927a9adf91b3f4, type: 3}
+  m_Name: NoviceEarrings
+  m_EditorClassIdentifier: 
+  _itemID: 91b0ad13-1cf3-451e-ba45-fe8e50bf3ad4
+  _sprite: {fileID: 0}
+  _displayName: Novice's Earrings
+  _description: 'HitPoints: +10 (Flat)
+
+    Mana: +10 (Flat)
+
+    EarthResistance:
+    +3% (Percent)
+
+
+    Equip location: Earrings'
+  _stackable: 0
+  _statModifiers:
+  - statType: 0
+    modifierType: 0
+    value: 10
+  - statType: 1
+    modifierType: 0
+    value: 10
+  - statType: 9
+    modifierType: 0
+    value: 3
+  _equipLocations: 7
+  _weaponMeshPrefab: {fileID: 0}

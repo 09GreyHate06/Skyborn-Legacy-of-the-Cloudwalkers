@@ -10,6 +10,7 @@ namespace SLOTC.Core.Combat.Animation
         public const string DeactivateWeapon = "DeactivateWeapon";
         public const string DodgeEnded = "DodgeEnded";
         public const string StaggerEnded = "StaggerEnded";
+        public const string DoAction = "DoAction";
         public const string Exit = "Exit";
 
 /*        public const string[] EventNames = { ApplyForce0,  ApplyForce1, ApplyForce2, ApplyForce3, ApplyForce4, ApplyForce6, ApplyForce7, ApplyForce8, ApplyForce9,

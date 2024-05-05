@@ -58,6 +58,96 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ActionBarSlot1",
+                    "type": "Button",
+                    "id": "857fc5d4-8629-4cf2-9d9b-e0cb43dcdb68",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ActionBarSlot2",
+                    "type": "Button",
+                    "id": "fb766110-cf9d-439d-b966-284f74bc9a10",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ActionBarSlot3",
+                    "type": "Button",
+                    "id": "ca141890-bafd-49ad-a3c2-223e251c61f3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ActionBarSlot4",
+                    "type": "Button",
+                    "id": "eb9ebb2a-bd55-412a-ba4e-83eaf4be73be",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ActionBarSlot5",
+                    "type": "Button",
+                    "id": "a23ff0de-a4e0-41ad-8c12-4f333fd94aa4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ActionBarSlot6",
+                    "type": "Button",
+                    "id": "489507ec-dd7f-409a-b45f-c58a9929dc64",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ActionBarSlot7",
+                    "type": "Button",
+                    "id": "ca355eea-2d3b-4d26-9fd3-8fa9d21080f5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ActionBarSlot8",
+                    "type": "Button",
+                    "id": "2c230c10-a1ba-43f9-8321-88ec92efa8aa",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ActionBarSlot9",
+                    "type": "Button",
+                    "id": "ab4388b7-ba53-4226-83bf-6270b20117c7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ActionBarSlot10",
+                    "type": "Button",
+                    "id": "bda641e6-571f-43e4-b761-70a754511811",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -168,6 +258,144 @@
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "Dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e6de94cd-216b-43b9-996c-d524d48bca55",
+                    "path": "<Keyboard>/f1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "ActionBarSlot1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "83f43aa3-84f3-43d4-9eb7-06f4c7b7eca7",
+                    "path": "<Keyboard>/f2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "ActionBarSlot2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "887d8e74-7722-4222-9a9c-f7393577d4d4",
+                    "path": "<Keyboard>/f3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "ActionBarSlot3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6e4d98f9-cfa0-4b2f-8e11-d2ee0ff1cea5",
+                    "path": "<Keyboard>/f4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "ActionBarSlot4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b29ffe15-5260-4922-b3f6-0abe17f2cc93",
+                    "path": "<Keyboard>/f5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "ActionBarSlot5",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9f5b41b5-af79-47e1-bf0c-951e3aba9a0f",
+                    "path": "<Keyboard>/f6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "ActionBarSlot6",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6996bc24-b9e3-4d72-adb1-19060db14248",
+                    "path": "<Keyboard>/f7",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "ActionBarSlot7",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a0aedf64-494a-4a4b-9fdb-9c01be024f5f",
+                    "path": "<Keyboard>/f8",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "ActionBarSlot8",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "261155d5-7376-475f-8a68-9d84c696a35e",
+                    "path": "<Keyboard>/f9",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "ActionBarSlot9",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "97efc903-a7c2-4539-9bbc-c717089b3fa7",
+                    "path": "<Keyboard>/f10",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "ActionBarSlot10",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "6991c5f4-0e34-4a22-b97c-b0cbe7788d3d",
+            "actions": [
+                {
+                    "name": "CharacterMenu",
+                    "type": "Button",
+                    "id": "cd98cb44-cc1f-4fd8-a3aa-f794838c7854",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "84031338-47a7-4b5f-a8b6-3d0890fb9701",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "CharacterMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

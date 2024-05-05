@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4b71e3d6451f5a49a927a9adf91b3f4, type: 3}
+  m_Name: BladeOfDestiny
+  m_EditorClassIdentifier: 
+  _itemID: e4c4cf07-a2f6-46da-8094-8996f2c218aa
+  _sprite: {fileID: 0}
+  _displayName: Master Crafted Blade
+  _description: 'PhysicalDamage: +15
+
+    MagicDamage: +12
+
+    CriticalHitChance:
+    +5%
+
+    CriticalHitBonusDamage: +15
+
+
+    Equip location: Weapon'
+  _stackable: 0
+  _statModifiers:
+  - statType: 2
+    modifierType: 0
+    value: 15
+  - statType: 3
+    modifierType: 0
+    value: 12
+  - statType: 5
+    modifierType: 0
+    value: 5
+  - statType: 6
+    modifierType: 0
+    value: 15
+  _equipLocations: 8
+  _weaponMeshPrefab: {fileID: 4417719777104776826, guid: 8a5a7e5c05bccb94f9d4cfaa5f003430, type: 3}

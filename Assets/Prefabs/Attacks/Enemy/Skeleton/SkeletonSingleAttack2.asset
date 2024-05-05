@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2261e1cf36179584f8de2dfdec4312a8, type: 3}
   m_Name: SkeletonSingleAttack2
   m_EditorClassIdentifier: 
-  _damageModifiers: []
+  _damageModifiers:
+  - type: 0
+    modType: 0
+    value: 10
   <Force>k__BackingField: {x: 0, y: 0, z: 15}
   <TargetForce>k__BackingField: {x: 0, y: 0, z: 5}
   _attackAnim:

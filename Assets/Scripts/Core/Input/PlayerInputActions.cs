@@ -82,6 +82,96 @@ namespace SLOTC.Core.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ActionBarSlot1"",
+                    ""type"": ""Button"",
+                    ""id"": ""857fc5d4-8629-4cf2-9d9b-e0cb43dcdb68"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ActionBarSlot2"",
+                    ""type"": ""Button"",
+                    ""id"": ""fb766110-cf9d-439d-b966-284f74bc9a10"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ActionBarSlot3"",
+                    ""type"": ""Button"",
+                    ""id"": ""ca141890-bafd-49ad-a3c2-223e251c61f3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ActionBarSlot4"",
+                    ""type"": ""Button"",
+                    ""id"": ""eb9ebb2a-bd55-412a-ba4e-83eaf4be73be"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ActionBarSlot5"",
+                    ""type"": ""Button"",
+                    ""id"": ""a23ff0de-a4e0-41ad-8c12-4f333fd94aa4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ActionBarSlot6"",
+                    ""type"": ""Button"",
+                    ""id"": ""489507ec-dd7f-409a-b45f-c58a9929dc64"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ActionBarSlot7"",
+                    ""type"": ""Button"",
+                    ""id"": ""ca355eea-2d3b-4d26-9fd3-8fa9d21080f5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ActionBarSlot8"",
+                    ""type"": ""Button"",
+                    ""id"": ""2c230c10-a1ba-43f9-8321-88ec92efa8aa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ActionBarSlot9"",
+                    ""type"": ""Button"",
+                    ""id"": ""ab4388b7-ba53-4226-83bf-6270b20117c7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ActionBarSlot10"",
+                    ""type"": ""Button"",
+                    ""id"": ""bda641e6-571f-43e4-b761-70a754511811"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -194,6 +284,144 @@ namespace SLOTC.Core.Input
                     ""action"": ""Dodge"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e6de94cd-216b-43b9-996c-d524d48bca55"",
+                    ""path"": ""<Keyboard>/f1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""ActionBarSlot1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""83f43aa3-84f3-43d4-9eb7-06f4c7b7eca7"",
+                    ""path"": ""<Keyboard>/f2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""ActionBarSlot2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""887d8e74-7722-4222-9a9c-f7393577d4d4"",
+                    ""path"": ""<Keyboard>/f3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""ActionBarSlot3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6e4d98f9-cfa0-4b2f-8e11-d2ee0ff1cea5"",
+                    ""path"": ""<Keyboard>/f4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""ActionBarSlot4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b29ffe15-5260-4922-b3f6-0abe17f2cc93"",
+                    ""path"": ""<Keyboard>/f5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""ActionBarSlot5"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9f5b41b5-af79-47e1-bf0c-951e3aba9a0f"",
+                    ""path"": ""<Keyboard>/f6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""ActionBarSlot6"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6996bc24-b9e3-4d72-adb1-19060db14248"",
+                    ""path"": ""<Keyboard>/f7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""ActionBarSlot7"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a0aedf64-494a-4a4b-9fdb-9c01be024f5f"",
+                    ""path"": ""<Keyboard>/f8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""ActionBarSlot8"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""261155d5-7376-475f-8a68-9d84c696a35e"",
+                    ""path"": ""<Keyboard>/f9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""ActionBarSlot9"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""97efc903-a7c2-4539-9bbc-c717089b3fa7"",
+                    ""path"": ""<Keyboard>/f10"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""ActionBarSlot10"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""6991c5f4-0e34-4a22-b97c-b0cbe7788d3d"",
+            ""actions"": [
+                {
+                    ""name"": ""CharacterMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""cd98cb44-cc1f-4fd8-a3aa-f794838c7854"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""84031338-47a7-4b5f-a8b6-3d0890fb9701"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""CharacterMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -225,6 +453,19 @@ namespace SLOTC.Core.Input
             m_Gameplay_Look = m_Gameplay.FindAction("Look", throwIfNotFound: true);
             m_Gameplay_Target = m_Gameplay.FindAction("Target", throwIfNotFound: true);
             m_Gameplay_Dodge = m_Gameplay.FindAction("Dodge", throwIfNotFound: true);
+            m_Gameplay_ActionBarSlot1 = m_Gameplay.FindAction("ActionBarSlot1", throwIfNotFound: true);
+            m_Gameplay_ActionBarSlot2 = m_Gameplay.FindAction("ActionBarSlot2", throwIfNotFound: true);
+            m_Gameplay_ActionBarSlot3 = m_Gameplay.FindAction("ActionBarSlot3", throwIfNotFound: true);
+            m_Gameplay_ActionBarSlot4 = m_Gameplay.FindAction("ActionBarSlot4", throwIfNotFound: true);
+            m_Gameplay_ActionBarSlot5 = m_Gameplay.FindAction("ActionBarSlot5", throwIfNotFound: true);
+            m_Gameplay_ActionBarSlot6 = m_Gameplay.FindAction("ActionBarSlot6", throwIfNotFound: true);
+            m_Gameplay_ActionBarSlot7 = m_Gameplay.FindAction("ActionBarSlot7", throwIfNotFound: true);
+            m_Gameplay_ActionBarSlot8 = m_Gameplay.FindAction("ActionBarSlot8", throwIfNotFound: true);
+            m_Gameplay_ActionBarSlot9 = m_Gameplay.FindAction("ActionBarSlot9", throwIfNotFound: true);
+            m_Gameplay_ActionBarSlot10 = m_Gameplay.FindAction("ActionBarSlot10", throwIfNotFound: true);
+            // UI
+            m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+            m_UI_CharacterMenu = m_UI.FindAction("CharacterMenu", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -292,6 +533,16 @@ namespace SLOTC.Core.Input
         private readonly InputAction m_Gameplay_Look;
         private readonly InputAction m_Gameplay_Target;
         private readonly InputAction m_Gameplay_Dodge;
+        private readonly InputAction m_Gameplay_ActionBarSlot1;
+        private readonly InputAction m_Gameplay_ActionBarSlot2;
+        private readonly InputAction m_Gameplay_ActionBarSlot3;
+        private readonly InputAction m_Gameplay_ActionBarSlot4;
+        private readonly InputAction m_Gameplay_ActionBarSlot5;
+        private readonly InputAction m_Gameplay_ActionBarSlot6;
+        private readonly InputAction m_Gameplay_ActionBarSlot7;
+        private readonly InputAction m_Gameplay_ActionBarSlot8;
+        private readonly InputAction m_Gameplay_ActionBarSlot9;
+        private readonly InputAction m_Gameplay_ActionBarSlot10;
         public struct GameplayActions
         {
             private @PlayerInputActions m_Wrapper;
@@ -302,6 +553,16 @@ namespace SLOTC.Core.Input
             public InputAction @Look => m_Wrapper.m_Gameplay_Look;
             public InputAction @Target => m_Wrapper.m_Gameplay_Target;
             public InputAction @Dodge => m_Wrapper.m_Gameplay_Dodge;
+            public InputAction @ActionBarSlot1 => m_Wrapper.m_Gameplay_ActionBarSlot1;
+            public InputAction @ActionBarSlot2 => m_Wrapper.m_Gameplay_ActionBarSlot2;
+            public InputAction @ActionBarSlot3 => m_Wrapper.m_Gameplay_ActionBarSlot3;
+            public InputAction @ActionBarSlot4 => m_Wrapper.m_Gameplay_ActionBarSlot4;
+            public InputAction @ActionBarSlot5 => m_Wrapper.m_Gameplay_ActionBarSlot5;
+            public InputAction @ActionBarSlot6 => m_Wrapper.m_Gameplay_ActionBarSlot6;
+            public InputAction @ActionBarSlot7 => m_Wrapper.m_Gameplay_ActionBarSlot7;
+            public InputAction @ActionBarSlot8 => m_Wrapper.m_Gameplay_ActionBarSlot8;
+            public InputAction @ActionBarSlot9 => m_Wrapper.m_Gameplay_ActionBarSlot9;
+            public InputAction @ActionBarSlot10 => m_Wrapper.m_Gameplay_ActionBarSlot10;
             public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -329,6 +590,36 @@ namespace SLOTC.Core.Input
                 @Dodge.started += instance.OnDodge;
                 @Dodge.performed += instance.OnDodge;
                 @Dodge.canceled += instance.OnDodge;
+                @ActionBarSlot1.started += instance.OnActionBarSlot1;
+                @ActionBarSlot1.performed += instance.OnActionBarSlot1;
+                @ActionBarSlot1.canceled += instance.OnActionBarSlot1;
+                @ActionBarSlot2.started += instance.OnActionBarSlot2;
+                @ActionBarSlot2.performed += instance.OnActionBarSlot2;
+                @ActionBarSlot2.canceled += instance.OnActionBarSlot2;
+                @ActionBarSlot3.started += instance.OnActionBarSlot3;
+                @ActionBarSlot3.performed += instance.OnActionBarSlot3;
+                @ActionBarSlot3.canceled += instance.OnActionBarSlot3;
+                @ActionBarSlot4.started += instance.OnActionBarSlot4;
+                @ActionBarSlot4.performed += instance.OnActionBarSlot4;
+                @ActionBarSlot4.canceled += instance.OnActionBarSlot4;
+                @ActionBarSlot5.started += instance.OnActionBarSlot5;
+                @ActionBarSlot5.performed += instance.OnActionBarSlot5;
+                @ActionBarSlot5.canceled += instance.OnActionBarSlot5;
+                @ActionBarSlot6.started += instance.OnActionBarSlot6;
+                @ActionBarSlot6.performed += instance.OnActionBarSlot6;
+                @ActionBarSlot6.canceled += instance.OnActionBarSlot6;
+                @ActionBarSlot7.started += instance.OnActionBarSlot7;
+                @ActionBarSlot7.performed += instance.OnActionBarSlot7;
+                @ActionBarSlot7.canceled += instance.OnActionBarSlot7;
+                @ActionBarSlot8.started += instance.OnActionBarSlot8;
+                @ActionBarSlot8.performed += instance.OnActionBarSlot8;
+                @ActionBarSlot8.canceled += instance.OnActionBarSlot8;
+                @ActionBarSlot9.started += instance.OnActionBarSlot9;
+                @ActionBarSlot9.performed += instance.OnActionBarSlot9;
+                @ActionBarSlot9.canceled += instance.OnActionBarSlot9;
+                @ActionBarSlot10.started += instance.OnActionBarSlot10;
+                @ActionBarSlot10.performed += instance.OnActionBarSlot10;
+                @ActionBarSlot10.canceled += instance.OnActionBarSlot10;
             }
 
             private void UnregisterCallbacks(IGameplayActions instance)
@@ -351,6 +642,36 @@ namespace SLOTC.Core.Input
                 @Dodge.started -= instance.OnDodge;
                 @Dodge.performed -= instance.OnDodge;
                 @Dodge.canceled -= instance.OnDodge;
+                @ActionBarSlot1.started -= instance.OnActionBarSlot1;
+                @ActionBarSlot1.performed -= instance.OnActionBarSlot1;
+                @ActionBarSlot1.canceled -= instance.OnActionBarSlot1;
+                @ActionBarSlot2.started -= instance.OnActionBarSlot2;
+                @ActionBarSlot2.performed -= instance.OnActionBarSlot2;
+                @ActionBarSlot2.canceled -= instance.OnActionBarSlot2;
+                @ActionBarSlot3.started -= instance.OnActionBarSlot3;
+                @ActionBarSlot3.performed -= instance.OnActionBarSlot3;
+                @ActionBarSlot3.canceled -= instance.OnActionBarSlot3;
+                @ActionBarSlot4.started -= instance.OnActionBarSlot4;
+                @ActionBarSlot4.performed -= instance.OnActionBarSlot4;
+                @ActionBarSlot4.canceled -= instance.OnActionBarSlot4;
+                @ActionBarSlot5.started -= instance.OnActionBarSlot5;
+                @ActionBarSlot5.performed -= instance.OnActionBarSlot5;
+                @ActionBarSlot5.canceled -= instance.OnActionBarSlot5;
+                @ActionBarSlot6.started -= instance.OnActionBarSlot6;
+                @ActionBarSlot6.performed -= instance.OnActionBarSlot6;
+                @ActionBarSlot6.canceled -= instance.OnActionBarSlot6;
+                @ActionBarSlot7.started -= instance.OnActionBarSlot7;
+                @ActionBarSlot7.performed -= instance.OnActionBarSlot7;
+                @ActionBarSlot7.canceled -= instance.OnActionBarSlot7;
+                @ActionBarSlot8.started -= instance.OnActionBarSlot8;
+                @ActionBarSlot8.performed -= instance.OnActionBarSlot8;
+                @ActionBarSlot8.canceled -= instance.OnActionBarSlot8;
+                @ActionBarSlot9.started -= instance.OnActionBarSlot9;
+                @ActionBarSlot9.performed -= instance.OnActionBarSlot9;
+                @ActionBarSlot9.canceled -= instance.OnActionBarSlot9;
+                @ActionBarSlot10.started -= instance.OnActionBarSlot10;
+                @ActionBarSlot10.performed -= instance.OnActionBarSlot10;
+                @ActionBarSlot10.canceled -= instance.OnActionBarSlot10;
             }
 
             public void RemoveCallbacks(IGameplayActions instance)
@@ -368,6 +689,52 @@ namespace SLOTC.Core.Input
             }
         }
         public GameplayActions @Gameplay => new GameplayActions(this);
+
+        // UI
+        private readonly InputActionMap m_UI;
+        private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+        private readonly InputAction m_UI_CharacterMenu;
+        public struct UIActions
+        {
+            private @PlayerInputActions m_Wrapper;
+            public UIActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @CharacterMenu => m_Wrapper.m_UI_CharacterMenu;
+            public InputActionMap Get() { return m_Wrapper.m_UI; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+            public void AddCallbacks(IUIActions instance)
+            {
+                if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+                @CharacterMenu.started += instance.OnCharacterMenu;
+                @CharacterMenu.performed += instance.OnCharacterMenu;
+                @CharacterMenu.canceled += instance.OnCharacterMenu;
+            }
+
+            private void UnregisterCallbacks(IUIActions instance)
+            {
+                @CharacterMenu.started -= instance.OnCharacterMenu;
+                @CharacterMenu.performed -= instance.OnCharacterMenu;
+                @CharacterMenu.canceled -= instance.OnCharacterMenu;
+            }
+
+            public void RemoveCallbacks(IUIActions instance)
+            {
+                if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(IUIActions instance)
+            {
+                foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public UIActions @UI => new UIActions(this);
         private int m_KeyboardMouseSchemeIndex = -1;
         public InputControlScheme KeyboardMouseScheme
         {
@@ -385,6 +752,20 @@ namespace SLOTC.Core.Input
             void OnLook(InputAction.CallbackContext context);
             void OnTarget(InputAction.CallbackContext context);
             void OnDodge(InputAction.CallbackContext context);
+            void OnActionBarSlot1(InputAction.CallbackContext context);
+            void OnActionBarSlot2(InputAction.CallbackContext context);
+            void OnActionBarSlot3(InputAction.CallbackContext context);
+            void OnActionBarSlot4(InputAction.CallbackContext context);
+            void OnActionBarSlot5(InputAction.CallbackContext context);
+            void OnActionBarSlot6(InputAction.CallbackContext context);
+            void OnActionBarSlot7(InputAction.CallbackContext context);
+            void OnActionBarSlot8(InputAction.CallbackContext context);
+            void OnActionBarSlot9(InputAction.CallbackContext context);
+            void OnActionBarSlot10(InputAction.CallbackContext context);
+        }
+        public interface IUIActions
+        {
+            void OnCharacterMenu(InputAction.CallbackContext context);
         }
     }
 }

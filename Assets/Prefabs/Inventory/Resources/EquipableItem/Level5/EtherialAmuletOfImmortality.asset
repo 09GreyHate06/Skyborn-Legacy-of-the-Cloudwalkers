@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4b71e3d6451f5a49a927a9adf91b3f4, type: 3}
+  m_Name: EtherialAmuletOfImmortality
+  m_EditorClassIdentifier: 
+  _itemID: e6dc371c-4b62-451f-9eb8-9fc89871faaa
+  _sprite: {fileID: 0}
+  _displayName: Etherial Amulet of Immortality
+  _description: "HitPoints: +65 \r\nMana: +60 \r\nAirResistance: +11% \n\nEquip location:
+    Pendant"
+  _stackable: 0
+  _statModifiers:
+  - statType: 0
+    modifierType: 0
+    value: 65
+  - statType: 1
+    modifierType: 0
+    value: 60
+  - statType: 7
+    modifierType: 0
+    value: 11
+  _equipLocations: 5
+  _weaponMeshPrefab: {fileID: 0}
