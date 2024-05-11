@@ -6,11 +6,11 @@ namespace SLOTC.Core.Inventory
         Head,
         Chest,
         Legs,
-        Shoes,
-        Gloves,
-        Pendant,
-        Ring,
-        Earrings,
+        Feet,
+        Hands,
+        Neck,
+        Fingers,
+        Ears,
         Weapon,
     }
 }

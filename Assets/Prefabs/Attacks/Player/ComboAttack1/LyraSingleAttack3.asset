@@ -12,10 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2261e1cf36179584f8de2dfdec4312a8, type: 3}
   m_Name: LyraSingleAttack3
   m_EditorClassIdentifier: 
-  _damageModifiers:
-  - type: 0
-    modType: 0
-    value: 10
+  _damageModifiers: []
   <Force>k__BackingField: {x: 0, y: 0, z: 15}
   <TargetForce>k__BackingField: {x: 0, y: 0, z: 10}
   _attackAnim:

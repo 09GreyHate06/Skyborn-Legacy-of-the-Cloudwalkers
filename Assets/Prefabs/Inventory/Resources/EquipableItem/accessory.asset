@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4b71e3d6451f5a49a927a9adf91b3f4, type: 3}
+  m_Name: accessory
+  m_EditorClassIdentifier: 
+  _itemID: c200e2f5-9ad5-4844-bc27-c7cff3a81e9c
+  _sprite: {fileID: 21300000, guid: a518ce81621bd4946a0ddb435f77e41f, type: 3}
+  _displayName: accessory
+  _description: Temp accessory
+  _stackable: 0
+  _statModifiers:
+  - statType: 6
+    modifierType: 0
+    value: 5
+  - statType: 7
+    modifierType: 1
+    value: 5
+  _equipLocations: 4
+  _weaponMeshPrefab: {fileID: 0}

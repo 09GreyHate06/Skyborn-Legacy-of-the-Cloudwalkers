@@ -87,10 +87,7 @@ namespace SLOTC.Core.Combat
                 damage += userMagicDamge * (1.0f + firePercent * 0.01f) + fireFlat - target.GetStat(StatType.FireResistance);
             }
 
-            int critChance = user.GetStat(StatType.CriticalHitChance);
-            if (critChance >= Random.Range(0, 101) || critChance > 100)
-                damage *= 1.0f + user.GetStat(StatType.CriticalHitBonusDamage) * 0.01f;
-
+            Debug.Log(damage);
             return Mathf.FloorToInt(Mathf.Clamp(damage, 0.0f, MaxDamage));
         }
     }
