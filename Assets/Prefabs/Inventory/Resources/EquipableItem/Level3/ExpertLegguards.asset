@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ExpertLegguards
   m_EditorClassIdentifier: 
   _itemID: df5aae2c-269d-411c-a58e-272e26ff861e
-  _sprite: {fileID: 21300000, guid: cd9df1f3a21bcb746b429dc4936f1736, type: 3}
+  _sprite: {fileID: 0}
   _displayName: Expert's Legguards
   _description: 'HitPoints: +35
 

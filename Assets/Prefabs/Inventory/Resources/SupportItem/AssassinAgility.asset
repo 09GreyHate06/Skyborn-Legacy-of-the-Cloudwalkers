@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AssassinAgility
   m_EditorClassIdentifier: 
   _itemID: b7932355-b199-4363-bf45-5b22810342c6
-  _sprite: {fileID: 21300000, guid: 3b86187524a89f047b35c59bd00f31d4, type: 3}
+  _sprite: {fileID: 0}
   _displayName: Assassin's Agility
   _description: "Effect: Buff that increases CriticalHitChance and CriticalHitBonusDamage
     for a duration.\r\nCriticalHitChance Boost: +10%\r\nCriticalHitBonusDamage Boost:

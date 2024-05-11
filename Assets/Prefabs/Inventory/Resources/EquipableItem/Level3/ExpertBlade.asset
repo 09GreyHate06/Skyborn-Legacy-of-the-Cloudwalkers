@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ExpertBlade
   m_EditorClassIdentifier: 
   _itemID: 912acc8e-94c9-4700-a9ff-cd1a3552530c
-  _sprite: {fileID: 21300000, guid: edbc3d8c43d7cef4a933c0a72eef272e, type: 3}
+  _sprite: {fileID: 0}
   _displayName: Expert's Blade
   _description: "PhysicalDamage: +10\r\nMagicDamage: +7 \r\nCriticalHitChance: +3%
     \r\nCriticalHitBonusDamage: +10 \n\nEquip location: Weapon"

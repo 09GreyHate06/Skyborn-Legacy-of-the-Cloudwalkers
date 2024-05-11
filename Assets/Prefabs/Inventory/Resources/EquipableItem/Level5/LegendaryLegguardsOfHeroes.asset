@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LegendaryLegguardsOfHeroes
   m_EditorClassIdentifier: 
   _itemID: 981e66d8-5ca8-4837-837b-0ddedd5cf871
-  _sprite: {fileID: 21300000, guid: cd9df1f3a21bcb746b429dc4936f1736, type: 3}
+  _sprite: {fileID: 0}
   _displayName: Legendary Legguards of Heroes
   _description: "HitPoints: +55\r\nMana: +50 \r\nDefense: +6% \r\nEarthResistance:
     +15% \n\nEquip location: Legs"

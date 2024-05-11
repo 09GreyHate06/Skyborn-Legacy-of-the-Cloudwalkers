@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ApprenticeGloves
   m_EditorClassIdentifier: 
   _itemID: ee3ba0f9-9ab5-40da-ad88-d2920b0fc7c3
-  _sprite: {fileID: 21300000, guid: e7259e97024d1ae458e74e83bb6da99f, type: 3}
+  _sprite: {fileID: 0}
   _displayName: Apprentice's Gloves
   _description: 'HitPoints: +5
 

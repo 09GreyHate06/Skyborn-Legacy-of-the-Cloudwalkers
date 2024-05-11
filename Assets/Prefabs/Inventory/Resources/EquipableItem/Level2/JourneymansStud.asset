@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: JourneymansStud
   m_EditorClassIdentifier: 
   _itemID: 128cc092-6553-4ac8-bc34-0f698c9bb4f1
-  _sprite: {fileID: 21300000, guid: 5b199dffeb689e84b8869a3a8b6712fa, type: 3}
+  _sprite: {fileID: 0}
   _displayName: Journeyman's Stud
   _description: 'HitPoints: +15
 

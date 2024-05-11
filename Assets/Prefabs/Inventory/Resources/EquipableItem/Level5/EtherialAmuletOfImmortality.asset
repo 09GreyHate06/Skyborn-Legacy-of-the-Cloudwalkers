@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EtherialAmuletOfImmortality
   m_EditorClassIdentifier: 
   _itemID: e6dc371c-4b62-451f-9eb8-9fc89871faaa
-  _sprite: {fileID: 21300000, guid: 3a6f844d1faef9e419ed2106d1ee0a4e, type: 3}
+  _sprite: {fileID: 0}
   _displayName: Etherial Amulet of Immortality
   _description: "HitPoints: +65 \r\nMana: +60 \r\nAirResistance: +11% \n\nEquip location:
     Pendant"

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ArcaneInfusion
   m_EditorClassIdentifier: 
   _itemID: 7d8c3d0f-87fc-4b9e-a1fa-ef69eee89a9c
-  _sprite: {fileID: 21300000, guid: a17ea9190afc9724e9aeb109fe91cee9, type: 3}
+  _sprite: {fileID: 0}
   _displayName: Arcane Infusion
   _description: 'Effect: Buff that gradually regenerates Mana over time.
 

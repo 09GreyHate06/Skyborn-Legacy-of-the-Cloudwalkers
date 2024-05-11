@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ExpertGloves
   m_EditorClassIdentifier: 
   _itemID: 48ae805a-2f57-482c-b725-3dd027af9a8d
-  _sprite: {fileID: 21300000, guid: d54e87eff54a4ac47bdb786b89a09fe0, type: 3}
+  _sprite: {fileID: 0}
   _displayName: Expert's Gloves
   _description: 'HitPoints: +15
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GrandmasterLegplates
   m_EditorClassIdentifier: 
   _itemID: 7969bf30-d4ca-458c-95dc-a19c22e2a7bb
-  _sprite: {fileID: 21300000, guid: cd9df1f3a21bcb746b429dc4936f1736, type: 3}
+  _sprite: {fileID: 0}
   _displayName: Grandmaster's Legplates
   _description: "HitPoints: +45 \r\nMana: +40 \r\nDefense: +5% \r\nEarthResistance:
     +12% \n\nEquip location: Legs"

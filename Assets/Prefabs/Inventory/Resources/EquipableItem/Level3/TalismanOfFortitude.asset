@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TalismanOfFortitude
   m_EditorClassIdentifier: 
   _itemID: 0850c070-94cf-4d78-b58d-9939b89612f2
-  _sprite: {fileID: 21300000, guid: 3a6f844d1faef9e419ed2106d1ee0a4e, type: 3}
+  _sprite: {fileID: 0}
   _displayName: Talisman of Fortitude
   _description: "HitPoints: +45 \r\nMana: +40 \r\nAirResistance: +7% \n\nEquip location:
     Pendant"

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GrandmasterEarrings
   m_EditorClassIdentifier: 
   _itemID: 41533652-001c-4e75-8a19-893ed2062280
-  _sprite: {fileID: 21300000, guid: 5b199dffeb689e84b8869a3a8b6712fa, type: 3}
+  _sprite: {fileID: 0}
   _displayName: Grandmaster's Earrings
   _description: "HitPoints: +25\r\nMana: +22 \r\nEarthResistance: +9% \n\nEquip location:
     Earrings"

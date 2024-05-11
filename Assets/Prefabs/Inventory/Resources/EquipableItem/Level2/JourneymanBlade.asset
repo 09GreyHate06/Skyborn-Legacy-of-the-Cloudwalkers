@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: JourneymanBlade
   m_EditorClassIdentifier: 
   _itemID: 5283edd2-d187-44a4-bf9f-0250175aeced
-  _sprite: {fileID: 21300000, guid: f7daf626eadc09043bd29aac7c8563ca, type: 3}
+  _sprite: {fileID: 0}
   _displayName: Journeyman's Blade
   _description: 'PhysicalDamage: +8
 

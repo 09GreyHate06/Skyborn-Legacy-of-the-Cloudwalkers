@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TrainingSword
   m_EditorClassIdentifier: 
   _itemID: 3991c3bc-2849-402f-9ef1-701a8aec089f
-  _sprite: {fileID: 21300000, guid: f7daf626eadc09043bd29aac7c8563ca, type: 3}
+  _sprite: {fileID: 0}
   _displayName: Training Sword
   _description: "PhysicalDamage: +5 \nMagicDamage: +3 \nCriticalHitChance: +1%\nCriticalHitBonusDamage:
     +5 \n\nEquip location: Weapon"

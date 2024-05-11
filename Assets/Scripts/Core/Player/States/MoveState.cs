@@ -14,21 +14,16 @@ namespace SLOTC.Core.Player.States
         private readonly TargetLocker _targetLocker;
         private readonly float _blendSpeed;
 
-        private AudioSource _audioSource;
-        private AudioClip _runSFX;
-
         //private MixerState<Vector2> _curAnimState;
 
         public override bool CanExit { get; set; }
 
-        public MoveState(PlayerMover playerMover, PlayerInput playerInput, TargetLocker targetLocker, AnimancerComponent animancer, MixerTransition2D moveAnim, AudioSource audioSource, AudioClip runSFX, float blendSpeed, float moveSpeed, float rotationSpeed)
+        public MoveState(PlayerMover playerMover, PlayerInput playerInput, TargetLocker targetLocker, AnimancerComponent animancer, MixerTransition2D moveAnim, float blendSpeed, float moveSpeed, float rotationSpeed)
             : base(playerMover, moveSpeed, rotationSpeed)
         {
             _playerInput = playerInput;
             _targetLocker = targetLocker;
             _animancer = animancer;
-            _audioSource = audioSource;
-            _runSFX = runSFX;
             _moveAnim = moveAnim;
             _blendSpeed = blendSpeed;
         }
@@ -45,16 +40,10 @@ namespace SLOTC.Core.Player.States
             //if (_curAnimState == null || !_curAnimState.IsPlaying)
             //_curAnimState = (MixerState<Vector2>)_animancer.Play(_moveAnim);
             _animancer.Play(_moveAnim);
-
-            _audioSource.clip = _runSFX;
-            _audioSource.loop = true;
-            _runSFX.frequency = 2;
-            _audioSource.Play();
         }
 
         public override void OnExit()
         {
-            _audioSource.Stop();
         }
 
         public override void OnUpdate(float deltaTime)

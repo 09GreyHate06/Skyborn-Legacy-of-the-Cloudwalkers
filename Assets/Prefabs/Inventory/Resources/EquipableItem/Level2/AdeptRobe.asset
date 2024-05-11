@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AdeptRobe
   m_EditorClassIdentifier: 
   _itemID: 19ec7254-5a24-4fd5-9851-2462cbeda1a2
-  _sprite: {fileID: 21300000, guid: 789a085046763fa4c912f1af0c3e3aeb, type: 3}
+  _sprite: {fileID: 0}
   _displayName: Adept's Robe
   _description: "HitPoints: +30\r\nMana: +25 \r\nDefense: +4% \r\nWaterResistance:
     +7%\n\nEquip location: Chest"

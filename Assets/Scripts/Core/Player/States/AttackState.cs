@@ -19,8 +19,7 @@ namespace SLOTC.Core.Player.States
         private int _comboCounter;
         private float _lastAttackTime = float.MinValue;
 
-        private AudioSource _audioSource;
-        private AudioClip _attackSFX;
+
         private SingleAttack _activeAttack;
 
         public override bool CanExit { get; set; }
@@ -28,13 +27,11 @@ namespace SLOTC.Core.Player.States
         public event Action OnAnimationEnded;
 
 
-        public AttackState(PlayerMover playerMover, PlayerInput playerInput, AnimancerComponent animancer, AudioSource audioSource, AudioClip attackSFX, WeaponHandler weaponHandler, SingleAttack[] attacks, float comboGraceTime, float rotationSpeed)
+        public AttackState(PlayerMover playerMover, PlayerInput playerInput, AnimancerComponent animancer, WeaponHandler weaponHandler, SingleAttack[] attacks, float comboGraceTime, float rotationSpeed)
             : base(playerMover, 0.0f, rotationSpeed)
         {
             _playerInput = playerInput;
             _animancer = animancer;
-            _audioSource = audioSource;
-            _attackSFX = attackSFX;
             _weaponHandler = weaponHandler;
             _attacks = attacks;
             _comboGraceTime = comboGraceTime;
@@ -80,7 +77,6 @@ namespace SLOTC.Core.Player.States
         public override void OnExit()
         {
             _activeAttack = null;
-            //_audioSource.Stop();
         }
 
         public override void OnUpdate(float deltaTime)
@@ -99,9 +95,6 @@ namespace SLOTC.Core.Player.States
         private void ActivateWeapon()
         {
             _weaponHandler.Activate(_activeAttack);
-            _audioSource.clip = _attackSFX;
-            _audioSource.loop = false;
-            _audioSource.Play();
         }
 
         private void DeactivateWeapon()

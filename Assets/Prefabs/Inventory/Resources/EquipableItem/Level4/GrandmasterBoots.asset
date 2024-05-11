@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GrandmasterBoots
   m_EditorClassIdentifier: 
   _itemID: 32b6e5db-7a6a-465a-86af-1c6dfea8a7c3
-  _sprite: {fileID: 21300000, guid: 73dafec2cb077884ea06cc60f56a82b0, type: 3}
+  _sprite: {fileID: 0}
   _displayName: Grandmaster's Boots
   _description: 'HitPoints: +25
 

@@ -2,7 +2,7 @@ using Cinemachine;
 using SLOTC.Core.Input;
 using UnityEngine;
 
-namespace SLOTC.Core.UI
+namespace SLOTC
 {
     public class CharacterUI : MonoBehaviour
     {

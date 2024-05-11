@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NoviceRing
   m_EditorClassIdentifier: 
   _itemID: ee55a165-a060-437a-9be9-0ff9a27a917e
-  _sprite: {fileID: 21300000, guid: 7022c59572c595a49a090f74a660a6f2, type: 3}
+  _sprite: {fileID: 0}
   _displayName: Novice's Ring
   _description: 'HitPoints: +15 (Flat)
 
