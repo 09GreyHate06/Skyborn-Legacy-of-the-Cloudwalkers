@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 154e98d53076e6b4a83089b6f14ab127, type: 3}
   m_Name: FireballScroll
   m_EditorClassIdentifier: 
-  _itemID: 77b9578a-6882-4e13-91b1-cbb05fce0ea7
+  _itemID: 4d7eadcb-d9b9-4335-8a92-375a2246f1da
   _sprite: {fileID: 21300000, guid: c4eead047111cb847856e2a59a358733, type: 3}
   _displayName: Fireball Scroll
   _description: '+10, +15% fire damage

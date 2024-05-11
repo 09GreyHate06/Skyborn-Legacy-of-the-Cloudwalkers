@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 154e98d53076e6b4a83089b6f14ab127, type: 3}
   m_Name: CorruptionExplosionScroll
   m_EditorClassIdentifier: 
-  _itemID: 840a84bd-5c7a-4b66-878f-8b245c1416b2
+  _itemID: c6fdd079-e78a-432b-9517-d9ff68f563f9
   _sprite: {fileID: 21300000, guid: c4eead047111cb847856e2a59a358733, type: 3}
   _displayName: Corruption Explosion Scroll
   _description: '+20 fire damage, +25% fire damage

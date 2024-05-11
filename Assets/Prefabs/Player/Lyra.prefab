@@ -1147,30 +1147,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _slots:
-  - item: {fileID: 11400000, guid: 30508942c2c80604895a265d6c258d6a, type: 2}
-    qty: 1
-  - item: {fileID: 11400000, guid: 36b18d8eea99e2a4ba93adad3f3b7350, type: 2}
-    qty: 1
-  - item: {fileID: 11400000, guid: 4b2277cb2adc64e4783361e669466956, type: 2}
-    qty: 1
-  - item: {fileID: 11400000, guid: 315e4f2685ff63a47aabdc617d3d940a, type: 2}
-    qty: 1
-  - item: {fileID: 11400000, guid: 17ceec3f3c2f263468da5f9557f7d57d, type: 2}
-    qty: 1
-  - item: {fileID: 11400000, guid: 4bdcdc78e3f703149ad87c6236b2d8a5, type: 2}
-    qty: 1
-  - item: {fileID: 11400000, guid: 1be62a977b129894a82e22ae7247bce9, type: 2}
-    qty: 1
-  - item: {fileID: 11400000, guid: a5800126d4933484a8978067460da0c0, type: 2}
-    qty: 1
-  - item: {fileID: 11400000, guid: 54f79f64b0894d9409d5104acf3e6505, type: 2}
-    qty: 5
-  - item: {fileID: 11400000, guid: 6d5c201ceda53c44d8465c712d965925, type: 2}
-    qty: 5
-  - item: {fileID: 11400000, guid: 1d877578bdcf1a54fb9514e910a7f50c, type: 2}
-    qty: 2
-  - item: {fileID: 11400000, guid: f96687a3419f6cc4794c90ccc72db068, type: 2}
-    qty: 2
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
+  - item: {fileID: 0}
+    qty: 0
   - item: {fileID: 0}
     qty: 0
   - item: {fileID: 0}

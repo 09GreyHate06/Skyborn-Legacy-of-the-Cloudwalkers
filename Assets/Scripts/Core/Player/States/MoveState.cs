@@ -48,6 +48,7 @@ namespace SLOTC.Core.Player.States
 
             _audioSource.clip = _runSFX;
             _audioSource.loop = true;
+            _runSFX.frequency = 2;
             _audioSource.Play();
         }
 
