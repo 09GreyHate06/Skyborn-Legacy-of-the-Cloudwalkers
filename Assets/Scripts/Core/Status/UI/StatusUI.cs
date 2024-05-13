@@ -14,11 +14,8 @@ namespace SLOTC.Core.Stats.UI
 
         [SerializeField] TextMeshProUGUI _hpValueTxt;
         [SerializeField] TextMeshProUGUI _spValueTxt;
-        [SerializeField] TextMeshProUGUI _pdamValueTxt;
-        [SerializeField] TextMeshProUGUI _mdamValueTxt;
-        [SerializeField] TextMeshProUGUI _pdefValueTxt;
-        [SerializeField] TextMeshProUGUI _crtChanceValueTxt;
-        [SerializeField] TextMeshProUGUI _crtDamValueTxt;
+        [SerializeField] TextMeshProUGUI _strValueTxt;
+        [SerializeField] TextMeshProUGUI _defValueTxt;
 
         [SerializeField] TextMeshProUGUI _airResistValueTxt;
         [SerializeField] TextMeshProUGUI _waterResistValueTxt;
@@ -71,11 +68,8 @@ namespace SLOTC.Core.Stats.UI
         {
             //if (!isActiveAndEnabled) return; // because unity event calls this even when disabled
 
-            _pdamValueTxt.text = _stat.GetStat(StatType.PhysicalDamage).ToString();
-            _mdamValueTxt.text = _stat.GetStat(StatType.MagicDamage).ToString();
-            _pdefValueTxt.text = _stat.GetStat(StatType.Defense).ToString();
-            _crtChanceValueTxt.text = _stat.GetStat(StatType.CriticalHitChance) + "%";
-            _crtDamValueTxt.text = _stat.GetStat(StatType.CriticalHitBonusDamage) + "%";
+            _strValueTxt.text = _stat.GetStat(StatType.Strength).ToString();
+            _defValueTxt.text = _stat.GetStat(StatType.Defense).ToString();
 
             _airResistValueTxt.text = _stat.GetStat(StatType.AirResistance) + "%";
             _waterResistValueTxt.text = _stat.GetStat(StatType.WaterResistance) + "%";

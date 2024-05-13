@@ -1,8 +1,8 @@
 
 using SLOTC.Core.Saving;
 using System;
-using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace SLOTC.Core.Stats
 {
@@ -12,46 +12,25 @@ namespace SLOTC.Core.Stats
         [SerializeField] float _experienceProgressionMult;
         [SerializeField] int _maxLevel;
         [SerializeField] int[] _experienceProgression;
+        [field: SerializeField] public int CurrentLevel { get; private set; } = 1;
+        public UnityEvent OnLvlUpdated;
 
-        private Action<int> _onLevelUp;
-        private Action<int> _onExperienceGained;
+        public event Action<int> OnLevelUp;
+        public event Action<int> OnExperienceGained;
 
-        public int CurrentLevel { get; private set; } = 1;
         public int ExperiencePoints { get; private set; } = 0;
-
-        public event Action<int> OnLevelUp
-        {
-            add
-            {
-                if (_onLevelUp == null || !_onLevelUp.GetInvocationList().Contains(value))
-                {
-                    _onLevelUp += value;
-                }
-            }
-            remove
-            {
-                _onLevelUp -= value;
-            }
-        }
-
-        public event Action<int> OnExperienceGained
-        {
-            add
-            {
-                if (_onExperienceGained == null || !_onExperienceGained.GetInvocationList().Contains(value))
-                {
-                    _onExperienceGained += value;
-                }
-            }
-            remove
-            {
-                _onExperienceGained -= value;
-            }
-        }
 
         private void OnValidate()
         {
             SetExperienceProgression();
+
+            if (CurrentLevel < 1)
+                CurrentLevel = 1;
+
+            if (CurrentLevel >= _maxLevel)
+                CurrentLevel = _maxLevel;
+
+            OnLvlUpdated?.Invoke();
         }
 
         public void GainExperience(int exp)
@@ -62,8 +41,8 @@ namespace SLOTC.Core.Stats
                 return;
             }
 
+            OnExperienceGained?.Invoke(exp);
             ExperiencePoints += exp;
-            _onExperienceGained?.Invoke(ExperiencePoints);
 
             if (ExperiencePoints < _experienceProgression[CurrentLevel + 1]) return;
 
@@ -72,7 +51,8 @@ namespace SLOTC.Core.Stats
             int experienceLeftOver = ExperiencePoints - _experienceProgression[CurrentLevel];
             ExperiencePoints = 0;
 
-            _onLevelUp?.Invoke(CurrentLevel);
+            OnLevelUp?.Invoke(CurrentLevel);
+            OnLvlUpdated?.Invoke();
 
             // will call until experience points < experience to level up
             GainExperience(experienceLeftOver);
@@ -109,6 +89,7 @@ namespace SLOTC.Core.Stats
             int[] state_ = (int[])state;
             ExperiencePoints = state_[0];
             CurrentLevel = state_[1];
+            OnLvlUpdated?.Invoke();
         }
     }
 }

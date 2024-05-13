@@ -1,3 +1,4 @@
+using SLOTC.Core.Saving;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,16 @@ namespace SLOTC.Core.Stats
 
     public class Status : MonoBehaviour
     {
-        [SerializeField] Attributes _attributes;
+        [Header("Progression")]
+        [SerializeField] Experience _exp;
+        [SerializeField] float _hpPerLevel = 10.0f;
+        [SerializeField] float _spPerLevel = 5.0f;
+        [SerializeField] float _strPerLevel = 2.0f;
+        [SerializeField] float _mstrPerLevel = 1.5f;
+        [SerializeField] float _defPerLevel = 1.0f;
+
+        [Space(20)]
+        [SerializeField] Stat[] _baseStats = new Stat[8];
         [SerializeField] Stat[] _stats = new Stat[8];
         [SerializeField] UnityEvent _onStatChanged;
         [SerializeField] int _maxStatValue = 999999;
@@ -23,22 +33,26 @@ namespace SLOTC.Core.Stats
 
         public UnityEvent OnStatChanged { get { return _onStatChanged; } }
 
-#if UNITY_EDITOR
         private void OnValidate()
         {
-            if (_stats.Length != Enum.GetValues(typeof(StatType)).Length)
-                _stats = new Stat[Enum.GetValues(typeof(StatType)).Length];
+            if (!_exp)
+                _exp = GetComponent<Experience>();
 
-            for (int i = 0; i < _stats.Length; i++)
+            int enumLength = Enum.GetValues(typeof(StatType)).Length;
+            if (_baseStats.Length != enumLength)
+                _baseStats = new Stat[enumLength];
+
+            if(_stats.Length != enumLength)
+                _stats = new Stat[enumLength];
+
+            for (int i = 0; i < enumLength; i++)
             {
+                _baseStats[i].type = (StatType)i;
                 _stats[i].type = (StatType)i;
             }
 
-            if (_attributes == null) return;
-
             UpdateStats();
         }
-#endif
 
         public int GetStat(StatType type)
         {
@@ -76,7 +90,7 @@ namespace SLOTC.Core.Stats
             {
                 StatType type = (StatType)i;
                 _stats[i].type = type;
-                int b = CalcBaseStat(type);
+                int b = _baseStats[i].value + (_exp != null ? CalcBaseStatLvlBonus(type) : 0);
                 if (GetModifiers(type, out int flat, out int percent))
                     _stats[i].value = Mathf.Clamp(Mathf.FloorToInt(b * (1.0f + percent * 0.01f + ((float)flat / b))), 0, _maxStatValue);
                 else
@@ -86,54 +100,27 @@ namespace SLOTC.Core.Stats
             _onStatChanged?.Invoke();
         }
 
-        private int CalcBaseStat(StatType type)
+        private int CalcBaseStatLvlBonus(StatType type)
         {
             switch (type)
             {
                 case StatType.HitPoints:
-                    // HP =  (Vitality * 12) + (Strength * 2)
-                    return Mathf.Clamp(Mathf.FloorToInt(_attributes.GetAttribute(AttributeType.Vitality) * 12 + _attributes.GetAttribute(AttributeType.Strength) * 2), 0, _maxStatValue);
+                    return Mathf.FloorToInt(_exp.CurrentLevel * _hpPerLevel);
 
                 case StatType.SkillPoints:
-                    // SP = (Intelligence * 10) + (Vitality * 3)
-                    return Mathf.Clamp(Mathf.FloorToInt(_attributes.GetAttribute(AttributeType.Intelligence) * 10 + _attributes.GetAttribute(AttributeType.Vitality) * 3), 0, _maxStatValue);
+                    return Mathf.FloorToInt(_exp.CurrentLevel * _spPerLevel);
 
-                case StatType.PhysicalDamage:
-                    // PDMG =  (Strength * 1.2) + (Dexterity * 0.5)
-                    return Mathf.Clamp(Mathf.FloorToInt(_attributes.GetAttribute(AttributeType.Strength) * 1.2f + _attributes.GetAttribute(AttributeType.Dexterity) * 0.5f), 0, _maxStatValue);
+                case StatType.Strength:
+                    return Mathf.FloorToInt(_exp.CurrentLevel * _strPerLevel);
 
-                case StatType.MagicDamage:
-                    // MDMG = (Intelligence * 1.5)
-                    return Mathf.Clamp(Mathf.FloorToInt(_attributes.GetAttribute(AttributeType.Intelligence) * 1.5f), 0, _maxStatValue);
+                case StatType.MagicStrength:
+                    return Mathf.FloorToInt(_exp.CurrentLevel * _mstrPerLevel);
 
                 case StatType.Defense:
-                    // DEF =  (Vitality * 0.6) + (Dexterity * 0.4)
-                    return Mathf.Clamp(Mathf.FloorToInt(_attributes.GetAttribute(AttributeType.Vitality) * 0.6f + _attributes.GetAttribute(AttributeType.Dexterity) * 0.4f), 0, _maxStatValue);
-
-                //case StatType.MagicDefense:
-                //    // MDEF =  (Intelligence * 0.8) + (Vitality * 0.2)
-                //    return Mathf.Clamp(Mathf.FloorToInt(_attributes.GetAttribute(AttributeType.Intelligence) * 0.8f + _attributes.GetAttribute(AttributeType.Vitality) * 0.2f), 0, _maxStatValue);
-
-                case StatType.CriticalHitChance:
-                    // CRIT% =  (Dexterity * 0.1) + (Luck * 0.4)
-                    return Mathf.Clamp(Mathf.FloorToInt(_attributes.GetAttribute(AttributeType.Dexterity) * 0.1f + _attributes.GetAttribute(AttributeType.Luck) * 0.4f), 0, _maxStatValue);
-
-                case StatType.CriticalHitBonusDamage:
-                    // CRIT ATK% = (Strength * 1.5) +  (Luck * 0.2)
-                    return Mathf.Clamp(Mathf.FloorToInt(_attributes.GetAttribute(AttributeType.Strength) * 1.5f + _attributes.GetAttribute(AttributeType.Luck) * 0.2f), 0, _maxStatValue);
-
-                case StatType.AirResistance:
-                    return _stats[(int)StatType.AirResistance].value;
-                case StatType.WaterResistance:
-                    return _stats[(int)StatType.WaterResistance].value;
-                case StatType.EarthResistance:
-                    return _stats[(int)StatType.EarthResistance].value;
-                case StatType.FireResistance:
-                    return _stats[(int)StatType.FireResistance].value;
-
+                    return Mathf.FloorToInt(_exp.CurrentLevel * _defPerLevel);
             }
 
-            return -1;
+            return 0;
         }
 
         private bool GetModifiers(StatType type, out int flat, out int percent)

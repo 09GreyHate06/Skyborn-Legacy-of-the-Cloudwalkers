@@ -1,5 +1,6 @@
 using UnityEngine;
 using SLOTC.Core.Stats;
+using System.Linq;
 
 namespace SLOTC.Core.Combat
 {
@@ -18,6 +19,8 @@ namespace SLOTC.Core.Combat
             int earthPercent = 0;
             int fireFlat = 0;
             int firePercent = 0;
+
+            bool hasPhysicalDamage = damageModifiers.Any(x => x.type == DamageType.Physical);
 
             foreach (DamageModifier damageMod in damageModifiers)
             {
@@ -59,13 +62,12 @@ namespace SLOTC.Core.Combat
             }
 
             float damage = 0.0f;
-
-            if(physicalFlat != 0 || physicalPercent != 0)
+            if(hasPhysicalDamage)
             {
-                damage += user.GetStat(StatType.PhysicalDamage) * (1.0f + physicalPercent * 0.01f) + physicalFlat - target.GetStat(StatType.Defense);
+                damage += user.GetStat(StatType.Strength) * (1.0f + physicalPercent * 0.01f) + physicalFlat - target.GetStat(StatType.Defense);
             }
 
-            int userMagicDamge = user.GetStat(StatType.MagicDamage);
+            float userMagicDamge = user.GetStat(StatType.MagicStrength);
 
             if(airFlat != 0 || airPercent != 0)
             {
