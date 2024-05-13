@@ -33,8 +33,8 @@ namespace SLOTC.Core.Movement.Player
 
             ApplyGravity();
 
-            _force = Vector3.SmoothDamp(_force, Vector3.zero, ref _dampingVelocity, _forceSmoothDampTime);
             _controller.Move((velocity + _force) * Time.deltaTime);
+            _force = Vector3.SmoothDamp(_force, Vector3.zero, ref _dampingVelocity, _forceSmoothDampTime);
         }
 
         public void AddForce(Vector3 force)
