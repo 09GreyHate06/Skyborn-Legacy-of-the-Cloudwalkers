@@ -1,9 +1,11 @@
+using SLOTC.Utils;
+using SLOTC.Core.Saving;
 using UnityEngine;
 
 namespace SLOTC.Core.Movement.Player
 {
     [RequireComponent(typeof(CharacterController))]
-    public class PlayerMover : MonoBehaviour, IForceReceiver
+    public class PlayerMover : MonoBehaviour, IForceReceiver, ISaveable
     {
         [SerializeField] float _forceSmoothDampTime = 0.1f;
         [SerializeField] float _gravityMultiplier = 1.0f;
@@ -51,6 +53,24 @@ namespace SLOTC.Core.Movement.Player
                 velocity.y = _groundedYVelocity;
             else
                 velocity += Physics.gravity * _gravityMultiplier * Time.deltaTime;
+        }
+
+        public object CaptureState()
+        {
+            SerializableVector3[] v = new SerializableVector3[]
+            {
+                new SerializableVector3(transform.position),
+                new SerializableVector3(transform.localEulerAngles),
+            };
+            return v;
+        }
+
+        public void RestoreState(object state)
+        {
+            SerializableVector3[] v = (SerializableVector3[])state;
+
+            transform.position = v[0].ToVector3();
+            transform.localEulerAngles = v[1].ToVector3();
         }
     }
 }

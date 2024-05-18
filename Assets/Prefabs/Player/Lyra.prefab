@@ -846,7 +846,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _forceSmoothDampTime: 0.1
-  _gravityMultiplier: 1
+  _gravityMultiplier: 2
   _groundedYVelocity: -3
   <UseGravity>k__BackingField: 1
   velocity: {x: 0, y: 0, z: 0}
@@ -875,7 +875,7 @@ MonoBehaviour:
   _targetLocker: {fileID: 3773183432409213779}
   _moveSpeed: 6
   _rotationSpeed: 500
-  _jumpForce: 6
+  _jumpForce: 8
   _timeLeavedGroundBeforeFallState: 0.5
   _animancer: {fileID: 4147362548377169278}
   _moveAnim:
@@ -1103,7 +1103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d591ea94f1eb764fbdc160ac03088e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHitPoints: 122
+  _currentHitPoints: 130
   _maxHitPoints: 140
 --- !u!114 &966342305088277749
 MonoBehaviour:

@@ -37,6 +37,10 @@ namespace SLOTC.Core.Combat
 
         public override void Activate(Attack attack)
         {
+            WeaponTrail weaponTrail = GetComponentInChildren<WeaponTrail>(true);
+            if (weaponTrail)
+                weaponTrail.gameObject.SetActive(true);
+
             _alreadyDealtWith.Clear();
             _activeAttack = attack;
             _weaponCollider.enabled = true;
@@ -52,6 +56,10 @@ namespace SLOTC.Core.Combat
 
         public override void Deactivate()
         {
+            WeaponTrail weaponTrail = GetComponentInChildren<WeaponTrail>();
+            if (weaponTrail)
+                weaponTrail.gameObject.SetActive(false);
+
             _weaponCollider.enabled = false;
         }
 

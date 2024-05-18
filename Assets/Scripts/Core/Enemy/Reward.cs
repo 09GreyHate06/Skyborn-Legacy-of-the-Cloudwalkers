@@ -16,7 +16,9 @@ namespace SLOTC.Core.Enemy
             exp.GainExperience(_exp);
             foreach (var item in _itemsRewards)
             {
-                if (!inventory.HasSpaceFor(item.item))
+                float r = UnityEngine.Random.Range(0.0f, 100.0f);
+
+                if (!inventory.HasSpaceFor(item.item) || r > item.chance)
                     continue;
 
                 inventory.AddToFirstEmptySlot(item.item, item.qty);
@@ -27,6 +29,7 @@ namespace SLOTC.Core.Enemy
     [Serializable]
     public struct ItemReward
     {
+        [Range(0.0f, 100.0f)] public float chance;
         public InventoryItem item;
         public int qty;
     }
